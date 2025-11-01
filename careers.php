@@ -1,0 +1,650 @@
+<?php
+require_once 'db.php';
+
+// Fetch only active careers
+$careers_query = "SELECT * FROM add_careers WHERE status = 'active' ORDER BY created_at DESC";
+$careers_result = mysqli_query($conn, $careers_query);
+$careers_count = mysqli_num_rows($careers_result);
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Careers - Tekksol Global</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Tekksol Global, Careers, Job Opportunities, Employment" name="keywords">
+    <meta content="Join Tekksol Global and build your career with our innovative training institute. Explore exciting job opportunities and grow with us." name="description">
+
+    <!-- Favicon -->
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        /* Mobile Login Dropdown Styles */
+.mobile-login-dropdown {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .desktop-login-dropdown {
+        display: none;
+    }
+    
+    .mobile-login-dropdown {
+        display: block;
+        padding: 10px 15px;
+        border-top: 1px solid #dee2e6;
+    }
+    
+    .mobile-login-dropdown .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+    }
+    
+    .mobile-login-dropdown .dropdown-item {
+        padding: 8px 0;
+        color: #333;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    
+    .mobile-login-dropdown .dropdown-item:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-login-dropdown .dropdown-item:hover {
+        background-color: transparent;
+        color: #06BBCC;
+    }
+}
+        /* Page Header Styling */
+        .page-header {
+            background: linear-gradient(rgba(24, 29, 56, .7), rgba(24, 29, 56, .7)), url(img/carousel-1.jpg) center center no-repeat;
+            background-size: cover;
+        }
+        
+        /* Job Cards Styling */
+        .job-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-badge {
+            background: #06BBCC;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .job-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .job-feature i {
+            color: #06BBCC;
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        /* Benefits Section */
+        .benefit-item {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            background: #f8f9fa;
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: #06BBCC;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .benefit-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+    </style>
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .whatsapp-tooltip {
+                bottom: 80px;
+                right: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+           <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="100px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About Us</a>
+                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link active">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                        <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                    <i class="fas fa-user-tie me-2"></i> Admin Login
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Mobile Login Dropdown -->
+<div class="mobile-login-dropdown">
+    <div class="dropdown">
+        <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Login Options
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                    <i class="fas fa-graduation-cap me-2"></i> Student Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Staff Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Admin Login
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">Join Our Team</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Careers</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Why Join Us Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Why Choose Us</h6>
+                <h1 class="mb-5">Why Join Tekksol Global?</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Career Growth</h4>
+                        <p>Continuous learning opportunities and clear career progression paths for professional development.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Great Culture</h4>
+                        <p>Collaborative work environment with supportive team members and positive workplace culture.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4>Competitive Benefits</h4>
+                        <p>Attractive compensation packages with comprehensive health and wellness benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Why Join Us End -->
+
+
+    <!-- Current Openings Start -->
+    <div class="container-xxl py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Job Opportunities</h6>
+                <h1 class="mb-5">Current Openings</h1>
+            </div>
+            
+            <?php if ($careers_count > 0): ?>
+                <div class="row g-4">
+                    <?php 
+                    $delay = 0.1;
+                    while ($career = mysqli_fetch_assoc($careers_result)): 
+                    ?>
+                        <!-- Job Card -->
+                        <div class="col-lg-6 wow fadeInUp" data-wow-delay="<?php echo $delay; ?>s">
+                            <div class="job-card bg-light p-4 h-100">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h4 class="mb-0"><?php echo htmlspecialchars($career['job_title']); ?></h4>
+                                    <span class="job-badge"><?php echo htmlspecialchars($career['job_type']); ?></span>
+                                </div>
+                                <p class="mb-4"><?php echo htmlspecialchars($career['job_description']); ?></p>
+                                
+                                <div class="job-features">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span><strong>Location:</strong> <?php echo htmlspecialchars($career['location']); ?></span>
+                                </div>
+                                <div class="job-features">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span><strong>Experience:</strong> <?php echo htmlspecialchars($career['experience']); ?></span>
+                                </div>
+                                <div class="job-features">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Qualification:</strong> <?php echo htmlspecialchars($career['qualification']); ?></span>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <a href="contact.html" class="btn btn-primary">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php 
+                        $delay += 0.2;
+                        if ($delay > 0.7) $delay = 0.1;
+                    endwhile; 
+                    ?>
+                </div>
+            <?php else: ?>
+                <div class="text-center py-5">
+                    <i class="fas fa-briefcase fa-5x text-muted mb-4"></i>
+                    <h3 class="mb-3">No Current Openings</h3>
+                    <p class="text-muted mb-4">We don't have any open positions at the moment, but we're always looking for talented individuals to join our team.</p>
+                </div>
+            <?php endif; ?>
+            
+            <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.1s">
+                <p class="mb-4">Don't see a position that matches your skills? We're always looking for talented individuals.</p>
+                <a href="contact.html" class="btn btn-primary btn-lg">Send Us Your Resume</a>
+            </div>
+        </div>
+    </div>
+    <!-- Current Openings End -->
+
+
+    <!-- Application Process Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">How to Apply</h6>
+                <h1 class="mb-5">Application Process</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
+                            <h5 class="mb-3">Submit Application</h5>
+                            <p>Send your resume and cover letter through our portal or email</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-phone-alt text-primary mb-4"></i>
+                            <h5 class="mb-3">Screening Call</h5>
+                            <p>Initial phone screening with our HR team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
+                            <h5 class="mb-3">Interviews</h5>
+                            <p>Technical and cultural fit interviews with team members</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-handshake text-primary mb-4"></i>
+                            <h5 class="mb-3">Job Offer</h5>
+                            <p>Receive and discuss your employment offer package</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Application Process End -->
+
+
+    <!-- CTA Start -->
+    <div class="container-xxl py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-8">
+                    <div class="text-white">
+                        <h2 class="text-white mb-3">Ready to Join Our Team?</h2>
+                        <p class="fs-5 mb-0">Take the next step in your career journey with Tekksol Global</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <a href="contact.html" class="btn btn-light btn-lg py-3 px-5">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CTA End -->
+
+
+    <!-- Contact Info Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Call us:</p>
+                            <h5 class="mb-0">+91 9042527746</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Email us 24/7 hours:</p>
+                            <h5 class="mb-0">info@tekksolglobal.com</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Our location:</p>
+                            <h5 class="mb-0">OMR, Rajiv Gandhi Salai, Chennai</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Info End -->
+        
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                    <p class="mb-2"><i class="fa fa-clock me-3"></i>Mon - Sat: 09:30 - 06:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link" href="courses.html">Python Course</a>
+                    <a class="btn btn-link" href="courses.html">Web Development</a>
+                    <a class="btn btn-link" href="courses.html">Digital Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="color:white">Our Location</h4>
+                   <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html">Home</a>
+                            <a href="cookie-policy.html">Cookies</a>
+                            <a href="contact.html">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+<style>
+    /* Login Dropdown Customization */
+    #loginDropdown {
+        border: none;
+    }
+
+    .dropdown-menu .dropdown-item {
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #06BBCC;
+        color: white;
+        padding-left: 1.5rem;
+    }
+
+    .dropdown-menu .dropdown-item i {
+        color: #06BBCC;
+    }
+
+    .dropdown-menu .dropdown-item:hover i {
+        color: white;
+    }
+</style>

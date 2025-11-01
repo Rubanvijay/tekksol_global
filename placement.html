@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Placement - Tekksol Global</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Tekksol Global, Placement, Career Opportunities, Job Placement" name="keywords">
+    <meta content="Tekksol Global provides excellent placement opportunities for students with our industry partnerships and career support services" name="description">
+
+    <!-- Favicon -->
+<link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        /* Mobile Login Dropdown Styles */
+.mobile-login-dropdown {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .desktop-login-dropdown {
+        display: none;
+    }
+    
+    .mobile-login-dropdown {
+        display: block;
+        padding: 10px 15px;
+        border-top: 1px solid #dee2e6;
+    }
+    
+    .mobile-login-dropdown .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+    }
+    
+    .mobile-login-dropdown .dropdown-item {
+        padding: 8px 0;
+        color: #333;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    
+    .mobile-login-dropdown .dropdown-item:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-login-dropdown .dropdown-item:hover {
+        background-color: transparent;
+        color: #06BBCC;
+    }
+}
+        /* Logo Banner Styles */
+        .logo-banner-container {
+            overflow: hidden;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .logo-banner {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+        
+        .logo-banner:hover {
+            animation-play-state: paused;
+        }
+        
+        .logo-item {
+            flex: 0 0 auto;
+            margin: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .logo-img {
+            max-width: 120px;
+            max-height: 60px;
+           
+            transition: filter 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            filter: grayscale(0%);
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-120px * 6 - 30px * 12));
+            }
+        }
+        
+        /* Page Header Styling */
+        .page-header {
+            background: linear-gradient(rgba(24, 29, 56, .7), rgba(24, 29, 56, .7)), url(img/carousel-1.jpg) center center no-repeat;
+            background-size: cover;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-img {
+                max-width: 100px;
+                max-height: 50px;
+            }
+            
+            .logo-item {
+                margin: 0 20px;
+            }
+        }
+    </style>
+      <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .whatsapp-tooltip {
+                bottom: 80px;
+                right: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+           <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="100px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About Us</a>
+                <a href="courses.php" class="nav-item nav-link">Courses</a>
+                <a href="placement.html" class="nav-item nav-link active">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                        <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                    <i class="fas fa-user-tie me-2"></i> Admin Login
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Mobile Login Dropdown -->
+<div class="mobile-login-dropdown">
+    <div class="dropdown">
+        <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Login Options
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                    <i class="fas fa-graduation-cap me-2"></i> Student Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Staff Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Admin Login
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">Placement Opportunities</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Placement</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Placement Overview Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Career Support</h6>
+                <h1 class="mb-5">Placement Opportunities at Tekksol Global</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h3 class="mb-4">Why Choose Tekksol Global for Placement?</h3>
+                    <p class="mb-4">At Tekksol Global, we understand that quality training is just the first step toward a successful career. Our comprehensive placement assistance program ensures that our students are well-prepared to secure rewarding positions in their chosen fields.</p>
+                    
+                    <div class="row gy-2 gx-4 mb-4">
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Industry Expert Trainers</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Hands-on Project Training</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Professional Certification</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Placement Assistance</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Resume Building Sessions</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Interview Preparation</p>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary py-3 px-5 mt-2" href="contact.html">Get Placement Support</a>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="img-fluid position-absolute w-100 h-100" src="img/placement.jpg" alt="Placement Support" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Placement Overview End -->
+
+
+    <!-- Placement Process Start -->
+    <div class="container-xxl py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Our Process</h6>
+                <h1 class="mb-5">Placement Process</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-user-check text-primary mb-4"></i>
+                            <h5 class="mb-3">Skill Assessment</h5>
+                            <p>Comprehensive evaluation of technical skills and career aspirations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
+                            <h5 class="mb-3">Resume Building</h5>
+                            <p>Professional resume creation highlighting skills and projects</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-comments text-primary mb-4"></i>
+                            <h5 class="mb-3">Interview Prep</h5>
+                            <p>Mock interviews and communication skills training</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-briefcase text-primary mb-4"></i>
+                            <h5 class="mb-3">Job Placement</h5>
+                            <p>Connecting with our network of hiring partners</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Placement Process End -->
+
+
+    <!-- Placement Partners Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Our Partners</h6>
+                <h1 class="mb-5">Our Placement Partners</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-12">
+                    <p class="text-center mb-5">Our students have been successfully placed in leading companies across various industries, demonstrating the quality of training provided at Tekksol Global.</p>
+                </div>
+            </div>
+            
+            <!-- Logo Banner -->
+            <div class="logo-banner-container">
+                <div class="logo-banner">
+                    <!-- TCS -->
+                    <div class="logo-item">
+                          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Tata_Consultancy_Services_old_logo.svg" 
+         alt="TCS" 
+         class="logo-img"
+         width="120" 
+         height="60">
+                    </div>
+                    
+                    <!-- Infosys -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" 
+         alt="TCS" 
+         class="logo-img"
+         width="120" 
+         height="60">
+                    </div>
+                    
+                    <!-- Wipro -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Wipro_Primary_Logo_Color_RGB.svg/320px-Wipro_Primary_Logo_Color_RGB.svg.png" alt="Wipro" class="logo-img">
+                    </div>
+                
+                    
+                    <!-- Accenture -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/320px-Accenture.svg.png" alt="Accenture" class="logo-img">
+                    </div>
+                    
+                    <!-- Cognizant -->
+                    <div class="logo-item">
+                       <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg" 
+         alt="TCS" 
+         class="logo-img"
+         width="120" 
+         height="60">
+                    </div>
+                    
+                    <!-- IBM -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/320px-IBM_logo.svg.png" alt="IBM" class="logo-img">
+                    </div>
+                    
+                    <!-- Capgemini -->
+                    <div class="logo-item">
+                       <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg" 
+         alt="TCS" 
+         class="logo-img"
+         width="120" 
+         height="60">
+                    </div>
+                    
+                    <!-- Tech Mahindra -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Tech_Mahindra_New_Logo.svg" 
+         alt="TCS" 
+         class="logo-img"
+         width="120" 
+         height="60">
+                    </div>
+                    
+                    <!-- Microsoft -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/320px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft" class="logo-img">
+                    </div>
+                    
+                    <!-- Oracle -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/320px-Oracle_logo.svg.png" alt="Oracle" class="logo-img">
+                    </div>
+                    
+                    <!-- Amazon -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/320px-Amazon_logo.svg.png" alt="Amazon" class="logo-img">
+                    </div>
+                    
+                    <!-- Repeat the same logos to create seamless loop -->
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/320px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS" class="logo-img">
+                    </div>
+                    
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Infosys_logo.svg/320px-Infosys_logo.svg.png" alt="Infosys" class="logo-img">
+                    </div>
+                    
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Wipro_Primary_Logo_Color_RGB.svg/320px-Wipro_Primary_Logo_Color_RGB.svg.png" alt="Wipro" class="logo-img">
+                    </div>
+                    
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/HCL_Technologies_logo.svg/320px-HCL_Technologies_logo.svg.png" alt="HCL" class="logo-img">
+                    </div>
+                    
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/320px-Accenture.svg.png" alt="Accenture" class="logo-img">
+                    </div>
+                    
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Cognizant_logo_2022.svg/320px-Cognizant_logo_2022.svg.png" alt="Cognizant" class="logo-img">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Static Logos for Mobile -->
+            <div class="row g-4 text-center d-lg-none mt-4">
+                <div class="col-4 col-md-2">
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/320px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS" class="logo-img">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Infosys_logo.svg/320px-Infosys_logo.svg.png" alt="Infosys" class="logo-img">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Wipro_Primary_Logo_Color_RGB.svg/320px-Wipro_Primary_Logo_Color_RGB.svg.png" alt="Wipro" class="logo-img">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/HCL_Technologies_logo.svg/320px-HCL_Technologies_logo.svg.png" alt="HCL" class="logo-img">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/320px-Accenture.svg.png" alt="Accenture" class="logo-img">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="logo-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Cognizant_logo_2022.svg/320px-Cognizant_logo_2022.svg.png" alt="Cognizant" class="logo-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Placement Partners End -->
+
+
+    <!-- Success Stories Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="text-center">
+                <h6 class="section-title bg-white text-center text-primary px-3">Success Stories</h6>
+                <h1 class="mb-5">Our Students Success Stories</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel position-relative">
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-1.png" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Vijayalakshmi</h5>
+                    <p>Java & SQL Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">I would like to appreciate the institute Tekksol Global. As a college student, I had some technical knowledge about Java and SQL. The instructors put in extra effort to ensure we understood the concepts. Now, I have practical knowledge as well. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Lalitha J</h5>
+                    <p>Java & SQL Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">On the first day of this course, I didn't have any prior knowledge of Java and SQL. The Java and SQL classes were simple and clear. Every week, we had a test which helped us understand the concepts more clearly. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-4.png" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">SibiSreeman</h5>
+                    <p>Python Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">At first I didn't know what developers do but now I learn to develop basic website. They explain about the Technologies about Python and I had great experience with them. Now I am a developer thanks to Tekksol Global.</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-5.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Aravind</h5>
+                    <p>Python + Web Development Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">After finishing college, Tekksol Global contacted me and explained their course offerings. The teaching and projects were excellent. Our trainer explained the concepts in detail and in a structured manner. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Success Stories End -->
+
+
+    <!-- Placement Stats Start -->
+    <div class="container-xxl py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Placement Statistics</h6>
+                <h1 class="mb-5">Our Placement Achievements</h1>
+            </div>
+            <div class="row g-4 text-center">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">95%</h1>
+                        <p class="fs-5 text-dark mb-0">Placement Rate</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">200+</h1>
+                        <p class="fs-5 text-dark mb-0">Companies</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">2500+</h1>
+                        <p class="fs-5 text-dark mb-0">Students Placed</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">4.2L</h1>
+                        <p class="fs-5 text-dark mb-0">Highest Package</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Placement Stats End -->
+
+
+    <!-- CTA Start -->
+    <div class="container-xxl py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-8">
+                    <div class="text-white">
+                        <h2 class="text-white mb-3">Ready to Start Your Career?</h2>
+                        <p class="fs-5 mb-0">Join Tekksol Global and get the best placement opportunities in the industry</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <a href="contact.html" class="btn btn-light btn-lg py-3 px-5">Contact Us Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CTA End -->
+
+
+    <!-- Contact Info Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Call us:</p>
+                            <h5 class="mb-0">+91 9042527746</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Email us 24/7 hours:</p>
+                            <h5 class="mb-0">info@tekksolglobal.com</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Our location:</p>
+                            <h5 class="mb-0">OMR, Rajiv Gandhi Salai, Chennai</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Info End -->
+        
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                    <p class="mb-2"><i class="fa fa-clock me-3"></i>Mon - Sat: 09:30 - 06:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link" href="courses.html">Python Course</a>
+                    <a class="btn btn-link" href="courses.html">Web Development</a>
+                    <a class="btn btn-link" href="courses.html">Digital Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="color:white">Our Location</h4>
+                   <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html">Home</a>
+                            <a href="cookie-policy.html">Cookies</a>
+                            <a href="contact.html">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Logo banner performance optimization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pause animation when not in viewport for better performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const banner = entry.target.querySelector('.logo-banner');
+                    if (banner) {
+                        if (entry.isIntersecting) {
+                            banner.style.animationPlayState = 'running';
+                        } else {
+                            banner.style.animationPlayState = 'paused';
+                        }
+                    }
+                });
+            });
+            
+            const bannerContainer = document.querySelector('.logo-banner-container');
+            if (bannerContainer) {
+                observer.observe(bannerContainer);
+            }
+        });
+    </script>
+</body>
+
+</html>
+<style>
+    /* Login Dropdown Customization */
+    #loginDropdown {
+        border: none;
+    }
+
+    .dropdown-menu .dropdown-item {
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #06BBCC;
+        color: white;
+        padding-left: 1.5rem;
+    }
+
+    .dropdown-menu .dropdown-item i {
+        color: #06BBCC;
+    }
+
+    .dropdown-menu .dropdown-item:hover i {
+        color: white;
+    }
+</style>

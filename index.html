@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tekksol Global - Professional Training Institute</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Tekksol Global, Training Institute, Professional Courses" name="keywords">
+    <meta content="Tekksol Global is the most trusted source of information on the business of learning" name="description">
+
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* Typewriter Animation Styles */
+        .typewriter-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .typewriter-container {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .typewriter-line {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #06BBCC;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            text-align: center;
+            border-right: 3px solid #06BBCC;
+        }
+        
+        .line-1 {
+            animation: typing-1 3s steps(25, end), blink-caret 0.75s step-end infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .line-2 {
+            animation: typing-2 2.5s steps(20, end), blink-caret 0.75s step-end infinite;
+            animation-delay: 4s;
+            margin-top: 20px;
+        }
+        
+        /* Hide the second line initially */
+        .line-2 {
+            width: 0;
+            overflow: hidden;
+        }
+        
+        /* Typing effects */
+        @keyframes typing-1 {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes typing-2 {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        /* Cursor blink effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #06BBCC }
+        }
+        
+        /* Decorative elements */
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(6, 187, 204, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .icon-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .icon-2 {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .icon-3 {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Fade in content after animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .typewriter-line {
+                font-size: 2.5rem;
+            }
+            
+            .floating-icon {
+                font-size: 1.5rem;
+            }
+            
+            .typewriter-section {
+                padding: 80px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .typewriter-line {
+                font-size: 2rem;
+            }
+            
+            .typewriter-section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Login Dropdown Customization */
+        #loginDropdown {
+            border: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #06BBCC;
+            color: white;
+            padding-left: 1.5rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            color: #06BBCC;
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            color: white;
+        }
+        
+        /* Custom SweetAlert2 Styles */
+        .swal2-popup {
+            border-radius: 15px !important;
+            border: 3px solid #ffd700 !important;
+        }
+        
+        .swal2-title {
+            color: #d35400 !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+        }
+        
+        .swal2-html-container {
+            font-size: 1.1rem !important;
+            color: #555 !important;
+        }
+        
+        .swal2-confirm {
+            background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%) !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 12px 30px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+        }
+        
+        .swal2-deny {
+            background: #f8f9fa !important;
+            color: #333 !important;
+            border: 1px solid #dee2e6 !important;
+            border-radius: 8px !important;
+            padding: 12px 30px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+        }
+        
+        .offer-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+        }
+        
+        .offer-highlight {
+            background: #ffd700;
+            color: #d35400;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-weight: 800;
+            margin: 0 3px;
+        }
+        
+        .offer-icon {
+            font-size: 3rem;
+            color: #06BBCC;
+            margin-bottom: 15px;
+        }
+        
+        /* Custom style for 3D container */
+        #three-d-container {
+            background-color: #f8f9fa; /* Light background to help the 3D object pop */
+            border-radius: 8px; /* Optional: adds a slight corner */
+            overflow: hidden;
+        }
+        
+        /* Mobile Login Dropdown Styles */
+        .mobile-login-dropdown {
+            display: none;
+        }
+        
+        @media (max-width: 991px) {
+            .desktop-login-dropdown {
+                display: none;
+            }
+            
+            .mobile-login-dropdown {
+                display: block;
+                padding: 10px 15px;
+                border-top: 1px solid #dee2e6;
+            }
+            
+            .mobile-login-dropdown .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                border: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            
+            .mobile-login-dropdown .dropdown-item {
+                padding: 8px 0;
+                color: #333;
+                border-bottom: 1px solid #f1f1f1;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:hover {
+                background-color: transparent;
+                color: #06BBCC;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="100px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About Us</a>
+                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            
+            <!-- Desktop Login Dropdown -->
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Mobile Login Dropdown -->
+            <div class="mobile-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login Options
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid p-0 mb-5">
+        <div class="owl-carousel header-carousel position-relative">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="img/carousel-1.png" alt="" style="height:676px;">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-10 col-lg-8">
+                                <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Enjoying with Tekksol Global best learning platform</h5>
+                                <h1 class="display-3 text-white animated slideInDown">Find your best career & get opportunity for your future</h1>
+                                <!-- <p class="fs-5 text-white mb-4 pb-2">World class learning for anyone, anywhere for Increasing Knowledge. Let your creativity shine and start bighting your future today and impress your audiences.</p> -->
+                                <a href="courses.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Explore Courses</a>
+                                <a href="contact.html" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="img/carousel-2.jpg" alt="" style="height:676px;">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-10 col-lg-8">
+                                <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Starting with Tekksol Global best learning Center</h5>
+                                <h1 class="display-3 text-white animated slideInDown">Get your best career by practicing with Tekksol Global</h1>
+                                <!-- <p class="fs-5 text-white mb-4 pb-2">World class learning for anyone, anywhere for Increasing Knowledge. Let your creativity shine and start bighting your future today and impress your audiences.</p> -->
+                                <a href="courses.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Explore Courses</a>
+                                <a href="contact.html" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Typewriter Animation Section -->
+    <section class="typewriter-section">
+        <!-- Decorative floating icons -->
+        <div class="floating-icon icon-1">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="floating-icon icon-2">
+            <i class="fas fa-laptop-code"></i>
+        </div>
+        <div class="floating-icon icon-3">
+            <i class="fas fa-rocket"></i>
+        </div>
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="typewriter-container">
+                        <span class="typewriter-line line-1" style="color:#68443d">Welcome to Tekksol Global</span>
+                        <span class="typewriter-line line-2" style="color:#68443d">Your Search Ends Here</span>
+                    </div>
+                    
+                    <!-- Additional content that appears after animation -->
+                    <div class="mt-5 pt-4 fade-in-content" style="opacity: 0; animation: fadeIn 1s ease-in-out forwards; animation-delay: 7s;">
+                        <p class="lead mb-4">Transform your career with industry-leading courses and expert guidance</p>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-chalkboard-teacher text-primary mb-3" style="font-size: 2rem;"></i>
+                                                <h5>Expert Trainers</h5>
+                                                <p class="small">Learn from industry professionals</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-briefcase text-primary mb-3" style="font-size: 2rem;"></i>
+                                                <h5>Placement Support</h5>
+                                                <p class="small">Get assistance with job placements</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card border-0 shadow-sm h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-certificate text-primary mb-3" style="font-size: 2rem;"></i>
+                                                <h5>Certification</h5>
+                                                <p class="small">Earn recognized certifications</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="courses.html" class="btn btn-primary btn-lg mt-4 px-5 py-3">Explore Courses <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                            <h5 class="mb-3">World Class Trainers</h5>
+                            <p>Seamlessly envisioneer tactical data through services with experienced professionals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                            <h5 class="mb-3">Easy Learning</h5>
+                            <p>Seamlessly envisioneer tactical data through services with simplified approach</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                            <h5 class="mb-3">Flexible</h5>
+                            <p>Seamlessly envisioneer tactical data through services with flexible timing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                            <h5 class="mb-3">Affordable Price</h5>
+                            <p>Seamlessly envisioneer tactical data through services at competitive rates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100" id="three-d-container">
+                        <canvas id="three-d-canvas" class="w-100 h-100"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
+                    <h1 class="mb-4">Welcome to Tekksol Global</h1>
+                    <p class="mb-4">Tekksol Global is the most trusted source of information on the business of learning. We serve as an expert resource for learning professionals seeking information about best practices and innovative approaches for developing effective training.</p>
+                    <p class="mb-4">We create an environment for trust and information-sharing among learning professionals, including those in the learning and development function and experts from companies serving the training industry.</p>
+                    <div class="row gy-2 gx-4 mb-4">
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Get access to our top courses</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Popular topics to learn now</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Find the right instructor for you</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Expert Trainers</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Placement Support</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Professional Certification</p>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary py-3 px-5 mt-2" href="about.html">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5 category">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Courses Categories</h6>
+                <h1 class="mb-5">Explore Top Categories</h1>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-7 col-md-6">
+                    <div class="row g-3">
+                        <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
+                            <a class="position-relative d-block overflow-hidden" href="">
+                                <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                    <h5 class="m-0">Digital Marketing</h5>
+                                    <small class="text-primary">24+ Courses</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
+                            <a class="position-relative d-block overflow-hidden" href="">
+                                <img class="img-fluid" src="img/cat-2.jpg" alt="">
+                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                    <h5 class="m-0">Graphic Design</h5>
+                                    <small class="text-primary">24+ Courses</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
+                            <a class="position-relative d-block overflow-hidden" href="">
+                                <img class="img-fluid" src="img/cat-3.jpg" alt="">
+                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                    <h5 class="m-0">UI/UX Design</h5>
+                                    <small class="text-primary">36+ Courses</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
+                    <a class="position-relative d-block h-100 overflow-hidden" href="">
+                        <img class="img-fluid position-absolute w-100 h-100" src="img/cat-4.jpg" alt="" style="object-fit: cover;">
+                        <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin:  1px;">
+                            <h5 class="m-0">Web Development</h5>
+                            <small class="text-primary">41+ Courses</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Popular Courses</h6>
+                <h1 class="mb-5">Our Popular Courses</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="img/course-1.jpg" alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">₹30,000.00</h3>
+                            <div class="mb-3">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                            </div>
+                            <h5 class="mb-4">Java Full Stack Course</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Expert Trainer</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>3 Months</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>Limited Seats</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="img/course-2.jpg" alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">₹30,000.00</h3>
+                            <div class="mb-3">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                            </div>
+                            <h5 class="mb-4">Python Full Stack Course</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Expert Trainer</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>2 Months</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>Limited Seats</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="course-item bg-light">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="img/course-3.jpg" alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">₹20,000.00</h3>
+                            <div class="mb-3">
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small class="fa fa-star text-primary"></small>
+                            </div>
+                            <h5 class="mb-4">CCNA Course</h5>
+                        </div>
+                        <div class="d-flex border-top">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Expert Trainer</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>3 Months</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>Limited Seats</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">2500+</h1>
+                        <p class="fs-5 text-dark mb-0">Successfully Trained</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">2000+</h1>
+                        <p class="fs-5 text-dark mb-0">Classes Completed</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">97%</h1>
+                        <p class="fs-5 text-dark mb-0">Satisfaction Rate</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="counter-item">
+                        <h1 class="display-4 text-primary mb-0">2000+</h1>
+                        <p class="fs-5 text-dark mb-0">Students Community</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Our Trusted Clients</h6>
+                <h1 class="mb-5">We Have More Than 150+ Global Partners</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-12">
+                    <p class="text-center">Our students have been successfully placed in leading companies across various industries, demonstrating the quality of training provided at Tekksol Global.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Our Instructors</h6>
+                <h1 class="mb-5">Meet Our Expert Instructors</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/team-1.jpg" alt="">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Senior Instructor</h5>
+                            <small>10+ Years Experience</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/team-2.jpg" alt="">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Lead Instructor</h5>
+                            <small>8+ Years Experience</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/team-3.jpg" alt="" style="width: 250px; height: 350px; object-fit: cover;">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Expert Trainer</h5>
+                            <small>7+ Years Experience</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/team-4.jpg" alt="" style="width: 250px; height: 350px; object-fit: cover;">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Professional Instructor</h5>
+                            <small>6+ Years Experience</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="text-center">
+                <h6 class="section-title bg-white text-center text-primary px-3">Testimonials</h6>
+                <h1 class="mb-5">Students Say About Us</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel position-relative">
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-1.png" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Vijayalakshmi</h5>
+                    <p>Java & SQL Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">I would like to appreciate the institute Tekksol Global. As a college student, I had some technical knowledge about Java and SQL. The instructors put in extra effort to ensure we understood the concepts. Now, I have practical knowledge as well. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Lalitha J</h5>
+                    <p>Java & SQL Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">On the first day of this course, I didn't have any prior knowledge of Java and SQL. The Java and SQL classes were simple and clear. Every week, we had a test which helped us understand the concepts more clearly. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-4.png" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">SibiSreeman</h5>
+                    <p>Python Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">At first I didn't know what developers do but now I learn to develop basic website. They explain about the Technologies about Python and I had great experience with them. Now I am a developer thanks to Tekksol Global.</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-5.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Aravind</h5>
+                    <p>Python + Web Development Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">After finishing college, Tekksol Global contacted me and explained their course offerings. The teaching and projects were excellent. Our trainer explained the concepts in detail and in a structured manner. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-6.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Arun Kumar S</h5>
+                    <p>Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">Tekksol Global delivers the best online courses I've encountered. Their curriculum is top-notch, and their service is excellent. Highly recommended!</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-3.png" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Kavitha M</h5>
+                    <p>Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">The online courses I've taken were exceptional, offering top-quality content and excellent service.</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-7.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Prakash M</h5>
+                    <p>Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">I attended their Java course and found it exceptional, with top-quality content and excellent service.</p>
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-8.jpg" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">Vijay Kumar</h5>
+                    <p>Student</p>
+                    <div class="testimonial-text bg-light text-center p-4">
+                        <p class="mb-0">I enrolled in their .NET course and was thoroughly impressed by the quality of content and the excellent service provided.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-8">
+                    <div class="text-white">
+                        <h2 class="text-white mb-3">Get Online Courses</h2>
+                        <p class="fs-5 mb-0">Discover, Learn, and Grow: Top Online Courses for Every Skill Level</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <a href="courses.html" class="btn btn-light btn-lg py-3 px-5">Join With Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Call us:</p>
+                            <h5 class="mb-0">+91 9042527746</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Email us 24/7 hours:</p>
+                            <h5 class="mb-0">info@tekksolglobal.com</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="d-flex align-items-center bg-light p-4">
+                        <div class="flex-shrink-0 btn-lg-square bg-primary text-white me-3">
+                            <i class="fa fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-dark">Our location:</p>
+                            <h5 class="mb-0">OMR, Rajiv Gandhi Salai, Chennai</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                    <p class="mb-2"><i class="fa fa-clock me-3"></i>Mon - Sat: 09:30 - 06:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link" href="courses.html">Python Course</a>
+                    <a class="btn btn-link" href="courses.html">Web Development</a>
+                    <a class="btn btn-link" href="courses.html">Digital Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    
+                    <h4 style="color:white">Our Location</h4>
+                   <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html">Home</a>
+                            <a href="cookie-policy.html">Cookies</a>
+                            <a href="contact.html">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- WhatsApp Button -->
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .whatsapp-tooltip {
+                bottom: 80px;
+                right: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('three-d-container');
+            const canvas = document.getElementById('three-d-canvas');
+            
+            // Exit if elements aren't found
+            if (!container || !canvas) return;
+
+            let scene, camera, renderer, object;
+
+            function init() {
+                // Scene
+                scene = new THREE.Scene();
+
+                // Camera
+                const fov = 75;
+                const aspect = container.clientWidth / container.clientHeight;
+                const near = 0.1;
+                const far = 1000;
+                camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+                camera.position.z = 3;
+
+                // Renderer
+                renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setClearColor(0x000000, 0); // Transparent background
+
+                // Object: Dodecahedron (12-sided figure) for a high-tech, abstract look
+                const geometry = new THREE.DodecahedronGeometry(1.2, 0);
+                // Use a standard material and the primary color from the existing design: #06BBCC
+                const material = new THREE.MeshStandardMaterial({
+                    color: 0x06BBCC, // Primary Blue/Cyan color
+                    metalness: 0.1,
+                    roughness: 0.5,
+                    flatShading: true,
+                    wireframe: true // Use wireframe for a more abstract/digital look
+                });
+                
+                object = new THREE.Mesh(geometry, material);
+                scene.add(object);
+
+                // Lighting: Subtle ambient light
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+
+                // Directional Light for definition (using the primary color as a highlight)
+                const directionalLight = new THREE.DirectionalLight(0x06BBCC, 1);
+                directionalLight.position.set(5, 5, 5).normalize();
+                scene.add(directionalLight);
+
+                // Handle window resize
+                window.addEventListener('resize', onWindowResize, false);
+            }
+
+            function onWindowResize() {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Rotation for animation
+                object.rotation.x += 0.005;
+                object.rotation.y += 0.008;
+
+                renderer.render(scene, camera);
+            }
+
+            init();
+            animate();
+        });
+        
+        // JavaScript to handle cursor removal after animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const line1 = document.querySelector('.line-1');
+            const line2 = document.querySelector('.line-2');
+            
+            // Remove cursor from line 1 after its animation completes
+            setTimeout(function() {
+                if (line1) {
+                    line1.style.animation = 'none';
+                    line1.style.borderRight = 'none';
+                }
+            }, 3500); // 3s typing + 0.5s delay
+            
+            // Remove cursor from line 2 after its animation completes
+            setTimeout(function() {
+                if (line2) {
+                    line2.style.animation = 'none';
+                    line2.style.borderRight = 'none';
+                }
+            }, 6500); // 2.5s typing + 4s delay
+        });
+    </script>
+    
+</body>
+
+</html>

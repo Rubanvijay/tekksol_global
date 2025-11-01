@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Courses - Tekksol Global</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <style>
+        /* Mobile-First Responsive Styles */
+        body {
+            overflow-x: hidden;
+        }
+        
+        /* Mobile Navigation Improvements */
+        .navbar-nav {
+            text-align: center;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        /* Mobile Login Dropdown Styles */
+        .mobile-login-dropdown {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            .desktop-login-dropdown {
+                display: none;
+            }
+            
+            .mobile-login-dropdown {
+                display: block;
+                padding: 10px 15px;
+                border-top: 1px solid #dee2e6;
+            }
+            
+            .mobile-login-dropdown .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                border: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            
+            .mobile-login-dropdown .dropdown-item {
+                padding: 8px 0;
+                color: #333;
+                border-bottom: 1px solid #f1f1f1;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:hover {
+                background-color: transparent;
+                color: #06BBCC;
+            }
+        }
+        
+        /* Mobile Header Improvements */
+        .page-header {
+            padding: 80px 0 40px !important;
+        }
+        
+        .page-header h1 {
+            font-size: 1.8rem !important;
+        }
+        
+        /* Mobile Course Cards */
+        .course-item {
+            margin-bottom: 20px;
+        }
+        
+        .position-relative.overflow-hidden .position-absolute {
+            bottom: 10px !important;
+        }
+        
+        .position-relative.overflow-hidden .btn {
+            padding: 6px 12px !important;
+            font-size: 0.8rem;
+        }
+        
+        /* Mobile Marquee */
+        .courses-marquee-container {
+            overflow: hidden;
+            position: relative;
+            padding: 15px 0;
+        }
+
+        .marquee-wrapper {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee-scroll 40s linear infinite;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .marquee-item {
+            flex: 0 0 auto;
+            width: 280px;
+            transition: transform 0.3s ease;
+        }
+
+        .marquee-item:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes marquee-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-50% - 10px));
+            }
+        }
+
+        /* Pause animation on hover */
+        .courses-marquee-container:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        
+        /* Mobile Testimonials */
+        .testimonial-carousel {
+            position: relative;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .testimonial-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .owl-carousel {
+            display: flex;
+            justify-content: center;
+        }
+
+        .owl-stage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .owl-item {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Center the carousel */
+        .owl-carousel .owl-stage-outer {
+            overflow: visible;
+        }
+
+        .owl-carousel .owl-stage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .owl-carousel .owl-item {
+            display: flex;
+            justify-content: center;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Ensure proper centering */
+        .testimonial-text {
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        
+        /* Mobile Footer */
+        .footer .row {
+            text-align: center;
+        }
+        
+        .footer .btn-link {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        /* Mobile Course Categories */
+        .course-category h2 {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Mobile Button Improvements */
+        .btn {
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        
+        /* Mobile Text Improvements */
+        h1, h2, h3, h4, h5, h6 {
+            word-wrap: break-word;
+        }
+        
+        /* Mobile Form Improvements */
+        .form-control {
+            font-size: 16px; /* Prevents zoom on iOS */
+        }
+        
+        /* Mobile Spacing Adjustments */
+        .container-xxl.py-5 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+        
+        .mb-5 {
+            margin-bottom: 2rem !important;
+        }
+        
+        /* Mobile Section Headers */
+        .section-title {
+            font-size: 0.9rem;
+            padding: 5px 15px;
+        }
+        
+        /* Mobile Course Stats */
+        .d-flex.border-top small {
+            font-size: 0.75rem;
+            padding: 8px 5px;
+        }
+        
+        /* Mobile WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 25px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Offer Styles */
+        .offer-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+            font-size: 0.9rem;
+        }
+        
+        .offer-highlight {
+            background: #ffd700;
+            color: #d35400;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-weight: 800;
+            margin: 0 3px;
+            font-size: 0.9rem;
+        }
+        
+        .offer-icon {
+            font-size: 2.5rem;
+            color: #06BBCC;
+            margin-bottom: 15px;
+        }
+        
+        .swal2-popup {
+            border-radius: 15px !important;
+            border: 3px solid #ffd700 !important;
+            max-width: 90% !important;
+        }
+        
+        .swal2-title {
+            color: #d35400 !important;
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+        }
+        
+        .swal2-html-container {
+            font-size: 1rem !important;
+            color: #555 !important;
+        }
+        
+        .swal2-confirm, .swal2-deny {
+            padding: 10px 20px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        /* Three.js Animation for Mobile */
+        #three-d-header-animation {
+            height: 100px;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.2;
+        }
+        
+        .page-header .container > .row {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Section Dividers */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #06BBCC, transparent);
+            margin: 30px 0;
+        }
+        
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        /* Responsive adjustments for larger screens */
+        @media (min-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .marquee-item {
+                width: 320px;
+            }
+            
+            .marquee-track {
+                animation: marquee-scroll 35s linear infinite;
+                gap: 25px;
+            }
+            
+            .testimonial-item {
+                padding: 0 15px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .marquee-item {
+                width: 350px;
+            }
+            
+            .marquee-track {
+                animation: marquee-scroll 30s linear infinite;
+                gap: 30px;
+            }
+            
+            .navbar-nav {
+                text-align: left;
+            }
+            
+            .footer .row {
+                text-align: left;
+            }
+            
+            .footer .btn-link {
+                display: inline-block;
+                margin-bottom: 0;
+            }
+            
+            .course-category h2 {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" 
+                 alt="Tekksol Global Logo" height="50px" width="85px">
+        </a>
+        <button type="button" class="navbar-toggler me-3" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-3 p-lg-0 text-center text-lg-start">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About Us</a>
+                <a href="courses.html" class="nav-item nav-link active">Courses</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                            <li>
+                                    <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                        <i class="fas fa-user-tie me-2"></i> Admin Login
+                                    </a>
+                                </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mobile-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login Options
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Page Header -->
+    <div class="container-fluid bg-primary py-4 mb-4 page-header">
+        <div id="three-d-header-animation">
+            <canvas id="three-d-canvas"></canvas>
+        </div>
+        
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-5 text-white animated slideInDown">Courses</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Courses</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Courses Section -->
+    <div class="container-xxl py-4">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
+                <h1 class="mb-4">Popular Courses</h1>
+            </div>
+            
+            <!-- Courses Marquee Container -->
+            <div class="courses-marquee-container mb-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="marquee-wrapper">
+                    <div class="marquee-track">
+                        <!-- Course cards would go here - shortened for brevity -->
+                        <div class="marquee-item">
+                            <div class="course-item bg-light">
+                                <div class="position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src="img/course-1.jpg" alt="Java Full Stack" style="height: 180px; object-fit: cover;">
+                                    <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-3">
+                                        <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                        <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
+                                    </div>
+                                </div>
+                                <div class="text-center p-3 pb-0">
+                                    <div class="mb-2">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small>(123)</small>
+                                    </div>
+                                    <h5 class="mb-3">Java Full Stack Course</h5>
+                                </div>
+                                <div class="d-flex border-top">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-1"></i>John Doe</small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-1"></i>120 Hrs</small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-1"></i>30 Students</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional course cards would continue here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Courses Section -->
+    <div class="container-xxl py-4">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">All Courses</h6>
+                <h1 class="mb-4">Comprehensive Course Catalog</h1>
+            </div>
+
+            <!-- Most Demanded Courses -->
+            <div class="course-category wow fadeInUp" data-wow-delay="0.2s">
+                <h2><i class="fas fa-university me-2"></i>Most Demanded IT Courses</h2>
+                <div class="row g-3 justify-content-center">
+                    <!-- Course items would go here - shortened for brevity -->
+                    <div class="col-12 col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="course-item bg-light h-100">
+                            <div class="position-relative overflow-hidden">
+                                <img class="img-fluid w-100" src="img/course-7.png" alt="Full Stack" style="height: 180px; object-fit: cover;">
+                                <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-3">
+                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
+                                </div>
+                            </div>
+                            <div class="text-center p-3 pb-0">
+                                <div class="mb-2">
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small>(78)</small>
+                                </div>
+                                <h5 class="mb-3">Full Stack Developer</h5>
+                            </div>
+                            <div class="d-flex border-top">
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-1"></i>Dr. Singh</small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-1"></i>120 Hrs</small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-1"></i>42 Students</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional course items would continue here -->
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Additional course categories would continue here -->
+            
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button class="btn btn-primary px-4 py-2" id="loadMoreCourses">Load More Courses</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="container-xxl py-4 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="text-center">
+                <h6 class="section-title bg-white text-center text-primary px-3">Testimonials</h6>
+                <h1 class="mb-4">Students Say About Us</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel position-relative">
+                <div class="testimonial-item text-center">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-1.png" style="width: 70px; height: 70px;">
+                    <h5 class="mb-0">Vijayalakshmi</h5>
+                    <p>Java & SQL Student</p>
+                    <div class="testimonial-text bg-light text-center p-3">
+                        <p class="mb-0">I would like to appreciate the institute Tekksol Global. As a college student, I had some technical knowledge about Java and SQL. The instructors put in extra effort to ensure we understood the concepts. Now, I have practical knowledge as well. Thanks to Tekksol Global!</p>
+                    </div>
+                </div>
+                
+                <!-- Additional testimonials would continue here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light footer pt-4 mt-4 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-4">
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link d-block text-start mb-2" href="about.html">About Us</a>
+                    <a class="btn btn-link d-block text-start mb-2" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link d-block text-start mb-2" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link d-block text-start mb-2" href="terms-condition.html">Terms & Condition</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-2"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-2"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-2"></i>info@tekksolglobal.com</p>
+                    <div class="d-flex pt-2 justify-content-center justify-content-md-start">
+                        <a class="btn btn-outline-light btn-social me-2" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social me-2" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link d-block text-start mb-2" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link d-block text-start mb-2" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link d-block text-start mb-2" href="courses.html">Python Course</a>
+                    <a class="btn btn-link d-block text-start mb-2" href="courses.html">Web Development</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h4 class="text-white mb-3">Newsletter</h4>
+                    <p class="mb-3">Subscribe our newsletter to get our latest updates & news</p>
+                    <div class="position-relative mx-auto" style="max-width: 100%;">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html" class="me-3">Home</a>
+                            <a href="cookie-policy.html" class="me-3">Cookies</a>
+                            <a href="contact.html" class="me-3">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Scripts Section -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // Mobile-specific JavaScript enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile navigation improvements
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            if (navbarToggler && navbarCollapse) {
+                navbarToggler.addEventListener('click', function() {
+                    navbarCollapse.classList.toggle('show');
+                });
+                
+                // Close navbar when clicking on a link (mobile)
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (window.innerWidth < 992) {
+                            navbarCollapse.classList.remove('show');
+                        }
+                    });
+                });
+            }
+            
+            // Load more courses functionality
+            const loadMoreBtn = document.getElementById('loadMoreCourses');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    // In a real implementation, this would load more courses via AJAX
+                    alert('More courses would be loaded here. This is a demo functionality.');
+                });
+            }
+            
+            // Testimonial carousel initialization
+            if (typeof $.fn.owlCarousel !== 'undefined') {
+                $(".testimonial-carousel").owlCarousel({
+                    autoplay: true,
+                    smartSpeed: 1000,
+                    margin: 15,
+                    dots: true,
+                    loop: true,
+                    nav: false,
+                    center: false,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        768: {
+                            items: 1
+                        },
+                        992: {
+                            items: 2
+                        }
+                    }
+                });
+            }
+            
+            // Three.js animation for mobile
+            const container = document.getElementById('three-d-header-animation');
+            if (container) {
+                const canvas = document.getElementById('three-d-canvas');
+                
+                let scene, camera, renderer, objects = [];
+
+                function init() {
+                    scene = new THREE.Scene();
+                    const fov = 75;
+                    const aspect = container.clientWidth / container.clientHeight;
+                    const near = 0.1;
+                    const far = 1000;
+                    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+                    camera.position.z = 10;
+                    camera.position.y = 0;
+
+                    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                    renderer.setClearColor(0x000000, 0);
+
+                    const material = new THREE.MeshBasicMaterial({
+                        color: 0x06BBCC, 
+                        wireframe: true,
+                        opacity: 0.8,
+                        transparent: true
+                    });
+
+                    const geometry = new THREE.CylinderGeometry(0.8, 0.8, 0.1, 6);
+                    const gridSize = 5; // Smaller grid for mobile
+                    const spacing = 2;
+
+                    for (let x = -gridSize; x <= gridSize; x++) {
+                        for (let y = -gridSize; y <= gridSize; y++) {
+                            const hexagon = new THREE.Mesh(geometry, material);
+                            let xPos = x * spacing + (y % 2) * (spacing / 2);
+                            let yPos = y * spacing * 0.866;
+                            hexagon.position.set(xPos, yPos, 0);
+                            hexagon.rotation.z = Math.PI / 2;
+                            scene.add(hexagon);
+                            objects.push(hexagon);
+                        }
+                    }
+
+                    window.addEventListener('resize', onWindowResize, false);
+                }
+
+                function onWindowResize() {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    const time = Date.now() * 0.0001;
+
+                    objects.forEach(obj => {
+                        obj.rotation.x = Math.sin(time * 5 + obj.position.x * 0.1) * 0.1; 
+                        obj.rotation.y = Math.cos(time * 5 + obj.position.y * 0.1) * 0.1; 
+                    });
+                    
+                    camera.position.x = Math.sin(time * 1.5) * 1.5;
+                    camera.position.y = Math.cos(time * 1.5) * 1.5;
+                    camera.lookAt(scene.position);
+
+                    renderer.render(scene, camera);
+                }
+
+                init();
+                animate();
+            }
+            
+            // Special offer popup
+            setTimeout(function() {
+                Swal.fire({
+                    title: '🎓 Special Academic Excellence Offer!',
+                    html: `
+                        <div class="offer-badge">
+                            <i class="fas fa-gift me-2"></i>LIMITED TIME OFFER
+                        </div>
+                        <div class="offer-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <p>High-achieving students with <span class="offer-highlight">8+ CGPA</span> are eligible for an exclusive</p>
+                        <h3 style="color: #06BBCC; margin: 15px 0;">70% DISCOUNT</h3>
+                        <p>on all our professional courses!</p>
+                        <p style="font-size: 0.9rem; color: #777; margin-top: 15px;">
+                            <i class="fas fa-clock me-1"></i>Offer valid for limited time only
+                        </p>
+                    `,
+                    icon: 'info',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Claim My Discount',
+                    cancelButtonText: 'Learn More',
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                        confirmButton: 'swal2-confirm',
+                        cancelButton: 'swal2-deny'
+                    },
+                    buttonsStyling: false,
+                    reverseButtons: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey: true,
+                    showClass: {
+                        popup: 'swal2-show'
+                    },
+                    hideClass: {
+                        popup: 'swal2-hide'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'contact.html';
+                    }
+                });
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

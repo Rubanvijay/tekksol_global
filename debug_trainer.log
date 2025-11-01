@@ -1,0 +1,92 @@
+=== NEW TRAINER REQUEST ===
+2025-11-01 14:42:11
+POST Data: Array
+(
+    [firstName] => Ruban 
+    [lastName] => P
+    [email] => 23pcs112@anjaconline.org
+    [phone] => 9629950744
+    [profession] => Msc Computer Science 
+    [experience] => 0
+    [specializations] => Computer Science
+    [currentCompany] => Fresher
+    [additionalInfo] => 
+)
+
+FILES Data: Array
+(
+    [resume] => Array
+        (
+            [name] => 31.10.25.xlsx
+            [full_path] => 31.10.25.xlsx
+            [type] => application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            [tmp_name] => C:\xampp\tmp\phpADD4.tmp
+            [error] => 0
+            [size] => 12580
+        )
+
+)
+
+RAW VALUES:
+firstName: 'Ruban ' (length: 6)
+lastName: 'P' (length: 1)
+email: '23pcs112@anjaconline.org' (length: 24)
+phone: '9629950744' (length: 10)
+profession: 'Msc Computer Science ' (length: 21)
+experience: '0' (length: 1, type: string)
+TRIMMED VALUES:
+firstName: 'Ruban' (empty: NO)
+lastName: 'P' (empty: NO)
+email: '23pcs112@anjaconline.org' (empty: NO)
+phone: '9629950744' (empty: NO)
+profession: 'Msc Computer Science' (empty: NO)
+experience: '0' (empty: YES)
+VALIDATION: Experience is '0' - ACCEPTED
+VALIDATION PASSED - All fields present
+DATA SAVED: trainer_submissions/trainer_2025-11-01_14-42-11_69060e33d938e.json
+EMAIL SENT: Confirmation email sent to 23pcs112@anjaconline.org
+EMAIL SENT: Notification email sent to admin
+
+=== NEW REQUEST ===
+2025-11-01 14:49:02
+POST Data: Array
+(
+    [firstName] => Ruban 
+    [lastName] => P
+    [email] => 23pcs112@anjaconline.org
+    [phone] => 9629950744
+    [profession] => Msc Computer Science 
+    [experience] => 0
+    [specializations] => Computer Science
+    [currentCompany] => Fresher
+    [additionalInfo] => 
+)
+
+FILES Data: Array
+(
+    [resume] => Array
+        (
+            [name] => 31.10.25.xlsx
+            [full_path] => 31.10.25.xlsx
+            [type] => application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            [tmp_name] => C:\xampp\tmp\phpF3FC.tmp
+            [error] => 0
+            [size] => 12580
+        )
+
+)
+
+FIELD CHECK:
+firstName: 'Ruban' (isset: YES)
+lastName: 'P' (isset: YES)
+email: '23pcs112@anjaconline.org' (isset: YES)
+phone: '9629950744' (isset: YES)
+profession: 'Msc Computer Science' (isset: YES)
+experience: '0' (isset: YES)
+VALIDATION PASSED
+RESUME UPLOADED: 31.10.25.xlsx (12.29 KB) -> trainer_submissions/resume_2025-11-01_14-49-02_69060fcedace1.xlsx
+DATA SAVED: trainer_submissions/trainer_2025-11-01_14-49-02_69060fcedcf81.json
+CONFIRMATION EMAIL SENT TO: 23pcs112@anjaconline.org
+RESUME ATTACHED: trainer_submissions/resume_2025-11-01_14-49-02_69060fcedace1.xlsx
+NOTIFICATION EMAIL SENT WITH RESUME
+

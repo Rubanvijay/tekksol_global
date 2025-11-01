@@ -1,0 +1,100 @@
+=== NEW REQUEST ===
+2025-11-01 14:12:12
+POST Data: Array
+(
+    [firstName] => Ruban 
+    [lastName] => P
+    [email] => 23pcs112@anjaconline.org
+    [phone] => 9629950744
+    [profession] => Msc Computer Science 
+    [experience] => 0
+    [specializations] => Computer Science
+    [currentCompany] => Fresher
+    [additionalInfo] => 
+)
+
+FILES Data: Array
+(
+    [resume] => Array
+        (
+            [name] => 31.10.25.xlsx
+            [full_path] => 31.10.25.xlsx
+            [type] => application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            [tmp_name] => C:\xampp\tmp\php3B32.tmp
+            [error] => 0
+            [size] => 12580
+        )
+
+)
+
+Trimmed values:
+firstName: 'Ruban'
+lastName: 'P'
+email: '23pcs112@anjaconline.org'
+phone: '9629950744'
+profession: 'Msc Computer Science'
+experience: '0'
+experience is empty
+VALIDATION FAILED: Missing required fields: Experience
+
+=== NEW REQUEST ===
+2025-11-01 14:14:02
+POST Data: Array
+(
+    [firstName] => Ruban 
+    [lastName] => P
+    [email] => 23pcs112@anjaconline.org
+    [phone] => 9629950744
+    [profession] => Msc Computer Science 
+    [experience] => 0
+    [specializations] => Computer Science
+    [currentCompany] => Fresher
+    [additionalInfo] => 
+)
+
+Trimmed values:
+firstName: 'Ruban'
+lastName: 'P'
+email: '23pcs112@anjaconline.org'
+phone: '9629950744'
+profession: 'Msc Computer Science'
+experience: '0' (strlen: 1)
+SUCCESS - Data saved to: trainer_submissions/trainer_2025-11-01_14-14-02_6906079abf301.json
+Submission data: {
+    "timestamp": "2025-11-01 14:14:02",
+    "firstName": "Ruban",
+    "lastName": "P",
+    "email": "23pcs112@anjaconline.org",
+    "phone": "9629950744",
+    "profession": "Msc Computer Science",
+    "experience": "0",
+    "specializations": "Computer Science",
+    "currentCompany": "Fresher",
+    "additionalInfo": "",
+    "ip": "::1"
+}
+
+=== NEW REQUEST ===
+2025-11-01 14:17:33
+POST Data: Array
+(
+    [firstName] => Ruban 
+    [lastName] => P
+    [email] => 23pcs112@anjaconline.org
+    [phone] => 9629950744
+    [profession] => Msc Computer Science 
+    [experience] => 0
+    [specializations] => Computer Science
+    [currentCompany] => Fresher
+    [additionalInfo] => 
+)
+
+Email sending results:
+Student email: FAILED
+Admin email: FAILED
+Personal email: FAILED
+
+=== NEW REQUEST ===
+2025-11-01 14:33:55
+PHPMailer Error: SMTP Error: Could not authenticate.
+
