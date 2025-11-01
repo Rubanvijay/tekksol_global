@@ -1,9 +1,9 @@
 <?php
-$host = "tekksol_global.clever-cloud.com";
+$host = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
 $port = "3306";
-$user = "ruban";
-$pass = "ruban123";
-$db   = "tekksol_global";
+$user = "uwgxq8otzk6mhome";
+$pass = "8oQDCXxH6aqYgvkG7g8t"; // copy the password from Clever Cloud
+$db   = "bzbnom7tqqucjcivbuxo";
 
 $conn = mysqli_connect($host, $user, $pass, $db, $port);
 
