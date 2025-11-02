@@ -629,7 +629,7 @@ try {
 
                                     <?php echo htmlspecialchars($course['course_domain']); ?>: <?php echo $course['count']; ?>
 
-                                    <?php echo htmlspecialchars((string)$course['course_domain']); ?>: <?php echo $course['count']; ?>
+                                   
 
                                 </span>
                             <?php endforeach; ?>
@@ -723,9 +723,6 @@ try {
                                             <strong><?php echo htmlspecialchars($student['name']); ?></strong><br>
                                             <small class="text-muted"><?php echo htmlspecialchars($student['course_domain']); ?></small>
 
-                                            <strong><?php echo htmlspecialchars((string)$student['name']); ?></strong><br>
-                                            <small class="text-muted"><?php echo htmlspecialchars((string)$student['course_domain']); ?></small>
-
                                             <span class="<?php 
                                                 echo $student['Status'] == 'Active' ? 'status-active' : 
                                                       ($student['Status'] == 'Completed' ? 'status-completed' : 'status-inactive'); 
@@ -733,7 +730,7 @@ try {
 
                                                 <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars($student['Status']); ?>
 
-                                                <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars((string)$student['Status']); ?>
+                                               
 
                                             </span>
                                         </div>
