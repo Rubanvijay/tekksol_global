@@ -481,7 +481,7 @@ try {
 <div class="d-none d-lg-block">
     <div class="dropdown">
         <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
+            <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars((String)$_SESSION['admin_username'] ?? 'Admin'); ?>
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown" style="min-width: 280px; max-width: 350px;">
             <li>
@@ -539,7 +539,7 @@ try {
                 <div class="col-md-8">
                     <h1 class="display-6 text-white mb-3">Admin Dashboard</h1>
                     <p class="welcome-text text-white">
-                        Welcome back, <strong><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?></strong>!
+                        Welcome back, <strong><?php echo htmlspecialchars((String)$_SESSION['admin_username'] ?? 'Admin'); ?></strong>!
                     </p>
                     <div class="d-flex align-items-center flex-wrap">
                         <span class="status-badge me-2" style="background: #28a745; color: white;">
@@ -614,7 +614,7 @@ try {
                         <div class="mt-3">
                             <?php foreach ($course_distribution as $course): ?>
                                 <span class="course-badge">
-                                    <?php echo htmlspecialchars($course['course_domain']); ?>: <?php echo $course['count']; ?> students
+                                    <?php echo htmlspecialchars((String)$course['course_domain']); ?>: <?php echo $course['count']; ?> students
                                 </span>
                             <?php endforeach; ?>
                         </div>
@@ -639,16 +639,16 @@ try {
                                     <?php foreach ($recent_students as $student): ?>
                                         <tr>
                                             <td>
-                                                <strong><?php echo htmlspecialchars($student['name']); ?></strong>
-                                                <small class="d-block text-muted"><?php echo htmlspecialchars($student['student_id']); ?></small>
+                                                <strong><?php echo htmlspecialchars((String)$student['name']); ?></strong>
+                                                <small class="d-block text-muted"><?php echo htmlspecialchars((String)$student['student_id']); ?></small>
                                             </td>
-                                            <td><?php echo htmlspecialchars($student['course_domain']); ?></td>
+                                            <td><?php echo htmlspecialchars((String)$student['course_domain']); ?></td>
                                             <td>
                                                 <span class="<?php 
                                                     echo $student['Status'] == 'Active' ? 'status-active' : 
                                                           ($student['Status'] == 'Completed' ? 'status-completed' : 'status-inactive'); 
                                                 ?>">
-                                                    <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars($student['Status']); ?>
+                                                    <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars((String)$student['Status']); ?>
                                                 </span>
                                             </td>
                                             <td><?php echo date('M d, Y', strtotime($student['start_date'])); ?></td>
@@ -679,7 +679,7 @@ try {
                                         <tr>
                                             <td>
                                                 <i class="fas fa-user-circle text-primary me-2"></i>
-                                                <strong><?php echo htmlspecialchars($staff['username']); ?></strong>
+                                                <strong><?php echo htmlspecialchars((String)$staff['username']); ?></strong>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
