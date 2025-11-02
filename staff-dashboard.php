@@ -668,8 +668,8 @@ try {
 
                                                 <h6><?php echo htmlspecialchars($student['name']); ?></h6>
                                                 <div class="student-info">
-                                                    <span class="me-3"><i class="fas fa-id-card me-1"></i><?php echo htmlspecialchars($student['student_id']); ?></span>
-                                                    <span class="me-3"><i class="fas fa-book me-1"></i><?php echo htmlspecialchars($student['course_domain']); ?></span>
+                                                    <span class="me-3"><i class="fas fa-id-card me-1"></i><?php echo htmlspecialchars((String)$student['student_id']); ?></span>
+                                                    <span class="me-3"><i class="fas fa-book me-1"></i><?php echo htmlspecialchars((String)$student['course_domain']); ?></span>
 
                                                 <h6><?php echo htmlspecialchars((string)$student['name']); ?></h6>
                                                 <div class="student-info">
@@ -681,9 +681,9 @@ try {
                                                               ($student['Status'] == 'Completed' ? 'status-completed' : 'status-inactive'); 
                                                     ?>">
 
-                                                        <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars($student['Status']); ?>
+                                                        <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars((String)$student['Status']); ?>
 
-                                                        <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars((string)$student['Status']); ?>
+                             
 
                                                     </span>
                                                 </div>
@@ -691,9 +691,6 @@ try {
                                             <div class="col-md-4 text-end">
 
                                                 <small class="text-muted"><?php echo htmlspecialchars($student['email']); ?></small>
-
-                                                <small class="text-muted"><?php echo htmlspecialchars((string)$student['email']); ?></small>
-
                                             </div>
                                         </div>
                                     </div>
