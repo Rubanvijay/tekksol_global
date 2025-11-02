@@ -473,7 +473,7 @@ try {
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
  
                         <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?>
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?>
+                       
 
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
@@ -766,12 +766,6 @@ try {
     <strong>Student Attendance</strong>
     <small class="d-block text-muted mt-2">Mark daily attendance</small>
 
-                        <a href="mark_student_attendance.php" class="action-btn">
-    <i class="fas fa-calendar-check"></i>
-    <strong>Student Attendance</strong>
-    <small class="d-block text-muted mt-2">Mark daiy attendance</small>
-
-</a>
                         
                         <a href="generate_student_credentials.php" class="action-btn">
                             <i class="fas fa-user-plus"></i>
