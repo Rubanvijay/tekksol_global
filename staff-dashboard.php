@@ -761,7 +761,7 @@ try {
                         </a>
 
 
-                        <a href="student_attendance.php" class="action-btn">
+                        <a href="mark_student_attendance.php" class="action-btn">
     <i class="fas fa-calendar-check"></i>
     <strong>Student Attendance</strong>
     <small class="d-block text-muted mt-2">Mark daily attendance</small>
