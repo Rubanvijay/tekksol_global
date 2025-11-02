@@ -12,10 +12,11 @@ if (!isset($_SESSION['staff_username'])) {
 $current_staff_username = $_SESSION['staff_username'];
 
 // Database configuration
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "ruban";
-$db = "tekksol_global";
+$servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
+$port = "3306";
+$dbusername = "uwgxq8otzk6mhome";
+$dbpassword = "8oQDCXxH6aqYgvkG7g8t";
+$db = "bzbnom7tqqucjcivbuxo";
 
 $error = "";
 $success = "";

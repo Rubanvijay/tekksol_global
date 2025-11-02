@@ -5,10 +5,11 @@ ini_set('display_errors', 1);
 
 session_start();
 
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "ruban";
-$db = "tekksol_global";
+$servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
+$port = "3306";
+$dbusername = "uwgxq8otzk6mhome";
+$dbpassword = "8oQDCXxH6aqYgvkG7g8t";
+$db = "bzbnom7tqqucjcivbuxo";
 
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -4,10 +4,11 @@ ini_set('display_errors', 1);
 session_start();
 
 // Database configuration
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "ruban";
-$db = "tekksol_global";
+$servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
+$port = "3306";
+$dbusername = "uwgxq8otzk6mhome";
+$dbpassword = "8oQDCXxH6aqYgvkG7g8t";
+$db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in as student
 if (!isset($_SESSION['student_username'])) {

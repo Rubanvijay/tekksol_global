@@ -5,10 +5,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "ruban";
-$dbname = "tekksol_global";
+$servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
+$port = "3306";
+$dbusername = "uwgxq8otzk6mhome";
+$dbpassword = "8oQDCXxH6aqYgvkG7g8t";
+$db = "bzbnom7tqqucjcivbuxo";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
