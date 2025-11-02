@@ -471,11 +471,10 @@ try {
             <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<<<<<<< HEAD
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
-=======
+ 
                         <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?>
->>>>>>> f9563fe (after updating DB)
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?>
+
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
@@ -512,11 +511,10 @@ try {
             <div class="mobile-login-dropdown d-lg-none">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-<<<<<<< HEAD
+
                         <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
-=======
                         <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?>
->>>>>>> f9563fe (after updating DB)
+
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
@@ -559,11 +557,11 @@ try {
                 <div class="col-md-8">
                     <h1 class="display-5 text-white mb-3">Staff Dashboard</h1>
                     <p class="welcome-text text-white">
-<<<<<<< HEAD
+
                         Welcome back, <strong><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
-=======
+
                         Welcome back, <strong><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
->>>>>>> f9563fe (after updating DB)
+
                     </p>
                     <div class="d-flex align-items-center flex-wrap">
                         <span class="status-badge me-3">Trainer</span>
@@ -629,11 +627,11 @@ try {
                         <div class="mt-3">
                             <?php foreach ($course_distribution as $course): ?>
                                 <span class="course-badge">
-<<<<<<< HEAD
+
                                     <?php echo htmlspecialchars($course['course_domain']); ?>: <?php echo $course['count']; ?>
-=======
+
                                     <?php echo htmlspecialchars((string)$course['course_domain']); ?>: <?php echo $course['count']; ?>
->>>>>>> f9563fe (after updating DB)
+
                                 </span>
                             <?php endforeach; ?>
                         </div>
@@ -649,11 +647,11 @@ try {
                                        class="form-control" 
                                        name="search_query" 
                                        placeholder="Search your students by ID, Name, Username, or Email..." 
-<<<<<<< HEAD
+
                                        value="<?php echo htmlspecialchars($search_query); ?>"
-=======
+
                                        value="<?php echo htmlspecialchars((string)$search_query); ?>"
->>>>>>> f9563fe (after updating DB)
+
                                        required>
                                 <button type="submit" name="search" class="btn btn-primary">
                                     <i class="fas fa-search me-2"></i>Search
@@ -668,35 +666,35 @@ try {
                                     <div class="student-card" onclick="window.location.href='student-profile.php?student_id=<?php echo urlencode($student['student_id']); ?>'">
                                         <div class="row align-items-center">
                                             <div class="col-md-8">
-<<<<<<< HEAD
+
                                                 <h6><?php echo htmlspecialchars($student['name']); ?></h6>
                                                 <div class="student-info">
                                                     <span class="me-3"><i class="fas fa-id-card me-1"></i><?php echo htmlspecialchars($student['student_id']); ?></span>
                                                     <span class="me-3"><i class="fas fa-book me-1"></i><?php echo htmlspecialchars($student['course_domain']); ?></span>
-=======
+
                                                 <h6><?php echo htmlspecialchars((string)$student['name']); ?></h6>
                                                 <div class="student-info">
                                                     <span class="me-3"><i class="fas fa-id-card me-1"></i><?php echo htmlspecialchars((string)$student['student_id']); ?></span>
                                                     <span class="me-3"><i class="fas fa-book me-1"></i><?php echo htmlspecialchars((string)$student['course_domain']); ?></span>
->>>>>>> f9563fe (after updating DB)
+
                                                     <span class="<?php 
                                                         echo $student['Status'] == 'Active' ? 'status-active' : 
                                                               ($student['Status'] == 'Completed' ? 'status-completed' : 'status-inactive'); 
                                                     ?>">
-<<<<<<< HEAD
+
                                                         <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars($student['Status']); ?>
-=======
+
                                                         <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars((string)$student['Status']); ?>
->>>>>>> f9563fe (after updating DB)
+
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 text-end">
-<<<<<<< HEAD
+
                                                 <small class="text-muted"><?php echo htmlspecialchars($student['email']); ?></small>
-=======
+
                                                 <small class="text-muted"><?php echo htmlspecialchars((string)$student['email']); ?></small>
->>>>>>> f9563fe (after updating DB)
+
                                             </div>
                                         </div>
                                     </div>
@@ -704,11 +702,11 @@ try {
                             </div>
                         <?php elseif (isset($_POST['search'])): ?>
                             <div class="alert alert-info mt-3">
-<<<<<<< HEAD
+
                                 <i class="fas fa-info-circle me-2"></i>No students found in your list matching "<?php echo htmlspecialchars($search_query); ?>"
-=======
+
                                 <i class="fas fa-info-circle me-2"></i>No students found in your list matching "<?php echo htmlspecialchars((string)$search_query); ?>"
->>>>>>> f9563fe (after updating DB)
+
                             </div>
                         <?php endif; ?>
                     </div>
@@ -722,22 +720,22 @@ try {
                                 <li onclick="window.location.href='student-profile.php?student_id=<?php echo urlencode($student['student_id']); ?>'" style="cursor: pointer;">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-<<<<<<< HEAD
+
                                             <strong><?php echo htmlspecialchars($student['name']); ?></strong><br>
                                             <small class="text-muted"><?php echo htmlspecialchars($student['course_domain']); ?></small>
-=======
+
                                             <strong><?php echo htmlspecialchars((string)$student['name']); ?></strong><br>
                                             <small class="text-muted"><?php echo htmlspecialchars((string)$student['course_domain']); ?></small>
->>>>>>> f9563fe (after updating DB)
+
                                             <span class="<?php 
                                                 echo $student['Status'] == 'Active' ? 'status-active' : 
                                                       ($student['Status'] == 'Completed' ? 'status-completed' : 'status-inactive'); 
                                             ?> ms-2">
-<<<<<<< HEAD
+
                                                 <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars($student['Status']); ?>
-=======
+
                                                 <i class="fas fa-circle me-1"></i><?php echo htmlspecialchars((string)$student['Status']); ?>
->>>>>>> f9563fe (after updating DB)
+
                                             </span>
                                         </div>
                                         <div class="text-end">
@@ -762,17 +760,17 @@ try {
                             <small class="d-block text-muted mt-2">Mark daily attendance</small>
                         </a>
 
-<<<<<<< HEAD
+
                         <a href="student_attendance.php" class="action-btn">
     <i class="fas fa-calendar-check"></i>
     <strong>Student Attendance</strong>
     <small class="d-block text-muted mt-2">Mark daily attendance</small>
-=======
+
                         <a href="mark_student_attendance.php" class="action-btn">
     <i class="fas fa-calendar-check"></i>
     <strong>Student Attendance</strong>
     <small class="d-block text-muted mt-2">Mark daiy attendance</small>
->>>>>>> f9563fe (after updating DB)
+
 </a>
                         
                         <a href="generate_student_credentials.php" class="action-btn">
