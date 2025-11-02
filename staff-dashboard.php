@@ -513,8 +513,7 @@ try {
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
 
                         <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?>
-
+                       
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
@@ -560,7 +559,7 @@ try {
 
                         Welcome back, <strong><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
 
-                        Welcome back, <strong><?php echo htmlspecialchars((string)$_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
+                      
 
                     </p>
                     <div class="d-flex align-items-center flex-wrap">
@@ -705,7 +704,7 @@ try {
 
                                 <i class="fas fa-info-circle me-2"></i>No students found in your list matching "<?php echo htmlspecialchars($search_query); ?>"
 
-                                <i class="fas fa-info-circle me-2"></i>No students found in your list matching "<?php echo htmlspecialchars((string)$search_query); ?>"
+                               
 
                             </div>
                         <?php endif; ?>
