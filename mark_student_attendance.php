@@ -350,7 +350,7 @@ try {
             <div class="d-none d-lg-block">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username']); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_username']); ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
@@ -390,7 +390,7 @@ try {
                         <i class="fas fa-calendar-check me-3"></i>Mark Student Attendance
                     </h1>
                     <p class="text-white mb-0">
-                        Trainer: <strong><?php echo htmlspecialchars($current_staff_username); ?></strong>
+                        Trainer: <strong><?php echo htmlspecialchars((String)$current_staff_username); ?></strong>
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -474,7 +474,7 @@ try {
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
                                         <div class="student-name">
-                                            <?php echo htmlspecialchars($student['name']); ?>
+                                            <?php echo htmlspecialchars((String)$student['name']); ?>
                                             <?php if ($student['attendance_status']): ?>
                                                 <span class="marked-badge ms-2">
                                                     <i class="fas fa-check me-1"></i>Marked
@@ -482,9 +482,9 @@ try {
                                             <?php endif; ?>
                                         </div>
                                         <div class="student-details">
-                                            <i class="fas fa-id-card me-1"></i><?php echo htmlspecialchars($student['student_id']); ?>
+                                            <i class="fas fa-id-card me-1"></i><?php echo htmlspecialchars((String)$student['student_id']); ?>
                                             <span class="mx-2">|</span>
-                                            <i class="fas fa-book me-1"></i><?php echo htmlspecialchars($student['course_domain']); ?>
+                                            <i class="fas fa-book me-1"></i><?php echo htmlspecialchars((String)$student['course_domain']); ?>
                                         </div>
                                     </div>
                                     <div class="col-md-7">
