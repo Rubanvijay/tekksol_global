@@ -432,11 +432,11 @@ try {
             <div class="student-info-card">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h4 class="mb-2"><?php echo htmlspecialchars($student_info['name']); ?></h4>
+                        <h4 class="mb-2"><?php echo htmlspecialchars((string)$student_info['name']); ?></h4>
                         <div class="d-flex flex-wrap gap-3">
-                            <span><i class="fas fa-id-card me-1"></i> <?php echo htmlspecialchars($student_info['student_id']); ?></span>
-                            <span><i class="fas fa-book me-1"></i> <?php echo htmlspecialchars($student_info['course_domain']); ?></span>
-                            <span><i class="fas fa-circle me-1 text-success"></i> <?php echo htmlspecialchars($student_info['Status']); ?></span>
+                            <span><i class="fas fa-id-card me-1"></i> <?php echo htmlspecialchars((string)$student_info['student_id']); ?></span>
+                            <span><i class="fas fa-book me-1"></i> <?php echo htmlspecialchars((string)$student_info['course_domain']); ?></span>
+                            <span><i class="fas fa-circle me-1 text-success"></i> <?php echo htmlspecialchars((string)$student_info['Status']); ?></span>
                         </div>
                     </div>
                     <div class="col-md-4 text-md-end">
@@ -555,7 +555,7 @@ try {
                             </div>
                             <div class="col-md-4 text-md-end">
                                 <small class="text-muted">
-                                    Marked by: <strong><?php echo htmlspecialchars($record['marked_by']); ?></strong>
+                                    Marked by: <strong><?php echo htmlspecialchars((string)$record['marked_by']); ?></strong>
                                 </small>
                             </div>
                         </div>
