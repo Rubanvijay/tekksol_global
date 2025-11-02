@@ -13,9 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get and sanitize input
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
-    echo "Username: " . $username . "<br>";
-    echo "Password: " . $password . "<br>";
 } else {
     echo "Please submit the form.";
     exit();
@@ -44,8 +41,6 @@ if(mysqli_num_rows($result) > 0) {
         // Set session variables
         $_SESSION['student_username'] = $username;
         $_SESSION['student_logged_in'] = true;
-        
-        echo "Login successful! Redirecting...<br>";
         header("Location: student-dashboard.php");
         exit();
     } else {
