@@ -689,8 +689,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     function(position) {
-                        const lat =  12.811393;
-                        const lon = 80.227807;
+                        const lat =  position.coords.latitude;
+                        const lon = position.coords.longitude;
 
                         
                         updateLocationInfo(lat, lon);
