@@ -388,7 +388,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_username'] ?? 'Staff'); ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
@@ -425,7 +425,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             <div class="mobile-login-dropdown d-lg-none">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_username'] ?? 'Staff'); ?>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
@@ -468,7 +468,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                 <div class="col-md-8">
                     <h1 class="display-5 text-white mb-3">Staff Attendance</h1>
                     <p class="welcome-text text-white">
-                        Welcome back, <strong><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
+                        Welcome back, <strong><?php echo htmlspecialchars((String)$_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
                     </p>
                     <div class="d-flex gap-2 flex-wrap">
                         <span class="status-badge bg-white text-primary">Staff Portal</span>
