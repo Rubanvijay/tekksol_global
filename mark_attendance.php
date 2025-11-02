@@ -481,7 +481,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                     </div>
                 </div>
             </div>
-        </div
+    </div>
     </div>
 
     <!-- Attendance Content -->
