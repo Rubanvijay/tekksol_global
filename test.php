@@ -1,10 +1,10 @@
 <?php
 session_start(); // Add this at the top
 
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "ruban";
-$db = "tekksol_global";
+$servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
+$dbusername = "uwgxq8otzk6mhome";
+$dbpassword = "8oQDCXxH6aqYgvkG7g8t";
+$db = "bzbnom7tqqucjcivbuxo";
 
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
