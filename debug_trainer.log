@@ -90,3 +90,46 @@ CONFIRMATION EMAIL SENT TO: 23pcs112@anjaconline.org
 RESUME ATTACHED: trainer_submissions/resume_2025-11-01_14-49-02_69060fcedace1.xlsx
 NOTIFICATION EMAIL SENT WITH RESUME
 
+=== NEW REQUEST ===
+2025-11-03 07:21:30
+POST Data: Array
+(
+    [firstName] => ruban
+    [lastName] => M
+    [email] => 23pcs112@anjaconline.org
+    [phone] => 09629950755
+    [profession] => siva
+    [experience] => 0
+    [specializations] => cxs
+    [currentCompany] => dh
+    [additionalInfo] => 
+)
+
+FILES Data: Array
+(
+    [resume] => Array
+        (
+            [name] => 24.10.25.xlsx
+            [full_path] => 24.10.25.xlsx
+            [type] => application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+            [tmp_name] => C:\xampp\tmp\php1F8.tmp
+            [error] => 0
+            [size] => 12611
+        )
+
+)
+
+FIELD CHECK:
+firstName: 'ruban' (isset: YES)
+lastName: 'M' (isset: YES)
+email: '23pcs112@anjaconline.org' (isset: YES)
+phone: '09629950755' (isset: YES)
+profession: 'siva' (isset: YES)
+experience: '0' (isset: YES)
+VALIDATION PASSED
+RESUME UPLOADED: 24.10.25.xlsx (12.32 KB) -> trainer_submissions/resume_2025-11-03_07-21-30_690849eaa2f7f.xlsx
+DATA SAVED: trainer_submissions/trainer_2025-11-03_07-21-30_690849eaae911.json
+CONFIRMATION EMAIL SENT TO: 23pcs112@anjaconline.org
+RESUME ATTACHED: trainer_submissions/resume_2025-11-03_07-21-30_690849eaa2f7f.xlsx
+NOTIFICATION EMAIL SENT WITH RESUME
+
