@@ -9,10 +9,14 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+// Turn off error display for production, log instead
+error_reporting(0);
+ini_set('display_errors', 0);
+
 header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data - MATCHING YOUR CONTACT FORM FIELD NAMES
+    // Get form data
     $name = trim($_POST["name"] ?? '');
     $email = trim($_POST["email"] ?? '');
     $subject = trim($_POST["subject"] ?? '');
@@ -31,25 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
-    // Create submissions directory if it doesn't exist
-    if (!is_dir('contact_submissions')) {
-        mkdir('contact_submissions', 0755, true);
-    }
-    
-    // Save submission data as backup
-    $submission = [
-        'timestamp' => date('Y-m-d H:i:s'),
-        'name' => $name,
-        'email' => $email,
-        'phone' => $phone,
-        'subject' => $subject,
-        'message' => $message,
-        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'Unknown'
-    ];
-    
-    $filename = 'contact_submissions/contact_' . date('Y-m-d_H-i-s') . '.json';
-    file_put_contents($filename, json_encode($submission, JSON_PRETTY_PRINT));
-    
     // Send email using PHPMailer
     $mail = new PHPMailer(true);
     
@@ -63,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
         
-        // Recipients - Send to your email
+        // Recipients
         $mail->setFrom('noreply@tekksolglobal.com', 'Tekksol Global Website');
-        $mail->addAddress('rubanvijay1000@gmail.com'); // Your email for receiving messages
-        $mail->addReplyTo($email, $name); // Customer's email for easy reply
+        $mail->addAddress('rubanvijay1000@gmail.com');
+        $mail->addReplyTo($email, $name);
         
-        // Content - Email to YOU with contact details
+        // Content
         $mail->isHTML(true);
         $mail->Subject = "New Contact Form Submission: $subject";
         $mail->Body = "
@@ -109,7 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </html>
         ";
         
-        // Alternative plain text version
         $mail->AltBody = "
 New Contact Form Submission
 
@@ -211,26 +195,27 @@ Website: https://www.tekksolglobal.com
             ";
             
             $confirmMail->send();
+            
+            // Success response
+            echo json_encode([
+                'status' => 'success', 
+                'message' => 'Thank you for contacting us! We have received your message and will respond within 24-48 hours.'
+            ]);
+            
         } catch (Exception $e) {
-            // Log if confirmation email fails, but don't fail the whole process
-            error_log("Confirmation email failed: " . $e->getMessage());
+            // If confirmation email fails but main email sent, still show success
+            echo json_encode([
+                'status' => 'success', 
+                'message' => 'Thank you for your message. We have received it and will contact you soon.'
+            ]);
         }
         
-        // Success response
-        echo json_encode([
-            'status' => 'success', 
-            'message' => 'Thank you for contacting us! We have received your message and will respond within 24-48 hours.'
-        ]);
-        
     } catch (Exception $e) {
-        // If email fails but data is saved, still show success
+        // If email fails completely
         echo json_encode([
-            'status' => 'success', 
-            'message' => 'Thank you for your message. We have received it and will contact you soon.'
+            'status' => 'error', 
+            'message' => 'Sorry, there was a problem sending your message. Please try again later or contact us directly at info@tekksolglobal.com.'
         ]);
-        
-        // Log the error for debugging
-        error_log("Contact PHPMailer Error: " . $mail->ErrorInfo);
     }
     
 } else {

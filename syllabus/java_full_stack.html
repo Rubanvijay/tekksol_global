@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Java Full Stack Course - Tekksol Global</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Java Full Stack Development Course, Spring Boot, Hibernate, React" name="keywords">
+    <meta content="Complete Java Full Stack Development course from basics to advanced frameworks" name="description">
+    
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <style>
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+        }
+        
+        * {
+            max-width: 100%;
+        }
+        
+        .container, .container-fluid, .container-xxl {
+            overflow-x: hidden !important;
+        }
+        
+        .course-detail-section {
+            padding: 60px 0;
+        }
+        
+        .course-header-box {
+            background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(6, 187, 204, 0.3);
+        }
+        
+        .course-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .stat-item i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .stat-item h4 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .syllabus-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .syllabus-module {
+            background: #f8f9fa;
+            border-left: 4px solid #06BBCC;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .syllabus-module:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(6, 187, 204, 0.2);
+        }
+        
+        .syllabus-module h4 {
+            color: #06BBCC;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .syllabus-module ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .syllabus-module ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .syllabus-module ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #06BBCC;
+            font-weight: bold;
+        }
+        
+        .market-analysis-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 30px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .skill-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .skill-card:hover {
+            border-color: #06BBCC;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(6, 187, 204, 0.2);
+        }
+        
+        .skill-card i {
+            font-size: 3rem;
+            color: #06BBCC;
+            margin-bottom: 15px;
+        }
+        
+        .skill-card h5 {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .enroll-cta {
+            background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .enroll-cta h2 {
+            margin-bottom: 20px;
+        }
+        
+        .enroll-cta .btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        @media (max-width: 768px) {
+            .course-header-box {
+                padding: 25px;
+            }
+            
+            .stat-item {
+                flex: 0 0 50%;
+                margin-bottom: 20px;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                left: 20px;
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Spinner -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global" height="60px" width="100px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About Us</a>
+                <a href="courses.html" class="nav-item nav-link active">Courses</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="d-none d-lg-block">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="student-login.html"><i class="fas fa-graduation-cap me-2"></i>Student Login</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="staff-login.html"><i class="fas fa-user-tie me-2"></i>Staff Login</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="admin-login.html"><i class="fas fa-user-tie me-2"></i>Admin Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Java Full Stack Development</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="courses.html">Courses</a></li>
+                            <li class="breadcrumb-item text-white active">Java Full Stack</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Details -->
+    <div class="container-xxl course-detail-section">
+        <div class="container">
+            <!-- Course Header -->
+            <div class="course-header-box wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="mb-3">Master Java Full Stack Development</h1>
+                <p class="lead mb-4">Become a proficient full-stack developer with expertise in Java, Spring Boot, Hibernate, React, and modern web technologies. Build enterprise-level applications from scratch.</p>
+                
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>120 Hours</h4>
+                        <p>Duration</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <h4>1500+</h4>
+                        <p>Students Enrolled</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>15+</h4>
+                        <p>Real Projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-certificate"></i>
+                        <h4>Certified</h4>
+                        <p>Industry Recognized</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Syllabus Section -->
+            <div class="syllabus-section wow fadeInUp" data-wow-delay="0.2s">
+                <h2 class="mb-4"><i class="fas fa-book-open me-3"></i>Complete Course Syllabus</h2>
+                
+                <!-- Module 1 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-code me-2"></i>Module 1: Java Fundamentals</h4>
+                    <ul>
+                        <li>Introduction to Java and JDK Setup</li>
+                        <li>Data Types, Variables, and Operators</li>
+                        <li>Control Structures (if-else, loops, switch)</li>
+                        <li>Object-Oriented Programming Concepts</li>
+                        <li>Classes, Objects, Inheritance, and Polymorphism</li>
+                        <li>Exception Handling and Error Management</li>
+                        <li>Collections Framework (List, Set, Map)</li>
+                        <li>File Handling and I/O Streams</li>
+                    </ul>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-database me-2"></i>Module 2: Advanced Java & JDBC</h4>
+                    <ul>
+                        <li>Multithreading and Concurrency</li>
+                        <li>Java 8+ Features (Lambda, Stream API)</li>
+                        <li>Introduction to JDBC</li>
+                        <li>Database Connectivity and Operations</li>
+                        <li>Prepared Statements and SQL Injection Prevention</li>
+                        <li>Transaction Management</li>
+                        <li>Connection Pooling Techniques</li>
+                    </ul>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-server me-2"></i>Module 3: Web Technologies (Servlets & JSP)</h4>
+                    <ul>
+                        <li>Introduction to Web Applications</li>
+                        <li>Servlet Lifecycle and Architecture</li>
+                        <li>Request and Response Handling</li>
+                        <li>Session Management and Cookies</li>
+                        <li>JSP Fundamentals and Syntax</li>
+                        <li>JSTL and Custom Tags</li>
+                        <li>MVC Architecture Pattern</li>
+                    </ul>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-layer-group me-2"></i>Module 4: Hibernate ORM Framework</h4>
+                    <ul>
+                        <li>Introduction to ORM and Hibernate</li>
+                        <li>Hibernate Configuration and Setup</li>
+                        <li>Entity Mapping and Annotations</li>
+                        <li>CRUD Operations with Hibernate</li>
+                        <li>HQL and Criteria API</li>
+                        <li>Relationships (One-to-One, One-to-Many, Many-to-Many)</li>
+                        <li>Caching Strategies (First-level, Second-level)</li>
+                        <li>Transaction Management in Hibernate</li>
+                    </ul>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-leaf me-2"></i>Module 5: Spring Framework Core</h4>
+                    <ul>
+                        <li>Introduction to Spring Framework</li>
+                        <li>Dependency Injection and IoC Container</li>
+                        <li>Bean Lifecycle and Scopes</li>
+                        <li>Spring AOP (Aspect-Oriented Programming)</li>
+                        <li>Spring JDBC and Data Access</li>
+                        <li>Spring ORM Integration</li>
+                        <li>Spring Transaction Management</li>
+                    </ul>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-rocket me-2"></i>Module 6: Spring Boot Framework</h4>
+                    <ul>
+                        <li>Introduction to Spring Boot</li>
+                        <li>Creating Spring Boot Applications</li>
+                        <li>Auto-Configuration and Starters</li>
+                        <li>Spring Boot REST API Development</li>
+                        <li>Request Mapping and Controllers</li>
+                        <li>Exception Handling in REST APIs</li>
+                        <li>Spring Data JPA Integration</li>
+                        <li>Spring Security Basics</li>
+                        <li>JWT Authentication Implementation</li>
+                        <li>Application Properties and Profiles</li>
+                        <li>Logging and Monitoring</li>
+                        <li>Spring Boot Actuator</li>
+                    </ul>
+                </div>
+
+                <!-- Module 7 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-code me-2"></i>Module 7: Frontend Technologies</h4>
+                    <ul>
+                        <li>HTML5, CSS3, and Bootstrap</li>
+                        <li>JavaScript ES6+ Features</li>
+                        <li>DOM Manipulation and Events</li>
+                        <li>AJAX and Fetch API</li>
+                        <li>Introduction to React.js</li>
+                        <li>React Components and Props</li>
+                        <li>State Management with Hooks</li>
+                        <li>React Router for Navigation</li>
+                        <li>Consuming REST APIs in React</li>
+                    </ul>
+                </div>
+
+                <!-- Module 8 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-tools me-2"></i>Module 8: Development Tools & DevOps</h4>
+                    <ul>
+                        <li>Version Control with Git and GitHub</li>
+                        <li>Maven/Gradle Build Tools</li>
+                        <li>Unit Testing with JUnit and Mockito</li>
+                        <li>RESTful API Testing (Postman)</li>
+                        <li>Docker Containerization Basics</li>
+                        <li>CI/CD Pipeline Introduction</li>
+                        <li>Deployment on Cloud (AWS/Azure basics)</li>
+                    </ul>
+                </div>
+
+                <!-- Module 9 -->
+                <div class="syllabus-module">
+                    <h4><i class="fas fa-project-diagram me-2"></i>Module 9: Capstone Projects</h4>
+                    <ul>
+                        <li>E-Commerce Application</li>
+                        <li>Banking Management System</li>
+                        <li>Hospital Management System</li>
+                        <li>Social Media Platform</li>
+                        <li>Real-time Chat Application</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills You'll Gain -->
+            <div class="market-analysis-section wow fadeInUp" data-wow-delay="0.3s">
+                <h2 class="mb-4"><i class="fas fa-graduation-cap me-3"></i>Skills You'll Master</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fab fa-java"></i>
+                        <h5>Core Java</h5>
+                        <p>Master OOP concepts</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-leaf"></i>
+                        <h5>Spring Boot</h5>
+                        <p>Build scalable APIs</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-database"></i>
+                        <h5>Hibernate</h5>
+                        <p>Database management</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-database"></i>
+                        <h5>JDBCs</h5>
+                        <p>Java Database Connectivity</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h5>Spring Security</h5>
+                        <p>Secure applications</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-cloud"></i>
+                        <h5>RESTful APIs</h5>
+                        <p>Web services</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Analysis -->
+            <div class="market-analysis-section wow fadeInUp" data-wow-delay="0.4s">
+                <h2 class="mb-4"><i class="fas fa-chart-line me-3"></i>Java Developer Market Demand & Salary Scale</h2>
+                <p class="lead">Java Full Stack developers are among the most sought-after professionals in the tech industry. Here's what you can expect after completing this course:</p>
+                
+                <div class="chart-container">
+                    <canvas id="salaryChart"></canvas>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="bg-light p-4 rounded">
+                            <h3 class="text-primary">₹4-6 LPA</h3>
+                            <p class="mb-0">Fresher (0-1 years)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="bg-light p-4 rounded">
+                            <h3 class="text-primary">₹8-12 LPA</h3>
+                            <p class="mb-0">Mid-Level (2-4 years)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="bg-light p-4 rounded">
+                            <h3 class="text-primary">₹15-25 LPA</h3>
+                            <p class="mb-0">Senior (5+ years)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enrollment CTA -->
+            <div class="enroll-cta wow fadeInUp" data-wow-delay="0.5s">
+                <h2>Ready to Start Your Java Full Stack Journey?</h2>
+                <p class="lead mb-4">Join thousands of successful developers who learned with Tekksol Global</p>
+                <a href="contact.html" class="btn btn-light btn-lg">Enroll Now</a>
+                <a href="tel:+919042527746" class="btn btn-outline-light btn-lg ms-3">Call Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                    <p class="mb-2"><i class="fa fa-clock me-3"></i>Mon - Sat: 09:30 - 06:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link" href="courses.html">Python Course</a>
+                    <a class="btn btn-link" href="courses.html">Web Development</a>
+                    <a class="btn btn-link" href="courses.html">Digital Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Our Location</h4>
+                    <iframe style="height:250px; width:100%;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html">Home</a>
+                            <a href="cookie-policy.html">Cookies</a>
+                            <a href="contact.html">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20know%20more%20about%20the%20Java%20Full%20Stack%20course" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        // Spinner
+        var spinner = function () {
+            setTimeout(function () {
+                if ($('#spinner').length > 0) {
+                    $('#spinner').removeClass('show');
+                }
+            }, 1);
+        };
+        spinner();
+
+        // Initialize WOW.js
+        new WOW().init();
+
+        // Chart.js - Java Developer Salary Scale by Experience
+        const ctx = document.getElementById('salaryChart').getContext('2d');
+        
+        const salaryChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Fresher (0-1 yr)', 'Junior (1-2 yrs)', 'Mid-Level (2-4 yrs)', 'Senior (4-6 yrs)', 'Lead (6-8 yrs)', 'Architect (8+ yrs)'],
+                datasets: [{
+                    label: 'Average Salary (₹ LPA)',
+                    data: [5, 7, 10, 15, 20, 25],
+                    backgroundColor: [
+                        'rgba(6, 187, 204, 0.8)',
+                        'rgba(6, 187, 204, 0.85)',
+                        'rgba(6, 187, 204, 0.9)',
+                        'rgba(5, 150, 163, 0.9)',
+                        'rgba(5, 150, 163, 0.95)',
+                        'rgba(5, 150, 163, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(6, 187, 204, 1)',
+                        'rgba(6, 187, 204, 1)',
+                        'rgba(6, 187, 204, 1)',
+                        'rgba(5, 150, 163, 1)',
+                        'rgba(5, 150, 163, 1)',
+                        'rgba(5, 150, 163, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    barThickness: 60
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Java Full Stack Developer - Career Growth & Salary Progression',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        color: '#06BBCC',
+                        padding: 20
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 13
+                        },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += '₹' + context.parsed.y + ' LPA';
+                                return label;
+                            },
+                            afterLabel: function(context) {
+                                const descriptions = [
+                                    'Entry-level position',
+                                    'Basic project experience',
+                                    'Independent developer',
+                                    'Team lead capabilities',
+                                    'Architecture expertise',
+                                    'System architect level'
+                                ];
+                                return descriptions[context.dataIndex];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 30,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value + ' LPA';
+                            },
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            color: '#666'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Annual Salary (in Lakhs)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 11,
+                                weight: '600'
+                            },
+                            color: '#666'
+                        },
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Experience Level',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', function() {
+            const chartSection = document.querySelector('.market-analysis-section');
+            const chartPosition = chartSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight;
+
+            if (chartPosition < screenPosition) {
+                salaryChart.update();
+            }
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to top button
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('.back-to-top').fadeIn('slow');
+            } else {
+                $('.back-to-top').fadeOut('slow');
+            }
+        });
+        
+        $('.back-to-top').click(function () {
+            $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+            return false;
+        });
+
+        // Syllabus module hover effect enhancement
+        document.querySelectorAll('.syllabus-module').forEach(module => {
+            module.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#e3f6f8';
+            });
+            module.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '#f8f9fa';
+            });
+        });
+
+        // Add counter animation for stats
+        function animateCounter(element, target, duration) {
+            let current = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.dataset.suffix || '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+                }
+            }, 16);
+        }
+
+        // Trigger counter animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-item h4');
+                    counters.forEach(counter => {
+                        const target = counter.textContent.replace(/\D/g, '');
+                        if (target) {
+                            counter.dataset.suffix = counter.textContent.replace(/\d/g, '');
+                            animateCounter(counter, parseInt(target), 2000);
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.course-header-box');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
