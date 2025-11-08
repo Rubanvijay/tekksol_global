@@ -12,7 +12,7 @@ $db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in as staff
 if (!isset($_SESSION['admin_username'])) {
-    header("Location: staff-login.html");
+    header("Location: admin-login.html");
     exit();
 }
 

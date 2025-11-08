@@ -762,6 +762,13 @@ try {
                                     <small class="d-block text-muted mt-1">Manage staff members</small>
                                 </a>
                             </div>
+                              <div class="col-6 col-lg-12">
+                                <a href="view_global_team_record.php" class="action-btn">
+                                    <i class="fas fa-users"></i>
+                                    <strong>Global Record</strong>
+                                    <small class="d-block text-muted mt-1">View Global Team Record</small>
+                                </a>
+                            </div>
                             
                             <div class="col-6 col-lg-12">
                                 <a href="generate_staff_credentials.php" class="action-btn">
@@ -799,6 +806,13 @@ try {
                                     <i class="fas fa-chart-bar"></i>
                                     <strong>Attendance Report</strong>
                                     <small class="d-block text-muted mt-1">View student & staff attendance</small>
+                                </a>
+                            </div>
+                             <div class="col-6 col-lg-12">
+                                <a href="sent_pay_slip.php" class="action-btn">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <strong>Pay Slip</strong>
+                                    <small class="d-block text-muted mt-1">Sent Pay Slip</small>
                                 </a>
                             </div>
 

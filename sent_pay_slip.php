@@ -4,6 +4,13 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+
+// Check if user is logged in as staff
+if (!isset($_SESSION['admin_username'])) {
+    header("Location: admin-login.html");
+    exit();
+}
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
