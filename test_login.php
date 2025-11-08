@@ -1,12 +1,15 @@
+<?php
+ session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Staff Login - Tekksol Global</title>
+    <title>Student Test Registration - Tekksol Global</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Tekksol Global, Staff Login, Training Institute" name="keywords">
-    <meta content="Staff login portal for Tekksol Global training institute" name="description">
+    <meta content="Tekksol Global, Test Registration, Student Assessment" name="keywords">
+    <meta content="Register for Tekksol Global assessment tests to evaluate your skills" name="description">
 
     <!-- Favicon -->
     <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
@@ -128,6 +131,25 @@
             margin-right: 1rem;
             flex-shrink: 0;
         }
+
+        /* Alert Styles */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .alert-success {
+            background-color: #d1edff;
+            color: #0c5460;
+            border-left: 4px solid #06BBCC;
+        }
     </style>
 </head>
 
@@ -196,38 +218,84 @@
                     <div class="login-card">
                         <div class="login-header">
                             <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" class="login-logo">
-                            <h2 class="mb-0">Staff Portal Access</h2>
-                            <p class="mb-0">Secure login for Tekksol Global staff members</p>
+                            <h2 class="mb-0">Test Registration</h2>
+                            <p class="mb-0">Assessment Portal</p>
                         </div>
                         <div class="login-body">
-                            <form action="test2.php" method="POST">
-                                <div class="mb-4">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email"placeholder="Enter your Email">
+                            <?php
+                           
+                            // Display error messages
+                            if (isset($_SESSION['error'])) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                                echo '<i class="fas fa-exclamation-circle me-2"></i>';
+                                echo $_SESSION['error'];
+                                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                echo '</div>';
+                                unset($_SESSION['error']);
+                            }
+                            
+                            // Display success messages
+                            if (isset($_SESSION['success'])) {
+                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                                echo '<i class="fas fa-check-circle me-2"></i>';
+                                echo $_SESSION['success'];
+                                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                                echo '</div>';
+                                unset($_SESSION['success']);
+                            }
+                            ?>
+
+                            <form action="process_registration.php" method="POST" id="registrationForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Full Name *</label>
+                                        <input type="text" class="form-control" id="name" name="name" 
+                                               value="<?php echo isset($_SESSION['old_name']) ? htmlspecialchars($_SESSION['old_name']) : ''; ?>" 
+                                               required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               value="<?php echo isset($_SESSION['old_email']) ? htmlspecialchars($_SESSION['old_email']) : ''; ?>" 
+                                               required>
+                                    </div>
                                 </div>
-                                <div class="mb-4">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" 
+                                               value="<?php echo isset($_SESSION['old_phone']) ? htmlspecialchars($_SESSION['old_phone']) : ''; ?>" 
+                                               required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="location" class="form-label">Location *</label>
+                                        <input type="text" class="form-control" id="location" name="location" 
+                                               value="<?php echo isset($_SESSION['old_location']) ? htmlspecialchars($_SESSION['old_location']) : ''; ?>" 
+                                               required>
+                                    </div>
                                 </div>
-                                <div class="mb-4 d-flex justify-content-between align-items-center">
+
+                                <div class="mb-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="rememberMe">
-                                        <label class="form-check-label" for="rememberMe">
-                                            Remember me on this device
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to the <a href="terms-condition.html" target="_blank">Terms and Conditions</a> 
+                                            and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
                                         </label>
                                     </div>
-                                    <a href="staff-forgot-password.html" class="forgot-password">Forgot Password?</a>
                                 </div>
+
                                 <div class="mb-4">
-                                    <button type="submit" class="btn btn-primary btn-login w-100">Sign In to Staff Portal</button>
+                                    <button type="submit" class="btn btn-primary btn-login w-100">Register for Test</button>
                                 </div>
+                               
                             </form>
-                            
-                           
-                            
+
                             <div class="login-footer">
-                                <p class="mb-0">Having trouble accessing your account? <a href="contact.html" class="forgot-password">Contact IT Support</a></p>
+                                <p class="mb-0">Already registered? <a href="test_selection.php">Select your test</a></p>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -310,6 +378,27 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-</body>
 
+    <script>
+        // Form validation
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            const phone = document.getElementById('phone').value;
+            const phoneRegex = /^[0-9]{10}$/;
+            
+            if (!phoneRegex.test(phone)) {
+                e.preventDefault();
+                alert('Please enter a valid 10-digit phone number');
+                return false;
+            }
+        });
+
+        // Hide spinner
+        document.addEventListener('DOMContentLoaded', function() {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
 </html>

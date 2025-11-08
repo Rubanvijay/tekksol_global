@@ -27,7 +27,43 @@
     <link href="css/style.css" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* ===== FONT SIZE FIX ===== */
+html {
+    font-size: 16px !important;
+}
 
+body {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Force specific font sizes for key elements */
+.navbar-nav .nav-link {
+    font-size: 1rem !important;
+}
+
+.btn {
+    font-size: 1rem !important;
+}
+
+h1 { font-size: calc(1.375rem + 1.5vw) !important; }
+h2 { font-size: calc(1.325rem + 0.9vw) !important; }
+h3 { font-size: calc(1.3rem + 0.6vw) !important; }
+h4 { font-size: calc(1.275rem + 0.3vw) !important; }
+h5 { font-size: 1.25rem !important; }
+h6 { font-size: 1rem !important; }
+
+/* Fix for navigation specifically */
+.navbar-light .navbar-nav .nav-link {
+    font-size: 15px !important;
+}
+
+/* Fix login button */
+.desktop-login-dropdown .btn-primary {
+    font-size: 1rem !important;
+}
+</style>
     <style>
         /* Typewriter Animation Styles */
         .typewriter-section {
@@ -293,6 +329,27 @@
                 color: #06BBCC;
             }
         }
+     /* Reduce only Login Button */
+.desktop-login-dropdown .btn-primary {
+    font-size: 1.0rem !important;
+  
+}
+
+/* For mobile login button */
+.mobile-login-dropdown .btn {
+    font-size: 1rem !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.recent_updates
+        {
+            height:40px;
+            background-color: white;
+            margin-top: 10px;
+           font-size:19px;
+            
+        }
+
     </style>
 </head>
 
@@ -305,21 +362,22 @@
     
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="100px">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="90px">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About Us</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="placement.html" class="nav-item nav-link">Placement</a>
-                <a href="careers.php" class="nav-item nav-link">Careers</a>
-                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-            </div>
+    <a href="index.html" class="nav-item nav-link active">Home</a>
+    <a href="about.html" class="nav-item nav-link">About</a>
+    <a href="courses.html" class="nav-item nav-link">Courses</a>
+    <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
+    <a href="placement.html" class="nav-item nav-link">Placement</a>
+    <a href="careers.php" class="nav-item nav-link">Careers</a>
+    <a href="become-trainer.html" class="nav-item nav-link">Trainer</a>
+    <a href="contact.html" class="nav-item nav-link">Contact</a>
+</div>
             
             <!-- Desktop Login Dropdown -->
             <div class="d-none d-lg-block desktop-login-dropdown">
@@ -343,6 +401,12 @@
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
                                 <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
                             </a>
                         </li>
                     </ul>
@@ -373,11 +437,21 @@
                                 <i class="fas fa-user-tie me-2"></i> Admin Login
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
+    <div class="recent_updates">
+    <marquee scrollamount="10">
+Recent Updates: ChatGPT-maker OpenAI signed a $38 billion deal Monday with Amazon’s AWS cloud computing arm, as the artificial intelligence company continues on a major partnership spree that has also included Oracle, Broadcom, AMD and chip-making juggernant Nvidia</marquee>
+</div>
 
     <div class="container-fluid p-0 mb-5">
         <div class="owl-carousel header-carousel position-relative">
@@ -622,12 +696,12 @@
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="img/course-1.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
+                                <a href="courses.html" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="enrollment.html" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
                             </div>
                         </div>
                         <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">₹30,000.00</h3>
+                            
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -649,12 +723,12 @@
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="img/course-2.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
+                                <a href="courses.html" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="enrollment.html" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
                             </div>
                         </div>
                         <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">₹30,000.00</h3>
+                            
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -676,12 +750,12 @@
                         <div class="position-relative overflow-hidden">
                             <img class="img-fluid" src="img/course-3.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
+                                <a href="courses.html" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                <a href="enrollment.html" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
                             </div>
                         </div>
                         <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">₹20,000.00</h3>
+                           
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -961,9 +1035,11 @@
                     <h4 class="text-white mb-3">Quick Link</h4>
                     <a class="btn btn-link" href="about.html">About Us</a>
                     <a class="btn btn-link" href="contact.html">Contact Us</a>
-                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
-                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
-                    <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                    <a class="btn btn-link" href="privacy_policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms&conditions.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-cancellation-policy.html">Refund/Cancellation Policy</a>
+                    <img src="https://www.tekksolglobal.com/wp-content/uploads/2023/07/iso-removebg-preview-80x80.png" height="80px" width="80px"></img>
+
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>

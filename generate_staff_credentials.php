@@ -18,8 +18,9 @@ $db = "bzbnom7tqqucjcivbuxo";
 
 $error = "";
 $success = "";
-$username = "";
+$email = "";
 $password = "";
+$team = "Global"; // Default value
 
 try {
     $conn = new mysqli($servername, $dbusername, $dbpassword, $db);
@@ -30,33 +31,39 @@ try {
     
     // Handle form submission
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generate'])) {
-        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
         $password = trim($_POST['password']);
+        $team = $_POST['team'] ?? 'Global';
         
         // Validate inputs
-        if (empty($username) || empty($password)) {
-            $error = "Please enter both username and password";
+        if (empty($email) || empty($password)) {
+            $error = "Please enter both email and password";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Please enter a valid email address";
+        } elseif (!in_array($team, ['Global', 'Innovation'])) {
+            $error = "Please select a valid team";
         } else {
-            // Check if username already exists
-            $check_sql = "SELECT username FROM staff WHERE username = ?";
+            // Check if email already exists
+            $check_sql = "SELECT email FROM staff WHERE email = ?";
             $stmt = $conn->prepare($check_sql);
-            $stmt->bind_param("s", $username);
+            $stmt->bind_param("s", $email);
             $stmt->execute();
             $result = $stmt->get_result();
             
             if ($result->num_rows > 0) {
-                $error = "Username '$username' already exists. Please choose a different username.";
+                $error = "Email '$email' already exists. Please choose a different email.";
             } else {
-                // Insert into database with plain text password
-                $insert_sql = "INSERT INTO staff (username, password) VALUES (?, ?)";
+                // Insert into database with plain text password and team
+                $insert_sql = "INSERT INTO staff (email, password, team) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($insert_sql);
-                $stmt->bind_param("ss", $username, $password);
+                $stmt->bind_param("sss", $email, $password, $team);
                 
                 if ($stmt->execute()) {
-                    $success = "Staff account created successfully!";
+                    $success = "Staff account created successfully for $team team!";
                     // Clear form fields
-                    $username = "";
+                    $email = "";
                     $password = "";
+                    $team = "Global"; // Reset to default
                 } else {
                     $error = "Error creating staff account: " . $stmt->error;
                 }
@@ -88,6 +95,57 @@ try {
     <link href="css/style.css" rel="stylesheet">
     
     <style>
+        /* Login Dropdown Customization - FIXED */
+        #loginDropdown, #mobileLoginDropdown {
+            border: none;
+        }
+
+        /* Force dropdown to accommodate full text */
+        .dropdown-menu {
+            min-width: 320px !important;
+            width: max-content !important;
+            max-width: none !important;
+            white-space: nowrap !important;
+        }
+
+        .dropdown-menu .dropdown-item {
+            transition: all 0.3s ease;
+            white-space: nowrap !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            padding: 0.65rem 1.5rem !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+        }
+
+        .dropdown-menu .dropdown-item span {
+            white-space: nowrap !important;
+            overflow: visible !important;
+            display: inline-block !important;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #06BBCC;
+            color: white;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            color: #06BBCC;
+            width: 20px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            color: white;
+        }
+        
+        /* Override Bootstrap dropdown constraints */
+        .dropdown-menu-end {
+            right: 0 !important;
+            left: auto !important;
+        }
+        
         .credentials-card {
             background: white;
             border-radius: 15px;
@@ -103,7 +161,7 @@ try {
             margin-bottom: 25px;
         }
         
-        .form-control {
+        .form-control, .form-select {
             border-radius: 8px;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -111,7 +169,7 @@ try {
             font-size: 16px; /* Prevents zoom on iOS */
         }
         
-        .form-control:focus {
+        .form-control:focus, .form-select:focus {
             border-color: #06BBCC;
             box-shadow: 0 0 0 0.2rem rgba(6, 187, 204, 0.25);
         }
@@ -119,6 +177,25 @@ try {
         .input-group-text {
             background-color: #f8f9fa;
             border-color: #e0e0e0;
+        }
+        
+        .team-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .team-global {
+            background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%);
+            color: white;
+        }
+        
+        .team-innovation {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
         }
         
         /* Mobile-specific styles */
@@ -166,7 +243,7 @@ try {
                 margin-bottom: 1.5rem !important;
             }
             
-            .form-control {
+            .form-control, .form-select {
                 padding: 10px 12px;
                 font-size: 16px;
             }
@@ -197,12 +274,6 @@ try {
                 padding: 10px;
                 border-radius: 0 0 10px 10px;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-            
-            .dropdown-menu {
-                border: none;
-                box-shadow: none;
-                padding-left: 15px;
             }
         }
         
@@ -271,46 +342,55 @@ try {
                 <a href="view_staff.php" class="nav-item nav-link">Staff</a>
                 <a href="generate_staff_credentials.php" class="nav-item nav-link active">Create Staff</a>
             </div>
+            
+            <!-- Mobile Dropdown -->
             <div class="d-lg-none mt-3">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle mobile-dropdown" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
+                        <i class="fas fa-user-shield me-2"></i><?php 
+                        echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php">
-                                <i class="fas fa-users me-2"></i> View Students
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php">
-                                <i class="fas fa-user-tie me-2"></i> View Staff
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php">
-                                <i class="fas fa-key me-2"></i> Generate Staff Credentials
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php">
-                                <i class="fas fa-chart-bar me-2"></i> Attendance Reports
+                            <a class="dropdown-item" href="admin_dashboard.php">
+                                <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            <a class="dropdown-item" href="view-all-students.php">
+                                <i class="fas fa-users me-3"></i><span>View Students</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="view_staff.php">
+                                <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="generate_staff_credentials.php">
+                                <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="attendance_reports.php">
+                                <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
+            
+            <!-- Desktop Dropdown -->
             <div class="d-none d-lg-block">
                 <div class="dropdown">
                     <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -318,34 +398,38 @@ try {
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php">
-                                <i class="fas fa-users me-2"></i> View Students
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php">
-                                <i class="fas fa-user-tie me-2"></i> View Staff
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php">
-                                <i class="fas fa-key me-2"></i> Generate Staff Credentials
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php">
-                                <i class="fas fa-chart-bar me-2"></i> Attendance Reports
+                            <a class="dropdown-item" href="admin_dashboard.php">
+                                <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            <a class="dropdown-item" href="view-all-students.php">
+                                <i class="fas fa-users me-3"></i><span>View Students</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="view_staff.php">
+                                <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="generate_staff_credentials.php">
+                                <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="attendance_reports.php">
+                                <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -383,28 +467,28 @@ try {
                         <div class="text-center mb-4">
                             <i class="fas fa-user-plus fa-4x text-primary mb-3"></i>
                             <h4>Create New Staff Account</h4>
-                            <p class="text-muted">Enter username and password for the new staff member</p>
+                            <p class="text-muted">Enter details for the new staff member</p>
                         </div>
 
                         <form method="POST" action="" class="form-card">
                             <div class="mb-4">
-                                <label for="username" class="form-label">
-                                    <i class="fas fa-user me-2"></i>Username <span class="text-danger">*</span>
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope me-2"></i>Email Address <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light">
-                                        <i class="fas fa-user text-primary"></i>
+                                        <i class="fas fa-envelope text-primary"></i>
                                     </span>
-                                    <input type="text" 
+                                    <input type="email" 
                                            class="form-control" 
-                                           id="username" 
-                                           name="username" 
-                                           placeholder="Enter username"
+                                           id="email" 
+                                           name="email" 
+                                           placeholder="Enter email address"
                                            required
-                                           value="<?php echo htmlspecialchars($username); ?>">
+                                           value="<?php echo htmlspecialchars($email); ?>">
                                 </div>
                                 <small class="form-text text-muted">
-                                    Choose a unique username for the staff member
+                                    Enter a valid email address for the staff member
                                 </small>
                             </div>
 
@@ -426,6 +510,24 @@ try {
                                 </div>
                                 <small class="form-text text-muted">
                                     Set a secure password for the staff member
+                                </small>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="team" class="form-label">
+                                    <i class="fas fa-users me-2"></i>Team <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="fas fa-layer-group text-primary"></i>
+                                    </span>
+                                    <select class="form-select" id="team" name="team" required>
+                                        <option value="Global" <?php echo ($team === 'Global') ? 'selected' : ''; ?>>Global</option>
+                                        <option value="Innovation" <?php echo ($team === 'Innovation') ? 'selected' : ''; ?>>Innovation</option>
+                                    </select>
+                                </div>
+                                <small class="form-text text-muted">
+                                    Select the team for this staff member
                                 </small>
                             </div>
 

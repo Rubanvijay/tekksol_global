@@ -4,12 +4,12 @@ ini_set('display_errors', 1);
 session_start();
 
 // Check if user is logged in as staff
-if (!isset($_SESSION['staff_username'])) {
+if (!isset($_SESSION['staff_email'])) {
     header("Location: staff-login.html");
     exit();
 }
 
-$current_staff_username = $_SESSION['staff_username'];
+$current_staff_email = $_SESSION['staff_email'];
 
 // Database configuration
 $servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
@@ -50,7 +50,7 @@ try {
                 // Verify student belongs to current trainer
                 $verify_sql = "SELECT student_id FROM student_details WHERE student_id = ? AND trainer_name = ?";
                 $verify_stmt = $conn->prepare($verify_sql);
-                $verify_stmt->bind_param("ss", $student_id, $current_staff_username);
+                $verify_stmt->bind_param("ss", $student_id, $current_staff_email);
                 $verify_stmt->execute();
                 $verify_result = $verify_stmt->get_result();
                 
@@ -66,7 +66,7 @@ try {
                         // Update existing attendance
                         $update_sql = "UPDATE student_attendance SET status = ?, marked_by = ? WHERE student_id = ? AND attendance_date = ?";
                         $update_stmt = $conn->prepare($update_sql);
-                        $update_stmt->bind_param("ssss", $status, $current_staff_username, $student_id, $attendance_date);
+                        $update_stmt->bind_param("ssss", $status, $current_staff_email, $student_id, $attendance_date);
                         
                         if ($update_stmt->execute()) {
                             $success_count++;
@@ -78,7 +78,7 @@ try {
                         // Insert new attendance
                         $insert_sql = "INSERT INTO student_attendance (student_id, attendance_date, status, marked_by) VALUES (?, ?, ?, ?)";
                         $insert_stmt = $conn->prepare($insert_sql);
-                        $insert_stmt->bind_param("ssss", $student_id, $attendance_date, $status, $current_staff_username);
+                        $insert_stmt->bind_param("ssss", $student_id, $attendance_date, $status, $current_staff_email);
                         
                         if ($insert_stmt->execute()) {
                             $success_count++;
@@ -117,7 +117,7 @@ try {
             ORDER BY sd.name ASC";
     
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $selected_date, $current_staff_username);
+    $stmt->bind_param("ss", $selected_date, $current_staff_email);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -350,7 +350,7 @@ try {
             <div class="d-none d-lg-block">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_username']); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_email']); ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
@@ -390,7 +390,7 @@ try {
                         <i class="fas fa-calendar-check me-3"></i>Mark Student Attendance
                     </h1>
                     <p class="text-white mb-0">
-                        Trainer: <strong><?php echo htmlspecialchars((String)$current_staff_username); ?></strong>
+                        Trainer: <strong><?php echo htmlspecialchars((String)$current_staff_email); ?></strong>
                     </p>
                 </div>
                 <div class="col-md-4">

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tekksol Global - Professional Training Institute</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Tekksol Global, Training Institute, Professional Courses" name="keywords">
+    <meta content="Tekksol Global is the most trusted source of information on the business of learning" name="description">
+
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* ===== FONT SIZE FIX ===== */
+html {
+    font-size: 16px !important;
+}
+
+body {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Force specific font sizes for key elements */
+.navbar-nav .nav-link {
+    font-size: 1rem !important;
+}
+
+.btn {
+    font-size: 1rem !important;
+}
+
+h1 { font-size: calc(1.375rem + 1.5vw) !important; }
+h2 { font-size: calc(1.325rem + 0.9vw) !important; }
+h3 { font-size: calc(1.3rem + 0.6vw) !important; }
+h4 { font-size: calc(1.275rem + 0.3vw) !important; }
+h5 { font-size: 1.25rem !important; }
+h6 { font-size: 1rem !important; }
+
+/* Fix for navigation specifically */
+.navbar-light .navbar-nav .nav-link {
+    font-size: 15px !important;
+}
+
+/* Fix login button */
+.desktop-login-dropdown .btn-primary {
+    font-size: 1rem !important;
+}
+</style>
+    <style>
+        /* Typewriter Animation Styles */
+        .typewriter-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .typewriter-container {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .typewriter-line {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #06BBCC;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            text-align: center;
+            border-right: 3px solid #06BBCC;
+        }
+        
+        .line-1 {
+            animation: typing-1 3s steps(25, end), blink-caret 0.75s step-end infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .line-2 {
+            animation: typing-2 2.5s steps(20, end), blink-caret 0.75s step-end infinite;
+            animation-delay: 4s;
+            margin-top: 20px;
+        }
+        
+        /* Hide the second line initially */
+        .line-2 {
+            width: 0;
+            overflow: hidden;
+        }
+        
+        /* Typing effects */
+        @keyframes typing-1 {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes typing-2 {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        /* Cursor blink effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #06BBCC }
+        }
+        
+        /* Decorative elements */
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(6, 187, 204, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .icon-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .icon-2 {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .icon-3 {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Fade in content after animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .typewriter-line {
+
+                font-size: 2.5rem;
+
+                font-size: 2.3rem;
+
+            }
+            
+            .floating-icon {
+                font-size: 1.5rem;
+            }
+            
+            .typewriter-section {
+                padding: 80px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .typewriter-line {
+
+                font-size: 2rem;
+
+                font-size: 1.8rem;
+
+            }
+            
+            .typewriter-section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Login Dropdown Customization */
+        #loginDropdown {
+            border: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #06BBCC;
+            color: white;
+            padding-left: 1.5rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            color: #06BBCC;
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            color: white;
+        }
+        
+        /* Custom SweetAlert2 Styles */
+        .swal2-popup {
+            border-radius: 15px !important;
+            border: 3px solid #ffd700 !important;
+        }
+        
+        .swal2-title {
+            color: #d35400 !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+        }
+        
+        .swal2-html-container {
+            font-size: 1.1rem !important;
+            color: #555 !important;
+        }
+        
+        .swal2-confirm {
+            background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%) !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 12px 30px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+        }
+        
+        .swal2-deny {
+            background: #f8f9fa !important;
+            color: #333 !important;
+            border: 1px solid #dee2e6 !important;
+            border-radius: 8px !important;
+            padding: 12px 30px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+        }
+        
+        .offer-badge {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+        }
+        
+        .offer-highlight {
+            background: #ffd700;
+            color: #d35400;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-weight: 800;
+            margin: 0 3px;
+        }
+        
+        .offer-icon {
+            font-size: 3rem;
+            color: #06BBCC;
+            margin-bottom: 15px;
+        }
+        
+        /* Custom style for 3D container */
+        #three-d-container {
+            background-color: #f8f9fa; /* Light background to help the 3D object pop */
+            border-radius: 8px; /* Optional: adds a slight corner */
+            overflow: hidden;
+        }
+        
+        /* Mobile Login Dropdown Styles */
+        .mobile-login-dropdown {
+            display: none;
+        }
+        
+        @media (max-width: 991px) {
+            .desktop-login-dropdown {
+                display: none;
+            }
+            
+            .mobile-login-dropdown {
+                display: block;
+                padding: 10px 15px;
+                border-top: 1px solid #dee2e6;
+            }
+            
+            .mobile-login-dropdown .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                border: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            
+            .mobile-login-dropdown .dropdown-item {
+                padding: 8px 0;
+                color: #333;
+                border-bottom: 1px solid #f1f1f1;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:hover {
+                background-color: transparent;
+                color: #06BBCC;
+            }
+        }
+     /* Reduce only Login Button */
+.desktop-login-dropdown .btn-primary {
+    font-size: 1.0rem !important;
+  
+}
+
+/* For mobile login button */
+.mobile-login-dropdown .btn {
+    font-size: 1rem !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.recent_updates
+        {
+            height:40px;
+            background-color: white;
+            margin-top: 10px;
+           font-size:19px;
+            
+        }
+         /* Fix for loading spinner */
+    #spinner {
+        display: none !important;
+    }
+    .privacy-header
+    {
+        color:black;
+    }
+
+
+    </style>
+</head>
+
+
+<body>
+    <!-- Remove or fix the spinner -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center" style="display: none;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="90px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            
+            <!-- Desktop Login Dropdown -->
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Mobile Login Dropdown -->
+            <div class="mobile-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login Options
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+   
+
+    <!-- Terms & Conditions Header -->
+    <div class="terms-header">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="text-dark mb-4">Terms & Conditions</h1>
+                    <p class="lead text-dark">Please read these terms carefully before using our services</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Content -->
+    <div class="container terms-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="terms-section">
+                    <h2>Acceptance of this Agreement</h2>
+                    <p>By clicking on the signup option or the "I am Interested, Tell me more" option, the participant (you or your) agrees to the Terms and Conditions, obligations, representations, warranties, and agreements. If you are not willing to accept the Agreement, you are not authorized to view or use in any manner any content, information, courseware, products, and services published, available, or provided on www.tekksolglobal.com, which is owned, maintained, and monitored by Tekksol Global.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>User ID and Password</h2>
+                    <p>By entering into this Agreement, you acknowledge and agree that your user ID and password are for your exclusive use only. Use or sharing of your Participant Account with another user is not permitted and is cause for the immediate blocking of your access to the Website, the Services, the Content, the Courseware, and termination of this Agreement.</p>
+                    <p>You agree that you are solely responsible for maintaining the confidentiality of your Participant Account and for all activities that occur under it. You agree to immediately notify our Help and Support Team if you become aware of or have reason to believe that there is any unauthorized use of your Participant Account. You also agree to take all reasonable steps to stop such unauthorized use and to cooperate with us in any investigation of such unauthorized uses.</p>
+                    <p>We shall not under any circumstances be held liable for any claims related to the use or misuse of your Participant Account due to the activities of any third party outside of our control or due to your failure to maintain the confidentiality and security of your Participant Account.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Content and Courseware</h2>
+                    <p>As a part of our Services offered through our Website, we shall grant you access to our content, courseware, practice tests, and other information, documents, and data which may be in audio, video, written, graphic, recorded, photographic, or any machine-readable format in relation to the specific certification training course you have registered for (Content and Courseware).</p>
+                    <p>We reserve the right to amend, revise or update the Content and Courseware offered to you. In the event such an amendment, revision or update occurs, we may require you to pay an additional fee to access such amended, revised, or updated Content and Courseware.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Usage of the Website and Services</h2>
+                    <p>We grant you a personal, restricted, non-transferable, non-exclusive, and revocable license to use the Website, the Services, and the Content and Courseware offered through the Website until the completion of the certification training course that you have enrolled for or the termination of this Agreement according to the Terms and Conditions set forth herein, whichever is earlier.</p>
+                    <p>The Services and the Content and Courseware are provided solely for your personal and non-commercial use to assist you in completing the certification training course you have registered for (Restricted Purpose).</p>
+                    <p>You are permitted online access to the Website, the Services, and the Content and Courseware and may download, save, or print the Content and Courseware solely for the Restricted Purpose.</p>
+                    <p>You are not permitted to reproduce, transmit, distribute, sub-license, broadcast, disseminate, or prepare derivative works of the Content and Courseware, or any part thereof, in any manner or through any communication channels or means, for any purpose other than the Restricted Purpose, without our prior written consent.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Intellectual Property Rights</h2>
+                    <p>While you are granted a limited and non-exclusive right to use the Website, the Services, and the Content and Courseware for the Restricted Purpose as set forth in this Agreement, you acknowledge and agree that we are the sole and exclusive owner of the Website, the Services, and the Content and Courseware and as such are vested with all Intellectual Property Rights and other proprietary rights in the Website, the Services, and the Content and Courseware.</p>
+                    <p>You acknowledge and agree that this Agreement other than permitting you to use the Website, the Services, and the Content and Courseware for the Restricted Purpose does not convey to you in any manner or form any right, title or interest of a proprietary, or any other nature in the Website, the Services, and the Content and Courseware.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Usage of Personal Information of Participants</h2>
+                    <p>We reserve the right to feature your picture in any photos, videos, or other promotional material used by us. Further, we may use your personal information to inform you about other certification training courses offered by us.</p>
+                    <p>However, we shall not distribute or share your personal information with any third-party marketing database or disclose your personal information to any third party except on a case-to-case basis after proper verification of such third party or if required under any applicable law.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Limitation of Liability</h2>
+                    <p>You expressly agree that the use of the Website, the Services, and the Content and Courseware is at your sole risk. We do not warrant that the Website or the Services or access to the Content and Courseware will be uninterrupted or error-free; nor is there any warranty as to the results that may be obtained from the use of the Website, the Services, or the Content and Courseware or as to the accuracy or reliability of any information provided through the Website, the Services, or the Content and Courseware.</p>
+                    <p>In no event will we or any person or entity involved in creating, producing, or distributing the Website, the Services, or the Content and Courseware be liable for any direct, indirect, incidental, special, or consequential damages arising out of the use of or inability to use the Website, the Services, or the Content and Courseware.</p>
+                    <p>The disclaimer of liability contained in this clause applies to any and all damages or injury caused by any failure of performance, error, omission, interruption, deletion, defect, delay in operation or transmission, computer virus, communication line failure, theft or destruction or unauthorized access to, alteration of, or use of records or any other material, whether for breach of contract, negligence, or under any other cause of action.</p>
+                    <p>You hereby specifically acknowledge that we are not liable for any defamatory, offensive, wrongful, or illegal conduct of third parties, or other users of the Website, the Services, or the Content and Courseware and that the risk of damage or injury from the foregoing rests entirely with each user.</p>
+                    <p>You agree that our liability or the liability of our affiliates, directors, officers, employees, agents, and licensors, if any, arising out of any kind of legal claim (whether in contract, tort or otherwise) in any way connected with the Services or the Content and Courseware shall not exceed the fee you paid to us for the particular certification training course.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Term and Termination</h2>
+                    <p>This Agreement will become effective upon your acceptance of the terms of this Agreement by your clicking on the acceptance button and, subject to the terms and conditions of this Agreement, will remain in effect till you maintain a current, fully paid-up online Participant Account, or until terminated by us, whichever is earlier.</p>
+                    <p>We reserve the right to terminate this Agreement and block your access to the Content and Courseware with immediate effect by sending a written notice through email to you to this effect (Immediate Termination Date), if such termination is made as a result of your misrepresentation, default, misconduct, or breach of your obligations related to or under this Agreement (Event of Default).</p>
+                    <p>On the occurrence of any Event of Default, we shall be authorized to exercise all the rights and remedies under this Agreement or applicable law or available in equity to seek indemnification for any loss or claim to result from any such Event of Default.</p>
+                    <p>The provisions of clause 4.3, clause 7.2, clause 8, and clause 11 of this Agreement shall survive the termination of this Agreement.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Indemnity</h2>
+                    <p>You agree to indemnify and hold us, our contractors, licensors, directors, officers, employees, and agents harmless from and against any and all claims, losses, damages, liabilities, and expenses including attorneys' fees, arising out of your unauthorized use of the Website, the Services, and the Content and Courseware or any violation or breach of this Agreement or any provisions hereof.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Waiver</h2>
+                    <p>Neither failure nor delay on the part of any party to exercise any right, remedy, power, or privilege hereunder shall operate as a waiver thereof, or of the exercise of any other right, remedy, power, or privilege. No term of this Agreement shall be deemed waived, and no breach consented to, unless such waiver or consent shall be in writing and signed by the party claimed to have waived or consented. No waiver of any rights or consent to any breaches shall constitute a waiver of any other rights or consent to any other breach.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Severability</h2>
+                    <p>In the event any provision of this Agreement is held invalid or unenforceable under the applicable laws of India, the remaining provisions shall continue in full force and effect, and the Agreement shall be deemed to be reformed by replacing such invalidated or unenforceable provision with a valid and enforceable provision that gives effect as closely as possible to the intentions of the parties as expressed by the invalidated or unenforceable provision.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Governing Law and Jurisdiction</h2>
+                    <p>For Participants who are a resident of the U.S.A., this Agreement shall be governed by and construed in accordance with the Laws of New York and the courts in New York shall have the exclusive jurisdiction over any matter relating to, in connection with, or arising out of, this Agreement.</p>
+                    <p>For Participants who are not a resident of the U.S.A., this Agreement shall be governed by and construed in accordance with the Laws of India and the courts in Chennai, India shall have the exclusive jurisdiction over any matter relating to, in connection with, or arising out of, this Agreement.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Amendment and Assignment</h2>
+                    <p>We reserve the right to unilaterally amend or modify this Agreement without giving any prior notification to you. We shall, however, publish the revised agreement on the Website so that you are aware of the revisions, modifications, and amendments made by us to this Agreement.</p>
+                    <p>You acknowledge and agree that it is your responsibility to check the Website periodically for any revisions, modifications, and amendments. Your continued use of or access to the Website, the Services, and the Content and Courseware following the posting of any changes to this Agreement shall constitute acceptance of those changes.</p>
+                    <p>You are not permitted to assign this Agreement or the rights and obligations mentioned in this Agreement to any third party and you only shall be held liable for any breach of this Agreement or any terms and conditions hereof.</p>
+                </div>
+                
+                <div class="terms-section">
+                    <h2>Entire Agreement</h2>
+                    <p>This Agreement, along with the Privacy Policy, Refund Policy, Terms of Use, Cookie Policy, and any additional guidelines, rules, and/or disclaimers posted on the Website constitutes the entire agreement governing your use of our Website and supersedes any prior agreements, if any, relating to any matter dealt within this Agreement.</p>
+                </div>
+                
+                <div class="terms-highlight">
+                    <h5>Contact Information</h5>
+                    <p>For any questions regarding these Terms & Conditions, please contact us:</p>
+                    <ul class="terms-list">
+                        <li>Email: <a href="mailto:info@tekksolglobal.com">info@tekksolglobal.com</a></li>
+                        <li>Phone: +91 9042527746</li>
+                        <li>Address: Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy_policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                    <img src="https://www.tekksolglobal.com/wp-content/uploads/2023/07/iso-removebg-preview-80x80.png" height="80px" width="80px" alt="ISO Certified">
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                    <p class="mb-2"><i class="fa fa-clock me-3"></i>Mon - Sat: 09:30 - 06:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link" href="courses.html">Python Course</a>
+                    <a class="btn btn-link" href="courses.html">Web Development</a>
+                    <a class="btn btn-link" href="courses.html">Digital Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="color:white">Our Location</h4>
+                    <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html">Home</a>
+                            <a href="cookie-policy.html">Cookies</a>
+                            <a href="contact.html">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- WhatsApp Button -->
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .whatsapp-tooltip {
+                bottom: 80px;
+                right: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Hide spinner immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+            
+            // Back to top button
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            
+            $('.back-to-top').click(function(){
+                $('html, body').animate({scrollTop : 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+        });
+
+        // Fallback: hide spinner after page load
+        window.addEventListener('load', function() {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

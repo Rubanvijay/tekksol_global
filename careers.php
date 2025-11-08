@@ -94,6 +94,7 @@ $careers_count = mysqli_num_rows($careers_result);
         .job-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border:1px solid darkgrey;
         }
         
         .job-badge {
@@ -248,15 +249,17 @@ $careers_count = mysqli_num_rows($careers_result);
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About Us</a>
+             <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="courses.html" class="nav-item nav-link">Courses</a>
+                 <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
                 <a href="placement.html" class="nav-item nav-link">Placement</a>
-                <a href="careers.php" class="nav-item nav-link active">Careers</a>
-                <a href="become-trainer.html" class="nav-item nav-link">Become a Trainer</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Trainer</a>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
+            
             <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -280,6 +283,12 @@ $careers_count = mysqli_num_rows($careers_result);
                                     <i class="fas fa-user-tie me-2"></i> Admin Login
                                 </a>
                             </li>
+                            <li><hr class="dropdown-divider"></li>
+                             <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -307,6 +316,12 @@ $careers_count = mysqli_num_rows($careers_result);
                     <i class="fas fa-user-tie me-2"></i> Admin Login
                 </a>
             </li>
+            <li><hr class="dropdown-divider"></li>
+                             <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
         </ul>
     </div>
 </div>
@@ -621,6 +636,39 @@ $careers_count = mysqli_num_rows($careers_result);
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+                   <script>
+                       // Enable dropdown on hover for desktop
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownElements = document.querySelectorAll('.dropdown');
+        
+        dropdownElements.forEach(function(dropdown) {
+            // Show on hover
+            dropdown.addEventListener('mouseenter', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                if (dropdownMenu && window.innerWidth >= 992) { // Only for desktop
+                    dropdownMenu.classList.add('show');
+                }
+            });
+            
+            // Hide when mouse leaves
+            dropdown.addEventListener('mouseleave', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                if (dropdownMenu && window.innerWidth >= 992) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+        });
+
+        // Remove spinner
+        setTimeout(() => {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.classList.remove('show');
+            }
+        }, 500);
+    });
+                    </script>
+
 </body>
 
 </html>

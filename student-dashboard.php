@@ -260,11 +260,11 @@ try {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="placement.html" class="nav-item nav-link">Placement</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="student-dashboard.php" class="nav-item nav-link active">Dashboard</a>
+                <a href="student-dashboard.php" class="nav-item nav-link">Dashboard</a>
+                <a href="student_attendance.php" class="nav-item nav-link">Attendance</a>
+                <a href="view_assignment.php" class="nav-item nav-link">Assignment</a>
+                <a href="download_certificate.php" class="nav-item nav-link">My Cerificate</a>
+              
             </div>
             
             <!-- Desktop Login Dropdown -->
@@ -292,6 +292,13 @@ try {
                                 <i class="fas fa-tasks me-2"></i> Assignment
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
+                        
+                       <li>
+    <a class="dropdown-item d-flex align-items-center py-2" href="download_certificate.php">
+        <i class="fas fa-certificate me-2"></i> My Certificate
+    </a>
+</li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
@@ -328,6 +335,12 @@ try {
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
+                        <li>
+    <a class="dropdown-item d-flex align-items-center py-2" href="download_certificate.php">
+        <i class="fas fa-certificate me-2"></i> My Certificate
+    </a>
+</li>
+ <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
                                 <i class="fas fa-sign-out-alt me-2"></i> Logout
@@ -496,6 +509,11 @@ try {
                                         <i class="fas fa-tasks me-2"></i>Assignments
                                     </a>
                                 </div>
+                                <div class="col-md-3 mb-3">
+    <a href="download_certificate.php" class="btn btn-outline-primary w-100">
+       <i class="fas fa-certificate me-2"></i>My Certificate
+    </a>
+</div>
                                 
                                 <div class="col-md-3 mb-3">
                                     <a href="contact.html" class="btn btn-outline-primary w-100">

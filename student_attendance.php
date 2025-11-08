@@ -367,22 +367,88 @@ try {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
                 <a href="student-dashboard.php" class="nav-item nav-link">Dashboard</a>
-                <a href="student_attendance.php" class="nav-item nav-link active">My Attendance</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="student_attendance.php" class="nav-item nav-link">Attendance</a>
+                <a href="view_assignment.php" class="nav-item nav-link">Assignment</a>
+                <a href="download_certificate.php" class="nav-item nav-link">My Cerificate</a>
             </div>
-            <div class="d-none d-lg-block">
+            <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user me-2"></i><?php echo htmlspecialchars($current_student_username); ?>
+                        <i class="fas fa-user me-2"></i><?php echo htmlspecialchars($_SESSION['student_username'] ?? 'Student'); ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                        <li><a class="dropdown-item" href="student-dashboard.php"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a></li>
-                        <li><a class="dropdown-item" href="student_attendance.php"><i class="fas fa-calendar-check me-2"></i> My Attendance</a></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-dashboard.php">
+                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                            </a>
+                        </li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student_attendance.php">
+                                <i class="fas fa-book me-2"></i> My Attendance
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="view_assignment.php">
+                                <i class="fas fa-tasks me-2"></i> Assignment
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        
+                       <li>
+    <a class="dropdown-item d-flex align-items-center py-2" href="download_certificate.php">
+        <i class="fas fa-certificate me-2"></i> My Certificate
+    </a>
+</li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+             <!-- Mobile Login Dropdown -->
+            <div class="mobile-login-dropdown d-lg-none">
+                <div class="dropdown">
+                    <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user me-2"></i><?php echo htmlspecialchars($_SESSION['student_username'] ?? 'Student'); ?>
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+                       <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-dashboard.php">
+                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student_attendance.php">
+                                <i class="fas fa-book me-2"></i> My Attendance
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="view_assignment.php">
+                                <i class="fas fa-tasks me-2"></i> Assignment
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+    <a class="dropdown-item d-flex align-items-center py-2" href="download_certificate.php">
+        <i class="fas fa-certificate me-2"></i> My Certificate
+    </a>
+</li>
+ <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

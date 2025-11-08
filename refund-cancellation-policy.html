@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Refund/Cancellation Policy - Tekksol Global</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Tekksol Global, Refund Policy, Cancellation Policy" name="keywords">
+    <meta content="Tekksol Global Refund and Cancellation Policy - Learn about our no refund policy" name="description">
+
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* ===== FONT SIZE FIX ===== */
+        html {
+            font-size: 16px !important;
+        }
+
+        body {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Fix loading spinner */
+        #spinner {
+            display: none;
+        }
+
+        /* Force specific font sizes for key elements */
+        .navbar-nav .nav-link {
+            font-size: 1rem !important;
+        }
+
+        .btn {
+            font-size: 1rem !important;
+        }
+
+        h1 { font-size: calc(1.375rem + 1.5vw) !important; }
+        h2 { font-size: calc(1.325rem + 0.9vw) !important; }
+        h3 { font-size: calc(1.3rem + 0.6vw) !important; }
+        h4 { font-size: calc(1.275rem + 0.3vw) !important; }
+        h5 { font-size: 1.25rem !important; }
+        h6 { font-size: 1rem !important; }
+
+        /* Fix for navigation specifically */
+        .navbar-light .navbar-nav .nav-link {
+            font-size: 15px !important;
+        }
+
+        /* Fix login button */
+        .desktop-login-dropdown .btn-primary {
+            font-size: 1rem !important;
+        }
+        
+        /* Refund Policy Specific Styles */
+        .refund-header {
+            background: linear-gradient(rgba(24, 29, 56, .7), rgba(24, 29, 56, .7)), url('img/carousel-1.png');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0 60px;
+            color: white;
+            text-align: center;
+        }
+        
+        .refund-content {
+            padding: 80px 0;
+        }
+        
+        .refund-section {
+            margin-bottom: 50px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            background: white;
+            border-left: 4px solid #06BBCC;
+        }
+        
+        .refund-section h2 {
+            color: #06BBCC;
+            margin-bottom: 20px;
+        }
+        
+        .refund-section h4 {
+            color: #68443d;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .refund-section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .refund-section a {
+            color: #06BBCC;
+            text-decoration: none;
+        }
+        
+        .refund-section a:hover {
+            color: #0596a3;
+            text-decoration: underline;
+        }
+        
+        .no-refund-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .no-refund-banner h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .policy-highlight {
+            background-color: #f8f9fa;
+            border-left: 4px solid #06BBCC;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .contact-info h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        /* Login Dropdown Customization */
+        #loginDropdown {
+            border: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #06BBCC;
+            color: white;
+            padding-left: 1.5rem;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            color: #06BBCC;
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            color: white;
+        }
+        
+        /* Mobile Login Dropdown Styles */
+        .mobile-login-dropdown {
+            display: none;
+        }
+        
+        @media (max-width: 991px) {
+            .desktop-login-dropdown {
+                display: none;
+            }
+            
+            .mobile-login-dropdown {
+                display: block;
+                padding: 10px 15px;
+                border-top: 1px solid #dee2e6;
+            }
+            
+            .mobile-login-dropdown .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                border: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            
+            .mobile-login-dropdown .dropdown-item {
+                padding: 8px 0;
+                color: #333;
+                border-bottom: 1px solid #f1f1f1;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-login-dropdown .dropdown-item:hover {
+                background-color: transparent;
+                color: #06BBCC;
+            }
+        }
+        
+        /* Reduce only Login Button */
+        .desktop-login-dropdown .btn-primary {
+            font-size: 1.0rem !important;
+        }
+
+        /* For mobile login button */
+        .mobile-login-dropdown .btn {
+            font-size: 1rem !important;
+            padding: 0.5rem 1rem !important;
+        }
+        
+        /* Recent Updates */
+        .recent_updates {
+            height:40px;
+            background-color: white;
+            margin-top: 10px;
+            font-size:19px;
+        }
+        #spinner
+        {
+        display:none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Remove or fix the spinner -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center" style="display: none;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="90px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            
+            <!-- Desktop Login Dropdown -->
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Mobile Login Dropdown -->
+            <div class="mobile-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login Options
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Refund Policy Header -->
+    <div class="refund-header">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="text-white mb-4">Refund/Cancellation Policy</h1>
+                    <p class="lead text-white">Our commitment to providing quality training with clear policies</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund Policy Content -->
+    <div class="container refund-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="no-refund-banner">
+                    <h3><i class="fas fa-exclamation-triangle me-2"></i>Important Notice</h3>
+                    <p class="mb-0">All sales of our online courses and IT training programs are final. We do not offer refunds or cancellations under any circumstances.</p>
+                </div>
+                
+                <div class="refund-section">
+                    <h2>Refund/Cancellation Policy</h2>
+                    <p>At Tekksol Global, we are committed to providing high-quality online courses and IT training. Please be aware that we have a strict no refund policy.</p>
+                    
+                    <h4>No Refund Policy</h4>
+                    <p>All sales of our online courses and IT training programs are final. Once a purchase is made, we do not offer refunds or cancellations under any circumstances.</p>
+                    
+                    <div class="policy-highlight">
+                        <h5><i class="fas fa-info-circle me-2"></i>Why We Have This Policy</h5>
+                        <p>Our no-refund policy is in place because:</p>
+                        <ul>
+                            <li>Course materials and resources are made available immediately upon enrollment</li>
+                            <li>We invest significant resources in course development and instructor allocation</li>
+                            <li>This allows us to maintain competitive pricing for all our students</li>
+                            <li>It ensures fair treatment for all enrolled students</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Before You Enroll</h4>
+                    <p>We encourage all prospective students to:</p>
+                    <ul>
+                        <li>Carefully review course descriptions and requirements</li>
+                        <li>Check the course curriculum and learning objectives</li>
+                        <li>Ensure you meet the technical requirements for online courses</li>
+                        <li>Contact our support team with any questions before enrolling</li>
+                    </ul>
+                    
+                    <h4>Course Access</h4>
+                    <p>Upon successful enrollment and payment, you will receive immediate access to:</p>
+                    <ul>
+                        <li>All course materials and resources</li>
+                        <li>Learning management system access</li>
+                        <li>Instructor support channels</li>
+                        <li>Any included certifications or assessments</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-info">
+                    <h4>Need Assistance?</h4>
+                    <p>If you have any questions or need further assistance regarding our refund policy, please contact our customer support team:</p>
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <i class="fas fa-envelope fa-2x mb-3"></i>
+                            <p><a href="mailto:support@tekksolglobal.com" style="color: white; text-decoration: underline;">support@tekksolglobal.com</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-phone fa-2x mb-3"></i>
+                            <p><a href="tel:+919042527746" style="color: white; text-decoration: underline;">+91 9042527746</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-clock fa-2x mb-3"></i>
+                            <p>Mon - Sat: 09:30 - 06:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="refund-section mt-4">
+                    <h4>Policy Updates</h4>
+                    <p>Tekksol Global reserves the right to modify this refund and cancellation policy at any time. Any changes will be effective immediately upon posting on our website. We encourage you to review this policy periodically.</p>
+                    
+                    <p class="text-muted"><small>Last updated: December 2024</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy_policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms&conditions.html">Terms & Condition</a>
+                    <a class="btn btn-link" href="refund-cancellation-policy.html">Refund/Cancellation Policy</a>
+                    <img src="https://www.tekksolglobal.com/wp-content/uploads/2023/07/iso-removebg-preview-80x80.png" height="80px" width="80px" alt="ISO Certified">
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                    <p class="mb-2"><i class="fa fa-clock me-3"></i>Mon - Sat: 09:30 - 06:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">.NET Development Course</a>
+                    <a class="btn btn-link" href="courses.html">Java Certification Training</a>
+                    <a class="btn btn-link" href="courses.html">Python Course</a>
+                    <a class="btn btn-link" href="courses.html">Web Development</a>
+                    <a class="btn btn-link" href="courses.html">Digital Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 style="color:white">Our Location</h4>
+                    <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Tekksol Global</a>, All Rights Reserved 2024.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="index.html">Home</a>
+                            <a href="cookie-policy.html">Cookies</a>
+                            <a href="contact.html">Help</a>
+                            <a href="terms-of-use.html">Terms Of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- WhatsApp Button -->
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .whatsapp-tooltip {
+                bottom: 80px;
+                right: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+
+    <script>
+        // Initialize WOW.js for animations
+        new WOW().init();
+        
+        // Hide spinner immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+            
+            // Back to top button
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            
+            $('.back-to-top').click(function(){
+                $('html, body').animate({scrollTop : 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+        });
+
+        // Fallback: hide spinner after page load
+        window.addEventListener('load', function() {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

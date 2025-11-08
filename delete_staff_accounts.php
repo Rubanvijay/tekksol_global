@@ -29,24 +29,24 @@ try {
     
     // Handle form submission
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
-        $username = trim($_POST['username']);
+        $username = trim($_POST['email']);
         
         // Validate input
         if (empty($username)) {
-            $error = "Please enter a username";
+            $error = "Please enter a Email";
         } else {
             // Check if username exists
-            $check_sql = "SELECT username FROM staff WHERE username = ?";
+            $check_sql = "SELECT email FROM staff WHERE email = ?";
             $stmt = $conn->prepare($check_sql);
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result();
             
             if ($result->num_rows === 0) {
-                $error = "Username '$username' not found in the system.";
+                $error = "Email '$username' not found in the system.";
             } else {
                 // Delete staff account
-                $delete_sql = "DELETE FROM staff WHERE username = ?";
+                $delete_sql = "DELETE FROM staff WHERE email = ?";
                 $stmt = $conn->prepare($delete_sql);
                 $stmt->bind_param("s", $username);
                 
@@ -474,14 +474,14 @@ try {
                                     </span>
                                     <input type="text" 
                                            class="form-control" 
-                                           id="username" 
-                                           name="username" 
-                                           placeholder="Enter staff username to delete"
+                                           id="email" 
+                                           name="email" 
+                                           placeholder="Enter staff Email to delete"
                                            required
-                                           value="<?php echo htmlspecialchars($username); ?>">
+                                           value="<?php echo htmlspecialchars((String)$username); ?>">
                                 </div>
                                 <small class="form-text text-muted">
-                                    Enter the exact username of the staff account you want to delete
+                                    Enter the exact email of the staff account you want to delete
                                 </small>
                             </div>
 

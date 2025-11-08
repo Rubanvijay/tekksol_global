@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Tekksol Global - Professional Training Institute</title>
@@ -348,6 +349,15 @@ h6 { font-size: 1rem !important; }
            font-size:19px;
             
         }
+         /* Fix for loading spinner */
+    #spinner {
+        display: none !important;
+    }
+    .privacy-header
+    {
+        color:black;
+    }
+
 
     </style>
 </head>
@@ -358,59 +368,62 @@ h6 { font-size: 1rem !important; }
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+    
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-       <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="WhatsApp_Image_2024 05 16_at_11.40.04_a1aa6339 removebg preview e1716316097904" height="60px" width="100px">
-    </a>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-         <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global Logo" height="60px" width="90px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="courses.html" class="nav-item nav-link">Courses</a>
-                 <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
+                <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
                 <a href="placement.html" class="nav-item nav-link">Placement</a>
                 <a href="careers.php" class="nav-item nav-link">Careers</a>
                 <a href="become-trainer.html" class="nav-item nav-link">Trainer</a>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
-
-        <div class="d-none d-lg-block desktop-login-dropdown">
-            <div class="dropdown">
-                <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    Login
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
-                            <i class="fas fa-graduation-cap me-2"></i> Student Login
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
-                            <i class="fas fa-user-tie me-2"></i> Staff Login
-                        </a>
-                    </li>
-                     <li><hr class="dropdown-divider"></li>
+            
+            <!-- Desktop Login Dropdown -->
+            <div class="d-none d-lg-block desktop-login-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
-                                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
-                                    <i class="fas fa-user-tie me-2"></i> Admin Login
-                                </a>
-                            </li>
-                             <li><hr class="dropdown-divider"></li>
-                             <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                                <i class="fas fa-graduation-cap me-2"></i> Student Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Staff Login
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                                <i class="fas fa-user-tie me-2"></i> Admin Login
+                            </a>
+                        </li>
+                         <li><hr class="dropdown-divider"></li>
+                        <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
                                 <i class="fas fa-user-tie me-2"></i> Test Login
                             </a>
                         </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-
-        <div class="mobile-login-dropdown">
+            
+            <!-- Mobile Login Dropdown -->
+            <div class="mobile-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         Login Options
@@ -434,7 +447,7 @@ h6 { font-size: 1rem !important; }
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
-                             <li>
+                        <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
                                 <i class="fas fa-user-tie me-2"></i> Test Login
                             </a>
@@ -442,187 +455,117 @@ h6 { font-size: 1rem !important; }
                     </ul>
                 </div>
             </div>
-    </div>
-</nav>
-<div class="container-fluid bg-primary py-5 mb-5 page-header">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h1 class="display-3 text-white animated slideInDown">About Us</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">About</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
         </div>
-    </div>
-    <div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                <div class="position-relative h-100" id="three-d-container">
-                    <canvas id="three-d-canvas" class="w-100 h-100"></canvas>
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
-                <h1 class="mb-4">Welcome to Tekksol Global</h1>
-                <p class="mb-4">Tekksol Global is the most trusted source of information on the business of learning. We serve as an expert resource for learning professionals seeking information about best practices and innovative approaches for developing effective training.</p>
-                <p class="mb-4">We create an environment for trust and information-sharing among learning professionals, including those in the learning and development function and experts from companies serving the training industry.</p>
-                <div class="row gy-2 gx-4 mb-4">
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Industry Expert Trainers</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Hands-on Project Training</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Professional Certification</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Placement Assistance</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Flexible Batch Timings</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Lifetime Career Support</p>
-                    </div>
-                </div>
-                <a class="btn btn-primary py-3 px-5 mt-2" href="about.html">Enroll Now</a>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item text-center pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
-                        <h5 class="mb-3">World Class Trainers</h5>
-                        <p>Learn from industry experts with years of practical experience and proven teaching methodologies</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item text-center pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                        <h5 class="mb-3">Easy Learning</h5>
-                        <p>Simplified approach with hands-on projects and real-world applications for better understanding</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item text-center pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-home text-primary mb-4"></i>
-                        <h5 class="mb-3">Flexible</h5>
-                        <p>Choose from multiple batch timings and learning modes to fit your schedule and preferences</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="service-item text-center pt-3">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
-                        <h5 class="mb-3">Affordable Price</h5>
-                        <p>Quality education at competitive rates with flexible payment options and scholarship opportunities</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--  -->
-<div class="container-xxl py-5">
+    </nav>
+    
+
+
+    <!-- Privacy Policy Header -->
+    <div class="privacy-header">
         <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Our Instructors</h6>
-                <h1 class="mb-5">Meet Our Expert Instructors</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item bg-light">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-1.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Senior Instructor</h5>
-                            <small>10+ Years Experience</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item bg-light">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-2.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Lead Instructor</h5>
-                            <small>8+ Years Experience</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item bg-light">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-3.jpg" alt="" style="width: 250px; height: 350px; object-fit: cover;">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Expert Trainer</h5>
-                            <small>7+ Years Experience</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item bg-light">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="img/team-4.jpg" alt="" style="width: 250px; height: 350px; object-fit: cover;">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">Professional Instructor</h5>
-                            <small>6+ Years Experience</small>
-                        </div>
-                    </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="text-dark mb-4">Privacy Policy</h1>
+                    <p class="lead text-dark">We take your privacy seriously and are committed to protecting your personal information</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Privacy Policy Content -->
+    <div class="container privacy-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="privacy-section">
+                    <h2>Overview</h2>
+                    <p>We take your privacy seriously and are committed to protecting your right to privacy as a user of our website. We have made every effort to ensure your information is secure. This privacy policy information covers what information is collected, what we do with it, and what you can do about it. You can use this information to make your decisions about your privacy.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>www.tekksolglobal.com Information Practices</h4>
+                    <p>Every effort has been taken to ensure the accuracy of the information on the website; the content is naturally subject to change. We are not responsible for any damages arising from the use of the information held on this server.</p>
+                    <p>We assure you that all our downloadable training content is virus-free. However, Tekksol Global can accept no liability for damages resulting from virus infection.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Information collected by www.tekksolglobal.com</h4>
+                    <p>You have total control over the privacy of your information. Your information will never be sold, exchanged, or disclosed to any third party for marketing purposes. You can opt to receive offers from us. You can browse our website without registration.</p>
+                    <p>We may collect and store the information that you voluntarily disclose to us, in order to access our free tests and discussion forum. We do not share your personal information with any third party. We do not collect information about our visitors from email databases, private/public organization, or bodies.</p>
+                    <p>We may use your information to contact you via email or telephone, typically to get feedback, to inform you about new products, or provide support on your issues. If you do not want us to contact you via email, you can unsubscribe at any time.</p>
+                    <p>When you purchase our online products or register for a classroom training, you need to make the payment online, thus you will be required to share with us your personal information such as name, e-mail address, telephone number, address(s), credit card number, expiration, and CVV number.</p>
+                    <p>During this program, we store your contact information in our registration and order-entry systems. Your credit card information is never stored in our system as it is processed by our payment gateway which uses Secure Encryption Technology (SSL). Our payment processing partners are Phonepe.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Cookie Information</h4>
+                    <p>In order to enhance your online experience and track website performance, our website uses cookies. It's a small text file that gets placed in your computer hard drive and can be retrieved later. Cookies do not tell us who you are.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>E-commerce tracking</h4>
+                    <p>To provide a superior online shopping experience, our shopping cart may use cookies to temporarily store names and email addresses. Cookies will never store credit card information as they're processed using payment gateways that use Secure Encryption Technology.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>External Links</h4>
+                    <p>Our website may have links to other sites, which include third-party websites or resources. We are not responsible for the privacy policies and information practices of third-party websites. Please read the privacy policies of third-party websites as every website has different terms of use and privacy policies.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Course Content</h4>
+                    <p>Course content for all the study programs both online and blended programs is provided only for the purpose of education and guidance. The course content is reviewed regularly and is subject to change without notice. Tekksol Global reserves the right to modify training content without notice.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Copyright information</h4>
+                    <p>You can electronically copy or take print outs of the website pages, only for personal use. Tekksol Global holds the copyright to all the material on this website unless otherwise indicated. Written permission from the copyright holder must be obtained for any use of this material other than for purposes permitted by law.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Personal Information Policy Image and Video Capture</h4>
+                    <p>Any images captured during events organized and hosted by Tekksol Global should not be misused. That includes pictures of Tekksol Global staff and training participants. If you enroll in a Tekksol Global course, your picture may also be featured in photos or videos of Tekksol Global.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Sharing your personal information</h4>
+                    <p>If you have purchased a Tekksol Global course, we may ask you for a testimonial and with your authorization, display your testimonial, photos or videos on our website or in our social media channels such as Facebook, YouTube, or Flickr. You should be aware that your publicly identifiable information could be used to send you promotional, unsolicited messages. We are not responsible for the personal information which you have chosen to display.</p>
+                    <p>If you do not want us to feature your pictures/testimonials on our website or on our social media channels, you can send an email to <a href="mailto:info@tekksolglobal.com">info@tekksolglobal.com</a>.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Personal Information Corrections</h4>
+                    <p>You can contact us if you notice that the information we are holding is incorrect or incomplete. Please send us an email at <a href="mailto:info@tekksolglobal.com">info@tekksolglobal.com</a>.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Changes to Privacy Policy</h4>
+                    <p>These privacy policy terms may change from time to time and we reserve the right to change the terms of the privacy policy at any time. When we update the privacy policy, all our registered users will be notified via email.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Deleting Personal Information</h4>
+                    <p>If you would like to delete your account, write to <a href="mailto:info@tekksolglobal.com">info@tekksolglobal.com</a>.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h4>Privacy Policy Questions?</h4>
+                    <p>If you have any questions regarding Tekksol Global Privacy Policy, please write to <a href="mailto:info@tekksolglobal.com">info@tekksolglobal.com</a>.</p>
+                </div>
+                
+                <div class="privacy-highlight">
+                    <h5>Contact Information</h5>
+                    <p>For any privacy-related concerns, please contact us:</p>
+                    <ul class="privacy-list">
+                        <li>Email: <a href="mailto:info@tekksolglobal.com">info@tekksolglobal.com</a></li>
+                        <li>Phone: +91 9042527746</li>
+                        <li>Address: Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -630,9 +573,10 @@ h6 { font-size: 1rem !important; }
                     <h4 class="text-white mb-3">Quick Link</h4>
                     <a class="btn btn-link" href="about.html">About Us</a>
                     <a class="btn btn-link" href="contact.html">Contact Us</a>
-                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="privacy_policy.html">Privacy Policy</a>
                     <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
                     <a class="btn btn-link" href="refund-policy.html">Refund/Cancellation Policy</a>
+                    <img src="https://www.tekksolglobal.com/wp-content/uploads/2023/07/iso-removebg-preview-80x80.png" height="80px" width="80px" alt="ISO Certified">
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
@@ -656,9 +600,8 @@ h6 { font-size: 1rem !important; }
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 style="color:white">Our Location</h4>
-                   <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                
-            </div>
+                    <iframe style="height:250px; width:300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761997422014!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -679,92 +622,116 @@ h6 { font-size: 1rem !important; }
             </div>
         </div>
     </div>
+    
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+    <!-- WhatsApp Button -->
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover + .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+            .whatsapp-tooltip {
+                bottom: 80px;
+                right: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20courses" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <script src="js/main.js"></script>
-    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('three-d-container');
-            const canvas = document.getElementById('three-d-canvas');
-            
-            // Exit if elements aren't found
-            if (!container || !canvas) return;
-
-            let scene, camera, renderer, object;
-
-            function init() {
-                // Scene
-                scene = new THREE.Scene();
-
-                // Camera
-                const fov = 75;
-                const aspect = container.clientWidth / container.clientHeight;
-                const near = 0.1;
-                const far = 1000;
-                camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-                camera.position.z = 3;
-
-                // Renderer
-                renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-                renderer.setSize(container.clientWidth, container.clientHeight);
-                renderer.setClearColor(0x000000, 0); // Transparent background
-
-                // Object: Dodecahedron (12-sided figure) for a high-tech, abstract look
-                const geometry = new THREE.DodecahedronGeometry(1.2, 0);
-                // Use a standard material and the primary color from the existing design: #06BBCC
-                const material = new THREE.MeshStandardMaterial({
-                    color: 0x06BBCC, // Primary Blue/Cyan color
-                    metalness: 0.1,
-                    roughness: 0.5,
-                    flatShading: true,
-                    wireframe: true // Use wireframe for a more abstract/digital look
-                });
-                
-                object = new THREE.Mesh(geometry, material);
-                scene.add(object);
-
-                // Lighting: Subtle ambient light
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-                scene.add(ambientLight);
-
-                // Directional Light for definition (using the primary color as a highlight)
-                const directionalLight = new THREE.DirectionalLight(0x06BBCC, 1);
-                directionalLight.position.set(5, 5, 5).normalize();
-                scene.add(directionalLight);
-
-                // Handle window resize
-                window.addEventListener('resize', onWindowResize, false);
-            }
-
-            function onWindowResize() {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            }
-
-            function animate() {
-                requestAnimationFrame(animate);
-
-                // Rotation for animation
-                object.rotation.x += 0.005;
-                object.rotation.y += 0.008;
-
-                renderer.render(scene, camera);
-            }
-
-            init();
-            animate();
+        // Initialize WOW.js for animations
+        new WOW().init();
+        
+        // Back to top button
+        $(document).ready(function(){
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            $('.back-to-top').click(function(){
+                $('html, body').animate({scrollTop : 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
         });
     </script>
 </body>
-
 </html>

@@ -1,70 +1,82 @@
 <?php
-// Enable error reporting at the VERY TOP
+ob_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 session_start();
 
 $servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
-$port = "3306";
 $dbusername = "uwgxq8otzk6mhome";
 $dbpassword = "8oQDCXxH6aqYgvkG7g8t";
 $db = "bzbnom7tqqucjcivbuxo";
 
-// Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get and sanitize input
-    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     
-    // Basic validation
-    if (empty($username) || empty($password)) {
-        die("Please fill in all fields.");
+    if (empty($email) || empty($password)) {
+        header("Location: staff-login.html?error=empty_fields");
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: staff-login.html?error=invalid_email");
+        exit;
     }
 
     $conn = new mysqli($servername, $dbusername, $dbpassword, $db);
     if($conn->connect_error) {
-        die("Connection Failed: " . $conn->connect_error);
+        header("Location: staff-login.html?error=db_connection");
+        exit;
     }
 
-    // Check only the specific user
-    $sql = "SELECT username, password FROM staff WHERE username = ?";
+    // Updated SQL to include team field
+    $sql = "SELECT email, password, team FROM staff WHERE email = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
+    if (!$stmt) {
+        header("Location: staff-login.html?error=db_error");
+        exit;
+    }
+    
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         
-        // For testing - remove this in production
-        error_log("Login attempt - Username: $username, DB Username: " . $row["username"] . ", Password match: " . ($password == $row["password"] ? 'YES' : 'NO'));
-        
-        if($username == $row["username"] && $password == $row["password"]) {
-            // Set CORRECT session variables for STAFF
-            $_SESSION['staff_username'] = $username;
+        if($password === $row["password"]) {
+            $_SESSION['staff_email'] = $email;
             $_SESSION['staff_logged_in'] = true;
+            $_SESSION['staff_team'] = $row["team"]; // Store team in session
             
             $stmt->close();
             $conn->close();
+            ob_end_clean();
             
-            // Redirect without any output
-            header("Location: staff-dashboard.php");
-            exit();
+            // Redirect based on team
+            if ($row["team"] === 'Global') {
+                header("Location: staff-dashboard-global.php");
+            } else {
+                // For Innovation team or any other team, redirect to original dashboard
+                header("Location: staff-dashboard.php");
+            }
+            exit;
         } else {
             $stmt->close();
             $conn->close();
+            ob_end_clean();
             header("Location: staff-login.html?error=invalid_password");
-            exit();
+            exit;
         }
     } else {
         $stmt->close();
         $conn->close();
+        ob_end_clean();
         header("Location: staff-login.html?error=user_not_found");
-        exit();
+        exit;
     }
 } else {
     header("Location: staff-login.html");
-    exit();
+    exit;
 }
 ?>

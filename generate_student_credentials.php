@@ -11,7 +11,7 @@ $dbpassword = "8oQDCXxH6aqYgvkG7g8t";
 $db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in as staff
-if (!isset($_SESSION['staff_username'])) {
+if (!isset($_SESSION['staff_email'])) {
     header("Location: staff-login.html");
     exit();
 }
@@ -305,7 +305,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="d-none d-lg-block">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php
+                         $email = $_SESSION['staff_email'] ?? '';
+    $username = $email ? explode('@', $email)[0] : 'Staff';
+    echo htmlspecialchars($username); 
+                         ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>

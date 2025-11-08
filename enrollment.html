@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Course Enrollment - Tekksol Global</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    
+    <link href="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" rel="icon">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <style>
+        /* Add to your existing styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .enrollment-form {
+            scroll-margin-top: 100px; /* Adjust based on your header height */
+        }
+        
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+        }
+        
+        * {
+            max-width: 100%;
+        }
+        /* Login Dropdown Styles */
+#loginDropdown {
+    border: none;
+}
+
+.dropdown-menu .dropdown-item {
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #06BBCC;
+    color: white;
+    padding-left: 1.5rem;
+}
+
+.dropdown-menu .dropdown-item i {
+    color: #06BBCC;
+}
+
+.dropdown-menu .dropdown-item:hover i {
+    color: white;
+}
+
+/* Mobile Login Dropdown Styles */
+.mobile-login-dropdown {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .desktop-login-dropdown {
+        display: none;
+    }
+    
+    .mobile-login-dropdown {
+        display: block;
+        padding: 10px 15px;
+        border-top: 1px solid #dee2e6;
+    }
+    
+    .mobile-login-dropdown .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+    }
+    
+    .mobile-login-dropdown .dropdown-item {
+        padding: 8px 0;
+        color: #333;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    
+    .mobile-login-dropdown .dropdown-item:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-login-dropdown .dropdown-item:hover {
+        background-color: transparent;
+        color: #06BBCC;
+    }
+}
+        
+        .enrollment-form {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-floating > label {
+            color: #6c757d;
+        }
+        
+        .form-control:focus {
+            border-color: #06BBCC;
+            box-shadow: 0 0 0 0.25rem rgba(6, 187, 204, 0.25);
+        }
+        
+        .course-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .course-card {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .course-card:hover {
+            border-color: #06BBCC;
+            background-color: #f8f9fa;
+        }
+        
+        .course-card.selected {
+            border-color: #06BBCC;
+            background-color: #e7f9fb;
+        }
+        
+        .course-card input[type="checkbox"] {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .course-card h6 {
+            margin-bottom: 5px;
+            color: #06BBCC;
+            padding-right: 30px;
+        }
+        
+        .course-card small {
+            color: #6c757d;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        @media (max-width: 768px) {
+            .enrollment-form {
+                padding: 20px;
+            }
+            
+            .course-selection {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="https://www.tekksolglobal.com/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_11.40.04_a1aa6339-removebg-preview-e1716316097904.png" alt="Tekksol Global" height="60px" width="100px">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+             <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                 <a href="enrollment.html" class="nav-item nav-link">Enrollment</a>
+                <a href="placement.html" class="nav-item nav-link">Placement</a>
+                <a href="careers.php" class="nav-item nav-link">Careers</a>
+                <a href="become-trainer.html" class="nav-item nav-link">Trainer</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+           <!-- Desktop Login Dropdown -->
+<div class="d-none d-lg-block desktop-login-dropdown">
+    <div class="dropdown">
+        <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Login
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                    <i class="fas fa-graduation-cap me-2"></i> Student Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Staff Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Admin Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+                             <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Mobile Login Dropdown -->
+<div class="mobile-login-dropdown">
+    <div class="dropdown">
+        <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Login Options
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="student-login.html">
+                    <i class="fas fa-graduation-cap me-2"></i> Student Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="staff-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Staff Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center py-2" href="admin-login.html">
+                    <i class="fas fa-user-tie me-2"></i> Admin Login
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+                             <li>
+                            <a class="dropdown-item d-flex align-items-center py-2" href="test_login.php">
+                                <i class="fas fa-user-tie me-2"></i> Test Login
+                            </a>
+                        </li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Course Enrollment</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="courses.html">Courses</a></li>
+                            <li class="breadcrumb-item text-white active">Enrollment</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enrollment Form -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="enrollment-form">
+                        <div class="text-center mb-4">
+                            <h6 class="section-title bg-white text-center text-primary px-3">Enroll Now</h6>
+                            <h1 class="mb-3">Start Your Learning Journey</h1>
+                            <p class="text-muted">Fill in your details and select your desired course(s) to begin</p>
+                        </div>
+
+                        <form id="enrollmentForm" method="POST">
+                            <div class="row g-3">
+                                <!-- Personal Information -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" required>
+                                        <label for="fullName">Full Name *</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        <label for="email">Email Address *</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" required pattern="[0-9]{10}">
+                                        <label for="phone">Phone Number *</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Qualification">
+                                        <label for="qualification">Highest Qualification</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                                        <label for="address">Address</label>
+                                    </div>
+                                </div>
+
+                                <!-- Course Selection -->
+                                <div class="col-12 mt-4">
+                                    <h5 class="mb-3">Select Course(s) *</h5>
+                                    <div class="course-selection" id="courseSelection">
+                                        <!-- Courses will be populated here -->
+                                    </div>
+                                    <small class="text-danger d-none" id="courseError">Please select at least one course</small>
+                                </div>
+
+                                <!-- Additional Information -->
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="mode" name="mode" required>
+                                            <option value="">Choose...</option>
+                                            <option value="Online">Online</option>
+                                            <option value="Offline">Offline</option>
+                                            <option value="Hybrid">Hybrid</option>
+                                        </select>
+                                        <label for="mode">Preferred Learning Mode *</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Additional Message" id="message" name="message" style="height: 100px"></textarea>
+                                        <label for="message">Additional Message / Questions</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">
+                                        <i class="fas fa-paper-plane me-2"></i>Submit Enrollment
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="btn btn-link" href="terms-condition.html">Terms & Condition</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Tekksol Global, OMR, Rajiv Gandhi Salai, Chennai</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9042527746</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@tekksolglobal.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Popular Courses</h4>
+                    <a class="btn btn-link" href="courses.html">Java Full Stack</a>
+                    <a class="btn btn-link" href="courses.html">Python Development</a>
+                    <a class="btn btn-link" href="courses.html">Data Science</a>
+                    <a class="btn btn-link" href="courses.html">Cloud Computing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Follow Us</h4>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/teksolglobal/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/tekksol-global/"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/tekksol_global/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/919042527746?text=Hi%20Tekksol%20Global%2C%20I%20would%20like%20to%20know%20more%20about%20course%20enrollment" 
+       class="whatsapp-float" 
+       target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+   // Enable dropdown on hover for desktop
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownElements = document.querySelectorAll('.dropdown');
+        
+        dropdownElements.forEach(function(dropdown) {
+            // Show on hover
+            dropdown.addEventListener('mouseenter', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                if (dropdownMenu && window.innerWidth >= 992) { // Only for desktop
+                    dropdownMenu.classList.add('show');
+                }
+            });
+            
+            // Hide when mouse leaves
+            dropdown.addEventListener('mouseleave', function() {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                if (dropdownMenu && window.innerWidth >= 992) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+        });
+
+        // Remove spinner
+        setTimeout(() => {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.classList.remove('show');
+            }
+        }, 500);
+    });
+    // Course list - All courses from courses.html
+        const courses = [
+            // Popular Courses
+            { id: 1, name: 'Java Full Stack Course', duration: '120 Hrs' },
+            { id: 2, name: 'Python Full Stack Course', duration: '110 Hrs' },
+            { id: 3, name: 'CCNA Course', duration: '110 Hrs' },
+            { id: 4, name: 'AI/ML Course', duration: '110 Hrs' },
+            { id: 5, name: 'Data Science Course', duration: '110 Hrs' },
+            { id: 6, name: 'Cloud Computing Course', duration: '110 Hrs' },
+            
+            // Most Demanded IT Courses
+            { id: 7, name: 'Full Stack Developer', duration: '120 Hrs' },
+            { id: 8, name: 'Data Analytics', duration: '100 Hrs' },
+            { id: 9, name: 'Data Science & AI', duration: '150 Hrs' },
+            { id: 10, name: 'Gen AI & Machine Learning', duration: '140 Hrs' },
+            { id: 11, name: 'DevOps and Cloud Computing', duration: '110 Hrs' },
+            { id: 12, name: 'UI/UX Design Strategy', duration: '90 Hrs' },
+            
+            // Master Programs
+            { id: 13, name: 'Big Data Masters Program', duration: '200 Hrs' },
+            { id: 14, name: 'Business Intelligence Masters Program', duration: '180 Hrs' },
+            { id: 15, name: 'Cloud Masters Program', duration: '190 Hrs' },
+            { id: 16, name: 'DevOps Masters Program', duration: '185 Hrs' },
+            { id: 17, name: 'Software Testing Masters Program', duration: '170 Hrs' },
+            { id: 18, name: 'Data Science Masters Program', duration: '210 Hrs' },
+            { id: 19, name: 'Full Stack Master Program', duration: '195 Hrs' },
+            { id: 20, name: 'Freshers Masters Program', duration: '160 Hrs' },
+            
+            // Cloud Computing
+            { id: 21, name: 'AWS Training', duration: '60 Hrs' },
+            { id: 22, name: 'Microsoft Azure', duration: '55 Hrs' },
+            { id: 23, name: 'Google Cloud Platform (GCP)', duration: '50 Hrs' },
+            
+            // Software Testing
+            { id: 24, name: 'Selenium Training', duration: '50 Hrs' },
+            { id: 25, name: 'Manual Testing Training', duration: '40 Hrs' },
+            { id: 26, name: 'Big Data Testing Training', duration: '60 Hrs' },
+            { id: 27, name: 'QTP Training', duration: '45 Hrs' },
+            { id: 28, name: 'LoadRunner Training', duration: '55 Hrs' },
+            { id: 29, name: 'JMeter Training', duration: '40 Hrs' },
+            { id: 30, name: 'ETL Testing Training', duration: '50 Hrs' },
+            { id: 31, name: 'Test Complete Training', duration: '45 Hrs' },
+            { id: 32, name: 'SoapUI Training', duration: '35 Hrs' },
+            { id: 33, name: 'Coded UI Training', duration: '42 Hrs' },
+            
+            // Digital Marketing
+            { id: 34, name: 'Digital Marketing', duration: '60 Hrs' },
+            { id: 35, name: 'SEO Training', duration: '45 Hrs' },
+            { id: 36, name: 'Google Analytics Training', duration: '30 Hrs' },
+            { id: 37, name: 'PPC Advertising', duration: '40 Hrs' },
+            
+            // Web Designing
+            { id: 38, name: 'HTML Training', duration: '30 Hrs' },
+            { id: 39, name: 'CSS Training', duration: '35 Hrs' },
+            { id: 40, name: 'JavaScript Training', duration: '50 Hrs' },
+            
+            // Mobile Applications
+            { id: 41, name: 'Android Training', duration: '80 Hrs' },
+            { id: 42, name: 'iOS Training', duration: '75 Hrs' },
+            { id: 43, name: 'Objective-C Training', duration: '50 Hrs' },
+            { id: 44, name: 'PhoneGap Training', duration: '45 Hrs' },
+            
+            // Java
+            { id: 45, name: 'Core Java Training', duration: '60 Hrs' },
+            { id: 46, name: 'J2EE Training', duration: '70 Hrs' },
+            { id: 47, name: 'Struts Training', duration: '55 Hrs' },
+            { id: 48, name: 'Hibernate Training', duration: '50 Hrs' },
+            { id: 49, name: 'Spring Boot Training', duration: '65 Hrs' },
+            
+            // Python
+            { id: 50, name: 'Python Basics Training', duration: '60 Hrs' },
+            { id: 51, name: 'Python Data Science Training', duration: '70 Hrs' },
+            { id: 52, name: 'Python Flask Training', duration: '55 Hrs' },
+            { id: 53, name: 'Python Django Training', duration: '50 Hrs' },
+            
+            // C
+            { id: 54, name: 'C Basics Training', duration: '60 Hrs' },
+            { id: 55, name: 'Advanced C Training', duration: '70 Hrs' },
+            { id: 56, name: 'Embedded C Training', duration: '70 Hrs' }
+        ];
+
+        // Populate courses
+        const courseSelection = document.getElementById('courseSelection');
+        courses.forEach(course => {
+            const courseCard = document.createElement('div');
+            courseCard.className = 'course-card';
+            courseCard.innerHTML = `
+                <input type="checkbox" name="courses[]" value="${course.name}" id="course${course.id}">
+                <h6>${course.name}</h6>
+                <small><i class="fa fa-clock me-1"></i>${course.duration}</small>
+            `;
+            
+            courseCard.addEventListener('click', function(e) {
+                if (e.target.type !== 'checkbox') {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                }
+                this.classList.toggle('selected', this.querySelector('input[type="checkbox"]').checked);
+            });
+            
+            courseSelection.appendChild(courseCard);
+        });
+
+        // Form submission
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Form submitted');
+            
+            const selectedCourses = Array.from(document.querySelectorAll('input[name="courses[]"]:checked'));
+            const courseError = document.getElementById('courseError');
+            
+            // Validate course selection
+            if (selectedCourses.length === 0) {
+                courseError.classList.remove('d-none');
+                // Scroll to course selection section
+                document.getElementById('courseSelection').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Course Selection Required',
+                    text: 'Please select at least one course to enroll.',
+                    confirmButtonColor: '#06BBCC'
+                });
+                return false;
+            } else {
+                courseError.classList.add('d-none');
+            }
+            
+            // Show loading
+            Swal.fire({
+                title: 'Processing Enrollment...',
+                html: 'Please wait while we process your enrollment',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            
+            const formData = new FormData(this);
+            
+            // Debug: Log form data
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            
+            // Use fetch API for better control
+            fetch('process_enrollment.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(result => {
+                console.log('Success response:', result);
+                
+                Swal.close();
+                
+                if (result.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Enrollment Successful!',
+                        html: result.message,
+                        confirmButtonText: 'Great!',
+                        confirmButtonColor: '#06BBCC',
+                        allowOutsideClick: false
+                    }).then(() => {
+                        // Reset form
+                        document.getElementById('enrollmentForm').reset();
+                        // Remove selected state from course cards
+                        document.querySelectorAll('.course-card').forEach(card => {
+                            card.classList.remove('selected');
+                        });
+                        // Optional: Scroll to top only on success
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Enrollment Failed',
+                        text: result.message || 'An error occurred. Please try again.',
+                        confirmButtonColor: '#06BBCC'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Fetch Error:', error);
+                Swal.close();
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Error',
+                    html: 'Unable to process your enrollment. Please try again or contact us directly:<br><br>' +
+                          '<strong>Phone:</strong> +91 9042527746<br>' +
+                          '<strong>Email:</strong> info@tekksolglobal.com',
+                    confirmButtonColor: '#06BBCC'
+                });
+            });
+            
+            return false;
+        });
+
+        // Remove spinner
+        setTimeout(() => {
+            document.getElementById('spinner').classList.remove('show');
+        }, 500);
+    </script>
+</body>
+</html>

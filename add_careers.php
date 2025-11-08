@@ -85,28 +85,56 @@ $careers_result = $conn->query($careers_query);
     <link href="css/style.css" rel="stylesheet">
     
     <style>
-        /* Login Dropdown Customization */
-        #loginDropdown {
-            border: none;
-        }
+        /* Login Dropdown Customization - FIXED */
+#loginDropdown {
+    border: none;
+}
 
-        .dropdown-menu .dropdown-item {
-            transition: all 0.3s ease;
-        }
+/* Force dropdown to accommodate full text */
+.dropdown-menu {
+    min-width: 320px !important;
+    width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+}
 
-        .dropdown-menu .dropdown-item:hover {
-            background-color: #06BBCC;
-            color: white;
-            padding-left: 1.5rem;
-        }
+.dropdown-menu .dropdown-item {
+    transition: all 0.3s ease;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    padding: 0.65rem 1.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
 
-        .dropdown-menu .dropdown-item i {
-            color: #06BBCC;
-        }
+.dropdown-menu .dropdown-item span {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    display: inline-block !important;
+}
 
-        .dropdown-menu .dropdown-item:hover i {
-            color: white;
-        }
+.dropdown-menu .dropdown-item:hover {
+    background-color: #06BBCC;
+    color: white;
+}
+
+.dropdown-menu .dropdown-item i {
+    color: #06BBCC;
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.dropdown-menu .dropdown-item:hover i {
+    color: white;
+}
+
+/* Override Bootstrap dropdown constraints */
+.dropdown-menu-end {
+    right: 0 !important;
+    left: auto !important;
+}
         
         .admin-header {
             background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%);
@@ -239,6 +267,45 @@ $careers_result = $conn->query($careers_query);
         .btn-delete i {
             color: white;
         }
+        .navbar-collapse {
+    min-width: max-content;
+}
+
+.navbar-nav {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+
+.navbar-nav .nav-link {
+    white-space: nowrap;
+    padding: 8px 10px !important;
+    font-size: 0.85rem;
+    margin: 0 2px;
+}
+
+/* Reduce container padding for navbar */
+.navbar > .container {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Make the dropdown button more compact */
+.btn-primary.py-4.px-lg-5 {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+.navbar-brand img {
+    height: 50px !important;
+    width: 80px !important;
+}
+
+.navbar-brand {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
     </style>
 </head>
 
@@ -261,56 +328,63 @@ $careers_result = $conn->query($careers_query);
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="admin_dashboard.php" class="nav-item nav-link">Admin Dashboard</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+               <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
+                <a href="view-all-students.php" class="nav-item nav-link">View Students</a>
+                <a href="view_staff.php" class="nav-item nav-link">View Staff</a>
+                <a href="request_leave_approval_admin.php" class="nav-item nav-link">Leave Approval</a>
+             
+                <a href="attendance_reports.php" class="nav-item nav-link">Attendance Report</a>
             </div>
-            <div class="d-none d-lg-block">
-                <div class="dropdown">
-                    <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php">
-                                <i class="fas fa-users me-2"></i> View Students
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add_careers.php">
-                                <i class="fas fa-briefcase me-2"></i> Post Vacancy
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php">
-                                <i class="fas fa-user-tie me-2"></i> View Staff
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php">
-                                <i class="fas fa-key me-2"></i> Generate Staff Credentials
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php">
-                                <i class="fas fa-chart-bar me-2"></i> Attendance Reports
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+           <div class="d-none d-lg-block">
+    <div class="dropdown">
+        <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+            <li>
+                <a class="dropdown-item" href="admin_dashboard.php">
+                    <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="view-all-students.php">
+                    <i class="fas fa-users me-3"></i><span>View Students</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="add_careers.php">
+                    <i class="fas fa-briefcase me-3"></i><span>Post Vacancy</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="view_staff.php">
+                    <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="generate_staff_credentials.php">
+                    <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="attendance_reports.php">
+                    <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="logout.php">
+                    <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
         </div>
     </nav>
     <!-- Navbar End -->

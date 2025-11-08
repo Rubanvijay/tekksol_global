@@ -1,4 +1,6 @@
 /********** Template CSS **********/
+/* ===== FONT SIZE STABILITY FIX ===== */
+
 :root {
     --primary: #06BBCC;
     --light: #F0FBFC;
@@ -12,7 +14,22 @@
 .fw-semi-bold {
     font-weight: 700 !important;
 }
+html {
+    font-size: 16px !important;
+}
 
+body {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem !important;
+}
+
+.btn {
+    font-size: 1rem !important;
+}
 .back-to-top {
     position: fixed;
     display: none;

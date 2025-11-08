@@ -1119,15 +1119,64 @@
                     </div>
                 </div>
             </div>
-            <!-- JavaScript will automatically duplicate these 6 courses -->
-
-
         </div>
     </div>
-
-
-
 </div>
 
+https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761991592022!5m2!1sen!
 
-https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15561.968732118774!2d80.2174138!3d12.8114404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525a7ec19a9dcd%3A0x5b448f5f9b4cc290!2sRubics%20Square!5e0!3m2!1sen!2sin!4v1761991592022!5m2!1sen!2sin
+
+this is my courses.html . now i want if i click java Full stack it go to java_full_stack.html page . in that page i want java full stack Syllabus from introduction to Framework spring boot. Also that page should contain if a student learn this course his  market scale in java should be in a good bar chart visualization. use courses.html design,color, header and footer . give me  java_full_stack.html
+
+
+
+
+ <form action="process_registration.php" method="POST" id="registrationForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Full Name *</label>
+                                        <input type="text" class="form-control" id="name" name="name" 
+                                               value="<?php echo isset($_SESSION['old_name']) ? htmlspecialchars($_SESSION['old_name']) : ''; unset($_SESSION['old_name']); ?>" 
+                                               required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               value="<?php echo isset($_SESSION['old_email']) ? htmlspecialchars($_SESSION['old_email']) : ''; unset($_SESSION['old_email']); ?>" 
+                                               required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" 
+                                               value="<?php echo isset($_SESSION['old_phone']) ? htmlspecialchars($_SESSION['old_phone']) : ''; unset($_SESSION['old_phone']); ?>" 
+                                               required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="location" class="form-label">Location *</label>
+                                        <input type="text" class="form-control" id="location" name="location" 
+                                               value="<?php echo isset($_SESSION['old_location']) ? htmlspecialchars($_SESSION['old_location']) : ''; unset($_SESSION['old_location']); ?>" 
+                                               required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to the <a href="terms-condition.html" target="_blank">Terms and Conditions</a> 
+                                            and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-register w-100 py-3 fw-bold">
+                                    Register for Test
+                                </button>
+                            </form>
+
+                            <div class="text-center mt-4">
+                                <p class="text-muted">Already registered? <a href="test_selection.php">Select your test</a></p>
+                            </div>

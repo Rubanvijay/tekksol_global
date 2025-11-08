@@ -11,12 +11,12 @@ $dbpassword = "8oQDCXxH6aqYgvkG7g8t";
 $db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in as staff
-if (!isset($_SESSION['staff_username'])) {
+if (!isset($_SESSION['staff_email'])) {
     header("Location: staff-login.html");
     exit();
 }
 
-$current_staff_username = $_SESSION['staff_username'];
+$current_staff_email = $_SESSION['staff_email'];
 $student_data = [];
 $all_students = [];
 $success_message = "";
@@ -34,7 +34,7 @@ try {
             WHERE trainer_name = ? 
             ORDER BY name";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $current_staff_username);
+    $stmt->bind_param("s", $current_staff_email);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -56,7 +56,7 @@ try {
                 JOIN students s ON sd.username = s.username 
                 WHERE sd.student_id = ? AND sd.trainer_name = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $student_id, $current_staff_username);
+        $stmt->bind_param("ss", $student_id, $current_staff_email);
         $stmt->execute();
         $result = $stmt->get_result();
         
@@ -97,7 +97,7 @@ try {
             // Verify the student still belongs to current staff before updating
             $verify_sql = "SELECT student_id FROM student_details WHERE student_id = ? AND trainer_name = ?";
             $verify_stmt = $conn->prepare($verify_sql);
-            $verify_stmt->bind_param("ss", $student_id, $current_staff_username);
+            $verify_stmt->bind_param("ss", $student_id, $current_staff_email);
             $verify_stmt->execute();
             $verify_result = $verify_stmt->get_result();
             
@@ -121,7 +121,7 @@ try {
                 $year_of_passed_out, $degree, $specialization, $type,
                 $course_domain, $course_mode, $timing, $duration,
                 $trainer_name, $start_date, $end_date, $amount_paid, $status,
-                $student_id, $current_staff_username // Added current_staff_username for security
+                $student_id, $current_staff_email // Added current_staff_email for security
             ];
             
             $update_stmt->bind_param(
@@ -130,7 +130,7 @@ try {
                 $year_of_passed_out, $degree, $specialization, $type,
                 $course_domain, $course_mode, $timing, $duration,
                 $trainer_name, $start_date, $end_date, $amount_paid, $status,
-                $student_id, $current_staff_username
+                $student_id, $current_staff_email
             );
 
             if ($update_stmt->execute()) {
@@ -368,7 +368,7 @@ try {
             <div class="d-none d-lg-block">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_email'] ?? 'Staff'); ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>

@@ -85,7 +85,7 @@ try {
     }
     
     // Get recent staff
-    $sql = "SELECT username FROM staff ORDER BY username DESC LIMIT 5";
+    $sql = "SELECT email FROM staff ORDER BY email DESC LIMIT 5";
     $result = $conn->query($sql);
     if ($result) {
         while ($row = $result->fetch_assoc()) {
@@ -135,28 +135,72 @@ try {
     <link href="css/style.css" rel="stylesheet">
     
     <style>
+        /* Fix horizontal overflow */
+        html, body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+        }
+
+        .container, .container-fluid, .container-xxl {
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+        }
+
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
         
-        /* Login Dropdown Customization */
+        /* Login Dropdown Customization - FIXED */
         #loginDropdown {
             border: none;
         }
 
+        /* Force dropdown to accommodate full text */
+        .dropdown-menu {
+            min-width: 320px !important;
+            width: max-content !important;
+            max-width: none !important;
+            white-space: nowrap !important;
+        }
+
         .dropdown-menu .dropdown-item {
             transition: all 0.3s ease;
+            white-space: nowrap !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            padding: 0.65rem 1.5rem !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+        }
+
+        .dropdown-menu .dropdown-item span {
+            white-space: nowrap !important;
+            overflow: visible !important;
+            display: inline-block !important;
         }
 
         .dropdown-menu .dropdown-item:hover {
             background-color: #06BBCC;
             color: white;
-            padding-left: 1.5rem;
         }
 
         .dropdown-menu .dropdown-item i {
             color: #06BBCC;
+            width: 20px;
+            flex-shrink: 0;
         }
 
         .dropdown-menu .dropdown-item:hover i {
             color: white;
+        }
+        
+        /* Override Bootstrap dropdown constraints */
+        .dropdown-menu-end {
+            right: 0 !important;
+            left: auto !important;
         }
         
         /* Admin Dashboard Styles */
@@ -447,8 +491,9 @@ try {
         
         /* Mobile form improvements */
         .form-control {
-            font-size: 16px; /* Prevents zoom on iOS */
+            font-size: 16px;
         }
+        
     </style>
 </head>
 
@@ -471,63 +516,59 @@ try {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-3 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="admin_dashboard.php" class="nav-item nav-link active">Admin Dashboard</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="" class="nav-item nav-link">Dashboard</a>
+                <a href="view-all-students.php" class="nav-item nav-link">Students</a>
+                <a href="view_staff.php" class="nav-item nav-link">Staff</a>
+                <a href="request_leave_approval_admin.php" class="nav-item nav-link">Leave Approval</a>
+                <a href="add_careers.php" class="nav-item nav-link">Add Careers</a>
+                <a href="attendance_reports.php" class="nav-item nav-link">Attendance Report</a>
             </div>
            
-           <!-- Updated Desktop Dropdown -->
-<div class="d-none d-lg-block">
-    <div class="dropdown">
-        <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars((String)$_SESSION['admin_username'] ?? 'Admin'); ?>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown" style="min-width: 280px; max-width: 350px;">
-            <li>
-                <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php" style="white-space: normal;">
-                    <i class="fas fa-tachometer-alt me-2" style="min-width: 20px;"></i> 
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php" style="white-space: normal;">
-                    <i class="fas fa-users me-2" style="min-width: 20px;"></i>
-                    <span>View Students</span>
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php" style="white-space: normal;">
-                    <i class="fas fa-user-tie me-2" style="min-width: 20px;"></i>
-                    <span>View Staff</span>
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php" style="white-space: normal;">
-                    <i class="fas fa-key me-2" style="min-width: 20px;"></i>
-                    <span>Generate Staff Credentials</span>
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php" style="white-space: normal;">
-                    <i class="fas fa-chart-bar me-2" style="min-width: 20px;"></i>
-                    <span>Attendance Reports</span>
-                </a>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <a class="dropdown-item d-flex align-items-center py-2" href="logout.php" style="white-space: normal;">
-                    <i class="fas fa-sign-out-alt me-2" style="min-width: 20px;"></i>
-                    <span>Logout</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+            <!-- Desktop Dropdown -->
+            <div class="d-none d-lg-block">
+                <div class="dropdown">
+                    <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars((String)$_SESSION['admin_username'] ?? 'Admin'); ?>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li>
+                            <a class="dropdown-item" href="admin_dashboard.php">
+                                <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="view-all-students.php">
+                                <i class="fas fa-users me-3"></i><span>View Students</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="view_staff.php">
+                                <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="generate_staff_credentials.php">
+                                <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="attendance_reports.php">
+                                <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -671,7 +712,7 @@ try {
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Username</th>
+                                        <th>Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -679,7 +720,7 @@ try {
                                         <tr>
                                             <td>
                                                 <i class="fas fa-user-circle text-primary me-2"></i>
-                                                <strong><?php echo htmlspecialchars((String)$staff['username']); ?></strong>
+                                                <strong><?php echo htmlspecialchars((String)$staff['email']); ?></strong>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -706,6 +747,13 @@ try {
                                     <small class="d-block text-muted mt-1">Manage student records</small>
                                 </a>
                             </div>
+                            <div class="col-6 col-lg-12">
+                                <a href="upload_certificate2.php" class="action-btn">
+                                    <i class="fas fa-medal"></i>
+                                    <strong>Upload Certificate</strong>
+                                    <small class="d-block text-muted mt-1">Upload Course Completion Certificate</small>
+                                </a>
+                            </div>
                             
                             <div class="col-6 col-lg-12">
                                 <a href="view_staff.php" class="action-btn">
@@ -718,7 +766,7 @@ try {
                             <div class="col-6 col-lg-12">
                                 <a href="generate_staff_credentials.php" class="action-btn">
                                     <i class="fas fa-key"></i>
-                                    <strong>Create New Staff </strong>
+                                    <strong>Create New Staff</strong>
                                     <small class="d-block text-muted mt-1">Create username & password</small>
                                 </a>
                             </div>
@@ -728,6 +776,13 @@ try {
                                     <i class="fas fa-user-slash"></i>
                                     <strong>Delete Staff</strong>
                                     <small class="d-block text-muted mt-1">Remove Staff Account</small>
+                                </a>
+                            </div>
+                            <div class="col-6 col-lg-12">
+                                <a href="request_leave_approval_admin.php" class="action-btn">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <strong>Leave Approval</strong>
+                                    <small class="d-block text-muted mt-1">Staff Leave Request</small>
                                 </a>
                             </div>
 

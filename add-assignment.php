@@ -11,7 +11,7 @@ $dbpassword = "8oQDCXxH6aqYgvkG7g8t";
 $db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in as staff
-if (!isset($_SESSION['staff_username'])) {
+if (!isset($_SESSION['staff_email'])) {
     header("Location: staff-login.html");
     exit();
 }
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = trim($_POST['username']);
         $assignment_text = trim($_POST['assignment_text']);
         $due_date = $_POST['due_date'] ?? null;
-        $assigned_by = $_SESSION['staff_username'];
+        $assigned_by = $_SESSION['staff_email'];
 
         // Validate required fields
         if (empty($username) || empty($assignment_text)) {
@@ -335,17 +335,20 @@ try {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="staff-dashboard.php" class="nav-item nav-link active">Dashboard</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="staff-dashboard.php" class="nav-item nav-link ">Dashboard</a>
+                <a href="mark_attendance.php" class="nav-item nav-link ">Checkin</a>
+                <a href="request_leave_approval.php" class="nav-item nav-link ">Leave Request</a>
+                
             </div>
             
-            <!-- Desktop Login Dropdown -->
             <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php 
+                          $email = $_SESSION['staff_email'] ?? '';
+                          $username = $email ? explode('@', $email)[0] : 'Staff';
+                          echo htmlspecialchars($username); 
+                        ?> 
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
@@ -353,19 +356,22 @@ try {
                                 <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="mark_attendance.php">
                                 <i class="fas fa-check-circle me-2"></i> Check-in
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-student.php">
-                                <i class="fas fa-user-plus me-2"></i> Add Student
+                            <a class="dropdown-item d-flex align-items-center py-2" href="edit_walkin_report.php">
+                                <i class="fas fa-user-plus me-2"></i> Edit Report
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-assignment.php">
-                                <i class="fas fa-tasks me-2"></i> Add Assignment
+                            <a class="dropdown-item d-flex align-items-center py-2" href="request_leave_approval.php">
+                                <i class="fas fa-tasks me-2"></i> Request Leave
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
@@ -382,7 +388,11 @@ try {
             <div class="mobile-login-dropdown d-lg-none">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php 
+                          $email = $_SESSION['staff_email'] ?? '';
+                          $username = $email ? explode('@', $email)[0] : 'Staff';
+                          echo htmlspecialchars($username); 
+                        ?>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
@@ -390,19 +400,22 @@ try {
                                 <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="mark_attendance.php">
                                 <i class="fas fa-check-circle me-2"></i> Check-in
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-student.php">
-                                <i class="fas fa-user-plus me-2"></i> Add Student
+                            <a class="dropdown-item d-flex align-items-center py-2" href="edit_walkin_report.php">
+                                <i class="fas fa-user-plus me-2"></i> Edit Report
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-assignment.php">
-                                <i class="fas fa-tasks me-2"></i> Add Assignment
+                            <a class="dropdown-item d-flex align-items-center py-2" href="request_leave_approval.php">
+                                <i class="fas fa-tasks me-2"></i> Request Leave
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>

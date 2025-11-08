@@ -23,6 +23,110 @@ $report_type = "staff"; // Default
 $date_from = date('Y-m-d', strtotime('-30 days'));
 $date_to = date('Y-m-d');
 
+// Handle Excel Download
+if (isset($_GET['download']) && $_GET['download'] == 'excel') {
+    $download_type = $_GET['type'] ?? 'staff';
+    $download_date_from = $_GET['date_from'] ?? $date_from;
+    $download_date_to = $_GET['date_to'] ?? $date_to;
+    
+    try {
+        $conn = new mysqli($servername, $dbusername, $dbpassword, $db);
+        
+        if ($conn->connect_error) {
+            throw new Exception("Connection failed: " . $conn->connect_error);
+        }
+        
+        // Generate Excel file
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename="attendance_report_' . $download_type . '_' . date('Y-m-d') . '.xls"');
+        
+        echo "<table border='1'>";
+        
+        if ($download_type == 'staff' || $download_type == 'both') {
+            // Staff Attendance Data
+            $sql = "SELECT employee_id, latitude, longitude, timestamp, DATE(timestamp) as attendance_date, checkin_type, status
+                    FROM staff_attendance 
+                    WHERE DATE(timestamp) BETWEEN ? AND ?
+                    ORDER BY timestamp DESC";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ss", $download_date_from, $download_date_to);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+         echo "<tr><td colspan='5' style='background:#06BBCC;color:white;text-align:center;font-weight:bold;font-size:16px;'>STAFF ATTENDANCE REPORT (" . $download_date_from . " to " . $download_date_to . ")</td></tr>";
+echo "<tr style='background:#f8f9fa;font-weight:bold;'>
+        <th>#</th>
+        <th>Employee ID</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Check-in Type</th>
+      </tr>";
+
+$counter = 1;
+while ($row = $result->fetch_assoc()) {
+    echo "<tr>
+            <td>" . $counter . "</td>
+            <td>" . htmlspecialchars($row['employee_id']) . "</td>
+            <td>" . date('M d, Y', strtotime($row['attendance_date'])) . "</td>
+            <td>" . date('h:i A', strtotime($row['timestamp'])) . "</td>
+            <td>" . ucfirst(str_replace('_', ' ', $row['checkin_type'])) . "</td>
+          </tr>";
+    $counter++;
+}
+            $stmt->close();
+            
+            if ($download_type == 'both') {
+                echo "<tr><td colspan='7' style='height:20px;'></td></tr>";
+            }
+        }
+        
+        if ($download_type == 'student' || $download_type == 'both') {
+            // Student Attendance Data
+            $sql = "SELECT s.name, s.student_id, s.course_domain, 
+                           sa.attendance_date, sa.status
+                    FROM student_attendance sa
+                    JOIN student_details s ON sa.student_id = s.student_id
+                    WHERE sa.attendance_date BETWEEN ? AND ?
+                    ORDER BY sa.attendance_date DESC, s.name";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ss", $download_date_from, $download_date_to);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            echo "<tr><td colspan='6' style='background:#28a745;color:white;text-align:center;font-weight:bold;font-size:16px;'>STUDENT ATTENDANCE REPORT (" . $download_date_from . " to " . $download_date_to . ")</td></tr>";
+            echo "<tr style='background:#f8f9fa;font-weight:bold;'>
+                    <th>#</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>";
+            
+            $counter = 1;
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>" . $counter . "</td>
+                        <td>" . htmlspecialchars($row['student_id']) . "</td>
+                        <td>" . htmlspecialchars($row['name']) . "</td>
+                        <td>" . htmlspecialchars($row['course_domain']) . "</td>
+                        <td>" . date('M d, Y', strtotime($row['attendance_date'])) . "</td>
+                        <td>" . htmlspecialchars($row['status']) . "</td>
+                      </tr>";
+                $counter++;
+            }
+            $stmt->close();
+        }
+        
+        echo "</table>";
+        $conn->close();
+        exit();
+        
+    } catch (Exception $e) {
+        $error = "Download error: " . $e->getMessage();
+    }
+}
+
 try {
     $conn = new mysqli($servername, $dbusername, $dbpassword, $db);
     
@@ -37,9 +141,9 @@ try {
         $date_to = $_POST['date_to'] ?? $date_to;
     }
     
-    // Get Staff Attendance - CORRECTED: using employee_id instead of staff_username
+    // Get Staff Attendance
     if ($report_type == 'staff' || $report_type == 'both') {
-        $sql = "SELECT employee_id, latitude, longitude, timestamp, DATE(timestamp) as attendance_date 
+        $sql = "SELECT employee_id, latitude, longitude, timestamp, DATE(timestamp) as attendance_date, checkin_type, status
                 FROM staff_attendance 
                 WHERE DATE(timestamp) BETWEEN ? AND ?
                 ORDER BY timestamp DESC";
@@ -156,6 +260,14 @@ try {
             font-family: monospace;
         }
         
+        .download-section {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .report-card {
@@ -169,6 +281,11 @@ try {
             }
             
             .summary-box {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .download-section {
                 padding: 15px;
                 margin-bottom: 15px;
             }
@@ -217,6 +334,11 @@ try {
                 margin-bottom: 12px;
             }
             
+            .download-section {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
             .summary-number {
                 font-size: 1.3rem;
             }
@@ -260,13 +382,58 @@ try {
                 border-radius: 0 0 10px 10px;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             }
-            
-            .dropdown-menu {
-                border: none;
-                box-shadow: none;
-                padding-left: 15px;
-            }
         }
+           /* Login Dropdown Customization - FIXED */
+#loginDropdown {
+    border: none;
+}
+
+/* Force dropdown to accommodate full text */
+.dropdown-menu {
+    min-width: 320px !important;
+    width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+}
+
+.dropdown-menu .dropdown-item {
+    transition: all 0.3s ease;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    padding: 0.65rem 1.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.dropdown-menu .dropdown-item span {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    display: inline-block !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #06BBCC;
+    color: white;
+}
+
+.dropdown-menu .dropdown-item i {
+    color: #06BBCC;
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.dropdown-menu .dropdown-item:hover i {
+    color: white;
+}
+
+/* Override Bootstrap dropdown constraints */
+.dropdown-menu-end {
+    right: 0 !important;
+    left: auto !important;
+}
+        
         
         /* Mobile table improvements */
         .table th, .table td {
@@ -333,10 +500,12 @@ try {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-3 p-lg-0">
-                <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
-                <a href="view-all-students.php" class="nav-item nav-link">Students</a>
-                <a href="view_staff.php" class="nav-item nav-link">Staff</a>
-                <a href="attendance_reports.php" class="nav-item nav-link active">Reports</a>
+               <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
+                <a href="view-all-students.php" class="nav-item nav-link">View Students</a>
+                <a href="view_staff.php" class="nav-item nav-link">View Staff</a>
+                <a href="request_leave_approval_admin.php" class="nav-item nav-link">Leave Approval</a>
+                <a href="add_careers.php" class="nav-item nav-link">Add Careers</a>
+                <a href="attendance_reports.php" class="nav-item nav-link">Attendance Report</a>
             </div>
             <div class="d-lg-none mt-3">
                 <div class="dropdown">
@@ -379,45 +548,49 @@ try {
                 </div>
             </div>
             <div class="d-none d-lg-block">
-                <div class="dropdown">
-                    <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php">
-                                <i class="fas fa-users me-2"></i> View Students
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php">
-                                <i class="fas fa-user-tie me-2"></i> View Staff
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php">
-                                <i class="fas fa-key me-2"></i> Generate Staff Credentials
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php">
-                                <i class="fas fa-chart-bar me-2"></i> Attendance Reports
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="dropdown">
+        <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-shield me-2"></i><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'Admin'); ?>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+            <li>
+                <a class="dropdown-item" href="admin_dashboard.php">
+                    <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
+                </a>
+            </li>
+             <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="view-all-students.php">
+                    <i class="fas fa-users me-3"></i><span>View Students</span>
+                </a>
+            </li>
+             <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="view_staff.php">
+                    <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                </a>
+            </li>
+             <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="generate_staff_credentials.php">
+                    <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                </a>
+            </li> 
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="attendance_reports.php">
+                    <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="logout.php">
+                    <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
         </div>
     </nav>
 
@@ -466,6 +639,8 @@ try {
                 </form>
             </div>
 
+           
+
             <!-- Summary -->
             <div class="row mb-4">
                 <?php if ($report_type == 'staff' || $report_type == 'both'): ?>
@@ -490,7 +665,13 @@ try {
             <!-- Staff Attendance Report -->
             <?php if (($report_type == 'staff' || $report_type == 'both') && !empty($staff_attendance)): ?>
             <div class="report-card">
-                <h5 class="mb-4"><i class="fas fa-user-tie me-2"></i>Staff Attendance Report</h5>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5><i class="fas fa-user-tie me-2"></i>Staff Attendance Report</h5>
+                    <a href="?download=excel&type=staff&date_from=<?php echo $date_from; ?>&date_to=<?php echo $date_to; ?>" 
+                       class="btn btn-success btn-sm">
+                        <i class="fas fa-file-excel me-1"></i>Download Excel
+                    </a>
+                </div>
                 <div class="attendance-table">
                     <div class="table-responsive">
                         <table class="table table-hover mb-0">
@@ -500,6 +681,8 @@ try {
                                     <th>Employee ID</th>
                                     <th>Date</th>
                                     <th>Check-in Time</th>
+                                    <th>Check-in Type</th>
+                                    <th>Status</th>
                                     <th>Location</th>
                                 </tr>
                             </thead>
@@ -516,6 +699,16 @@ try {
                                         <span class="badge bg-success">
                                             <i class="fas fa-clock me-1"></i>
                                             <?php echo date('h:i A', strtotime($record['timestamp'])); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">
+                                            <?php echo ucfirst(str_replace('_', ' ', $record['checkin_type'])); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary">
+                                            <?php echo htmlspecialchars($record['status']); ?>
                                         </span>
                                     </td>
                                     <td>
@@ -540,7 +733,13 @@ try {
             <!-- Student Attendance Report -->
             <?php if (($report_type == 'student' || $report_type == 'both') && !empty($student_attendance)): ?>
             <div class="report-card">
-                <h5 class="mb-4"><i class="fas fa-users me-2"></i>Student Attendance Report</h5>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5><i class="fas fa-users me-2"></i>Student Attendance Report</h5>
+                    <a href="?download=excel&type=student&date_from=<?php echo $date_from; ?>&date_to=<?php echo $date_to; ?>" 
+                       class="btn btn-success btn-sm">
+                        <i class="fas fa-file-excel me-1"></i>Download Excel
+                    </a>
+                </div>
                 <div class="attendance-table">
                     <div class="table-responsive">
                         <table class="table table-hover mb-0">

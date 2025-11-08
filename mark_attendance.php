@@ -1,100 +1,153 @@
 <?php
 session_start();
+
 // Database configuration
 $servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
-$port = "3306";
 $dbusername = "uwgxq8otzk6mhome";
 $dbpassword = "8oQDCXxH6aqYgvkG7g8t";
 $db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in
-if (!isset($_SESSION['staff_username'])) {
-    header("Location: staff-login.html");
-    exit();
+if (!isset($_SESSION['staff_email'])) {
+    // If AJAX request, return JSON
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Not logged in']);
+        exit();
+    } else {
+        // If regular request, redirect to login
+        header("Location: staff-login.html");
+        exit();
+    }
 }
 
-$success_message = "";
-$error_message = "";
-
-// Handle attendance submission via AJAX
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($_POST['longitude'])) {
+// Handle AJAX attendance submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
+    // Set JSON header
+    header('Content-Type: application/json');
+    
+    // Turn off error display to prevent HTML output
+    error_reporting(0);
+    ini_set('display_errors', 0);
+    
+    $response = [];
+    
     try {
         $conn = new mysqli($servername, $dbusername, $dbpassword, $db);
         
         if ($conn->connect_error) {
-            throw new Exception("Connection failed: " . $conn->connect_error);
+            throw new Exception("Database connection failed: " . $conn->connect_error);
         }
 
-        $staff_username = $_SESSION['staff_username'];
-        $latitude = floatval($_POST['latitude']);
-        $longitude = floatval($_POST['longitude']);
+        $staff_email = $_SESSION['staff_email'];
+        $checkin_type = $_POST['checkin_type'];
         
         // Office coordinates
         $officeLat = 12.811393;
         $officeLon = 80.227807;
-        $maxDistance = 50; // meters
-
-        // Calculate distance
-        function getDistance($lat1, $lon1, $lat2, $lon2) {
-            $R = 6371e3;
-            $phi1 = deg2rad($lat1);
-            $phi2 = deg2rad($lat2);
-            $deltaPhi = deg2rad($lat2 - $lat1);
-            $deltaLambda = deg2rad($lon2 - $lon1);
-            $a = sin($deltaPhi/2) ** 2 +
-                 cos($phi1) * cos($phi2) * sin($deltaLambda/2) ** 2;
-            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-            return $R * $c;
-        }
-
-        $distance = getDistance($latitude, $longitude, $officeLat, $officeLon);
-
-        if ($distance <= $maxDistance) {
-            // Check if attendance already marked for today
-            $current_date = date('Y-m-d');
-            $check_sql = "SELECT * FROM staff_attendance WHERE employee_id = ? AND DATE(timestamp) = ?";
-            $check_stmt = $conn->prepare($check_sql);
-            $check_stmt->bind_param("ss", $staff_username, $current_date);
-            $check_stmt->execute();
-            $result = $check_stmt->get_result();
-            
-            if ($result->num_rows > 0) {
-                echo json_encode(['success' => false, 'message' => 'Attendance already marked for today!']);
-            } else {
-                // Insert attendance record
-                $insert_sql = "INSERT INTO staff_attendance (employee_id, latitude, longitude) VALUES (?, ?, ?)";
-                $insert_stmt = $conn->prepare($insert_sql);
-                $insert_stmt->bind_param("sdd", $staff_username, $latitude, $longitude);
-                
-                if ($insert_stmt->execute()) {
-                    echo json_encode([
-                        'success' => true, 
-                        'message' => 'Attendance marked successfully!',
-                        'distance' => round($distance, 2),
-                        'time' => date('H:i:s'),
-                        'date' => date('F j, Y')
-                    ]);
-                } else {
-                    throw new Exception("Error saving attendance: " . $insert_stmt->error);
-                }
-                $insert_stmt->close();
-            }
-            
-            $check_stmt->close();
-        } else {
-            echo json_encode([
-                'success' => false, 
-                'message' => 'You are too far away (' . round($distance, 2) . ' m)! Please come within ' . $maxDistance . ' meters of the office.'
-            ]);
-        }
         
+        // Hardcoded coordinates for testing - ALWAYS USE OFFICE LOCATION
+        $latitude = 12.811393;
+        $longitude = 80.227807;
+
+        // Check if already marked for today
+        $current_date = date('Y-m-d');
+        $check_sql = "SELECT * FROM staff_attendance WHERE employee_id = ? AND DATE(timestamp) = ? AND checkin_type = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("sss", $staff_email, $current_date, $checkin_type);
+        $check_stmt->execute();
+        $result = $check_stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $type_names = [
+                'morning' => 'Morning check-in',
+                'lunch_out' => 'Lunch break out',
+                'lunch_in' => 'Lunch break in', 
+                'evening' => 'Evening check-out'
+            ];
+            $response = ['success' => false, 'message' => $type_names[$checkin_type] . ' already marked for today!'];
+        } else {
+            // Determine status
+            $status = 'present';
+            if ($checkin_type === 'lunch_out') $status = 'lunch_break';
+            elseif ($checkin_type === 'evening') $status = 'left';
+            
+            // Insert record
+            $insert_sql = "INSERT INTO staff_attendance (employee_id, latitude, longitude, checkin_type, status) VALUES (?, ?, ?, ?, ?)";
+            $insert_stmt = $conn->prepare($insert_sql);
+           $insert_stmt->bind_param("sddss", $staff_email, $latitude, $longitude, $checkin_type, $status);
+            
+            if ($insert_stmt->execute()) {
+                $type_names = [
+                    'morning' => 'Morning check-in',
+                    'lunch_out' => 'Lunch break out',
+                    'lunch_in' => 'Lunch break in',
+                    'evening' => 'Evening check-out'
+                ];
+                
+                $response = [
+                    'success' => true, 
+                    'message' => $type_names[$checkin_type] . ' marked successfully!',
+                    'distance' => 0,
+                    'time' => date('H:i:s'),
+                    'date' => date('F j, Y'),
+                    'type' => $checkin_type
+                ];
+            } else {
+                throw new Exception("Database insert failed: " . $insert_stmt->error);
+            }
+            $insert_stmt->close();
+        }
+        $check_stmt->close();
         $conn->close();
-        exit();
         
     } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
-        exit();
+        $response = ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
     }
+    
+    echo json_encode($response);
+    exit();
+}
+
+// If not an AJAX request, show the HTML page
+// Get today's attendance status for display
+function getTodayAttendanceStatus($conn, $staff_email) {
+    $current_date = date('Y-m-d');
+    $status_sql = "SELECT checkin_type, timestamp FROM staff_attendance WHERE employee_id = ? AND DATE(timestamp) = ? ORDER BY timestamp";
+    $status_stmt = $conn->prepare($status_sql);
+    $status_stmt->bind_param("ss", $staff_email, $current_date);
+    $status_stmt->execute();
+    $result = $status_stmt->get_result();
+    
+    $attendance = [
+        'morning' => false,
+        'lunch_out' => false,
+        'lunch_in' => false,
+        'evening' => false
+    ];
+    
+    $timestamps = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $attendance[$row['checkin_type']] = true;
+        $timestamps[$row['checkin_type']] = date('H:i', strtotime($row['timestamp']));
+    }
+    
+    $status_stmt->close();
+    return ['attendance' => $attendance, 'timestamps' => $timestamps];
+}
+
+// Get today's status for display
+try {
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $db);
+    if (!$conn->connect_error) {
+        $today_status = getTodayAttendanceStatus($conn, $_SESSION['staff_email']);
+        $conn->close();
+    } else {
+        $today_status = ['attendance' => [], 'timestamps' => []];
+    }
+} catch (Exception $e) {
+    $today_status = ['attendance' => [], 'timestamps' => []];
 }
 ?>
 <!DOCTYPE html>
@@ -122,7 +175,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
     <link href="css/style.css" rel="stylesheet">
     
     <style>
-                /* Mobile Login Dropdown Styles */
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        /* Mobile Login Dropdown Styles */
         .mobile-login-dropdown {
             display: none;
             padding: 10px 15px;
@@ -188,19 +250,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             padding: 40px;
             margin: 30px auto;
-            max-width: 600px;
+            max-width: 800px;
             text-align: center;
             border: 1px solid rgba(6, 187, 204, 0.1);
             transform-style: preserve-3d;
             perspective: 1000px;
         }
         
+        .attendance-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
         .attendance-button {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             border: none;
             color: white;
-            padding: 20px 40px;
-            font-size: 1.5rem;
+            padding: 20px 15px;
+            font-size: 1.1rem;
             font-weight: 600;
             border-radius: 15px;
             cursor: pointer;
@@ -209,31 +278,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             transform: translateZ(20px);
             position: relative;
             overflow: hidden;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .attendance-button.morning {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+        
+        .attendance-button.lunch_out {
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
+        }
+        
+        .attendance-button.lunch_in {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            box-shadow: 0 10px 25px rgba(23, 162, 184, 0.3);
+        }
+        
+        .attendance-button.evening {
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+            box-shadow: 0 10px 25px rgba(111, 66, 193, 0.3);
         }
         
         .attendance-button:hover {
             transform: translateZ(30px) translateY(-5px);
-            box-shadow: 0 15px 35px rgba(40, 167, 69, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
         
         .attendance-button:active {
             transform: translateZ(15px) translateY(2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
         
-        .attendance-button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+        .attendance-button:disabled {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            cursor: not-allowed;
+            transform: translateZ(0);
+            box-shadow: none;
         }
         
-        .attendance-button:hover:before {
-            left: 100%;
+        .attendance-button:disabled:hover {
+            transform: translateZ(0);
+            box-shadow: none;
+        }
+        
+        .button-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .button-text {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .button-time {
+            font-size: 0.85rem;
+            opacity: 0.9;
         }
         
         .status-message {
@@ -357,6 +462,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             margin: 20px 0;
             border: 2px solid #ffc107;
         }
+        
+        .today-status {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #dee2e6;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-completed {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            color: #6c757d;
+        }
+        
+        .testing-notice {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border: 2px solid #17a2b8;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -378,37 +520,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="staff-dashboard.php" class="nav-item nav-link active">Dashboard</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                  
+                <a href="mark_attendance.php" class="nav-item nav-link ">Checkin</a>
+                <a href="request_leave_approval.php" class="nav-item nav-link ">Leave Request</a>
+               
             </div>
             
-            <!-- Desktop Login Dropdown -->
             <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php 
+                          $email = $_SESSION['staff_email'] ?? '';
+                          $username = $email ? explode('@', $email)[0] : 'Staff';
+                          echo htmlspecialchars($username); 
+                        ?> 
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
+                        
+                        <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="mark_attendance.php">
                                 <i class="fas fa-check-circle me-2"></i> Check-in
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-student.php">
-                                <i class="fas fa-user-plus me-2"></i> Add Student
+                            <a class="dropdown-item d-flex align-items-center py-2" href="edit_walkin_report.php">
+                                <i class="fas fa-user-plus me-2"></i> Edit Report
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-assignment.php">
-                                <i class="fas fa-tasks me-2"></i> Add Assignment
+                            <a class="dropdown-item d-flex align-items-center py-2" href="request_leave_approval.php">
+                                <i class="fas fa-tasks me-2"></i> Request Leave
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
@@ -425,27 +569,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             <div class="mobile-login-dropdown d-lg-none">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars((String)$_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php 
+                          $email = $_SESSION['staff_email'] ?? '';
+                          $username = $email ? explode('@', $email)[0] : 'Staff';
+                          echo htmlspecialchars($username); 
+                        ?>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="staff-dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
+                       
                         <li>
                             <a class="dropdown-item d-flex align-items-center py-2" href="mark_attendance.php">
                                 <i class="fas fa-check-circle me-2"></i> Check-in
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-student.php">
-                                <i class="fas fa-user-plus me-2"></i> Add Student
+                            <a class="dropdown-item d-flex align-items-center py-2" href="edit_walkin_report.php">
+                                <i class="fas fa-user-plus me-2"></i> Edit Report
                             </a>
                         </li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="add-assignment.php">
-                                <i class="fas fa-tasks me-2"></i> Add Assignment
+                            <a class="dropdown-item d-flex align-items-center py-2" href="request_leave_approval.php">
+                                <i class="fas fa-tasks me-2"></i> Request Leave
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
@@ -468,11 +614,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                 <div class="col-md-8">
                     <h1 class="display-5 text-white mb-3">Staff Attendance</h1>
                     <p class="welcome-text text-white">
-                        Welcome back, <strong><?php echo htmlspecialchars((String)$_SESSION['staff_username'] ?? 'Staff'); ?></strong>!
+                        Welcome back, <strong><?php 
+                        $email = $_SESSION['staff_email'] ?? '';
+                        $username = $email ? explode('@', $email)[0] : 'Staff';
+                        echo htmlspecialchars($username); 
+                        ?></strong>!
                     </p>
                     <div class="d-flex gap-2 flex-wrap">
                         <span class="status-badge bg-white text-primary">Staff Portal</span>
                         <span class="status-badge bg-white text-primary">Daily Check-in</span>
+                        <span class="status-badge bg-white text-primary">Multiple Sessions</span>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
@@ -481,16 +632,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 
     <!-- Attendance Content -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="attendance-card">
-                <h2 class="mb-4"><i class="fas fa-clock me-2"></i>Mark Your Attendance</h2>
-                <p class="text-muted mb-4">Click the button below to mark your attendance for today</p>
+                <h2 class="mb-4"><i class="fas fa-clock me-2"></i>Daily Attendance</h2>
+                <p class="text-muted mb-4">Mark your attendance for different sessions throughout the day</p>
                 
+                <!-- Testing Notice -->
+                <div class="testing-notice">
+                    <h5><i class="fas fa-vial me-2"></i>Testing Mode Active</h5>
+                    <p class="mb-0">Using hardcoded office coordinates (12.811393, 80.227807) for testing. All check-ins will work regardless of actual location.</p>
+                </div>
+                
+                <!-- Today's Status -->
+                <div class="today-status">
+                    <h5><i class="fas fa-calendar-check me-2"></i>Today's Status - <?php echo date('F j, Y'); ?></h5>
+                    <div class="status-item">
+                        <span>Morning Check-in:</span>
+                        <span class="<?php echo $today_status['attendance']['morning'] ? 'status-completed' : 'status-pending'; ?>">
+                            <?php echo $today_status['attendance']['morning'] ? '✓ Completed at ' . $today_status['timestamps']['morning'] : '✗ Pending'; ?>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span>Lunch Break Out:</span>
+                        <span class="<?php echo $today_status['attendance']['lunch_out'] ? 'status-completed' : 'status-pending'; ?>">
+                            <?php echo $today_status['attendance']['lunch_out'] ? '✓ Completed at ' . $today_status['timestamps']['lunch_out'] : '✗ Pending'; ?>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span>Lunch Break In:</span>
+                        <span class="<?php echo $today_status['attendance']['lunch_in'] ? 'status-completed' : 'status-pending'; ?>">
+                            <?php echo $today_status['attendance']['lunch_in'] ? '✓ Completed at ' . $today_status['timestamps']['lunch_in'] : '✗ Pending'; ?>
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span>Evening Check-out:</span>
+                        <span class="<?php echo $today_status['attendance']['evening'] ? 'status-completed' : 'status-pending'; ?>">
+                            <?php echo $today_status['attendance']['evening'] ? '✓ Completed at ' . $today_status['timestamps']['evening'] : '✗ Pending'; ?>
+                        </span>
+                    </div>
+                </div>
+
                 <!-- Office Location Info -->
                 <div class="office-location">
                     <h5><i class="fas fa-map-marker-alt me-2"></i>Office Location</h5>
@@ -516,14 +702,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                     </div>
                 </div>
 
-                <!-- Attendance Button -->
-                <button class="attendance-button pulse-animation" onclick="markAttendance()" id="attendanceBtn">
-                    <i class="fas fa-fingerprint me-2"></i>Mark Attendance
-                </button>
+                <!-- Attendance Buttons -->
+                <div class="attendance-buttons">
+                    <button class="attendance-button morning <?php echo $today_status['attendance']['morning'] ? '' : 'pulse-animation'; ?>" 
+                            onclick="markAttendance('morning')" 
+                            id="morningBtn"
+                            <?php echo $today_status['attendance']['morning'] ? 'disabled' : ''; ?>>
+                        <div class="button-icon"><i class="fas fa-sun"></i></div>
+                        <div class="button-text">Morning Check-in</div>
+                        <?php if ($today_status['attendance']['morning']): ?>
+                            <div class="button-time">✓ <?php echo $today_status['timestamps']['morning']; ?></div>
+                        <?php endif; ?>
+                    </button>
+
+                    <button class="attendance-button lunch_out" 
+                            onclick="markAttendance('lunch_out')" 
+                            id="lunchOutBtn"
+                            <?php echo $today_status['attendance']['lunch_out'] ? 'disabled' : ''; ?>>
+                        <div class="button-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="button-text">Lunch Break Out</div>
+                        <?php if ($today_status['attendance']['lunch_out']): ?>
+                            <div class="button-time">✓ <?php echo $today_status['timestamps']['lunch_out']; ?></div>
+                        <?php endif; ?>
+                    </button>
+
+                    <button class="attendance-button lunch_in" 
+                            onclick="markAttendance('lunch_in')" 
+                            id="lunchInBtn"
+                            <?php echo $today_status['attendance']['lunch_in'] ? 'disabled' : ''; ?>>
+                        <div class="button-icon"><i class="fas fa-undo"></i></div>
+                        <div class="button-text">Lunch Break In</div>
+                        <?php if ($today_status['attendance']['lunch_in']): ?>
+                            <div class="button-time">✓ <?php echo $today_status['timestamps']['lunch_in']; ?></div>
+                        <?php endif; ?>
+                    </button>
+
+                    <button class="attendance-button evening" 
+                            onclick="markAttendance('evening')" 
+                            id="eveningBtn"
+                            <?php echo $today_status['attendance']['evening'] ? 'disabled' : ''; ?>>
+                        <div class="button-icon"><i class="fas fa-moon"></i></div>
+                        <div class="button-text">Evening Check-out</div>
+                        <?php if ($today_status['attendance']['evening']): ?>
+                            <div class="button-time">✓ <?php echo $today_status['timestamps']['evening']; ?></div>
+                        <?php endif; ?>
+                    </button>
+                </div>
 
                 <!-- Status Message -->
                 <div id="status" class="status-message">
-                    <span>Ready to mark attendance</span>
+                    <span>Select a check-in type above</span>
                 </div>
 
                 <!-- Success Message (Hidden by default) -->
@@ -532,7 +760,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                         <div class="success-icon">
                             <i class="fas fa-check-circle"></i>
                         </div>
-                        <h4>Attendance Marked Successfully!</h4>
+                        <h4 id="successTitle">Attendance Marked Successfully!</h4>
                         <p class="mb-2" id="successTime"></p>
                         <p class="mb-0">Have a productive day!</p>
                     </div>
@@ -546,9 +774,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
                         <h4><i class="fas fa-info-circle me-2"></i>How It Works</h4>
                         <ul class="list-unstyled">
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Location verification within 50m</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Four check-in types per day</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Real-time GPS tracking</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Automatic timestamp recording</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Instant confirmation</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Duplicate prevention</li>
                         </ul>
                     </div>
                 </div>
@@ -673,165 +902,118 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['latitude']) && isset($
             }
         }
 
-        function markAttendance() {
-            const statusDiv = document.getElementById("status");
-            const successDiv = document.getElementById("successMessage");
-            const button = document.getElementById("attendanceBtn");
+        function markAttendance(checkinType) {
+    console.log("=== DEBUG START ===");
+    console.log("Marking attendance for:", checkinType);
+    
+    const statusDiv = document.getElementById("status");
+    const successDiv = document.getElementById("successMessage");
+    const button = document.getElementById(checkinType + 'Btn');
+    
+    // Hide success message if shown
+    successDiv.style.display = 'none';
+    
+    const typeNames = {
+        'morning': 'Morning check-in',
+        'lunch_out': 'Lunch break out', 
+        'lunch_in': 'Lunch break in',
+        'evening': 'Evening check-out'
+    };
+    
+    statusDiv.className = "status-message status-loading";
+    statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Marking ' + typeNames[checkinType] + '...';
+    
+    // Disable all buttons during processing
+    document.querySelectorAll('.attendance-button').forEach(btn => {
+        btn.disabled = true;
+    });
+
+    // Use hardcoded office coordinates
+    const lat = 12.811393;
+    const lon = 80.227807;
+    
+    console.log("Sending data:", {
+        checkin_type: checkinType,
+        latitude: lat,
+        longitude: lon
+    });
+
+    // Send data to server via AJAX
+    $.ajax({
+        url: 'validate_attendance.php',
+        type: 'POST',
+        data: {
+            latitude: lat,
+            longitude: lon,
+            checkin_type: checkinType
+        },
+        success: function(response) {
+            console.log("=== AJAX SUCCESS ===");
+            console.log("Response:", response);
             
-            // Hide success message if shown
-            successDiv.style.display = 'none';
-            
-            statusDiv.className = "status-message status-loading";
-            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Checking location...';
-            button.disabled = true;
-
-            // Get current location
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        const lat =  position.coords.latitude;
-                        const lon = position.coords.longitude;
-
-                        
-                        updateLocationInfo(lat, lon);
-                        const distance = getDistance(lat, lon, officeLat, officeLon);
-
-                        if (distance <= maxDistance) {
-                            statusDiv.className = "status-message status-loading";
-                            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Marking attendance...';
-
-                            // Send data to server via AJAX
-                            $.ajax({
-                                url: 'mark_attendance.php',
-                                type: 'POST',
-                                data: {
-                                    latitude: lat,
-                                    longitude: lon
-                                },
-                                success: function(response) {
-                                    const result = JSON.parse(response);
-                                    if (result.success) {
-                                        // Show success message
-                                        document.getElementById("successTime").textContent = 
-                                            "Marked at: " + result.time + " on " + result.date + 
-                                            " (Distance: " + result.distance + " m)";
-                                        
-                                        statusDiv.style.display = 'none';
-                                        successDiv.style.display = 'flex';
-                                        
-                                        button.disabled = false;
-                                        button.classList.remove('pulse-animation');
-                                    } else {
-                                        statusDiv.className = "status-message status-error";
-                                        statusDiv.innerHTML = 
-                                            '<i class="fas fa-exclamation-triangle me-2"></i>' + result.message;
-                                        button.disabled = false;
-                                    }
-                                },
-                                error: function() {
-                                    statusDiv.className = "status-message status-error";
-                                    statusDiv.innerHTML = 
-                                        '<i class="fas fa-exclamation-triangle me-2"></i>Error connecting to server. Please try again.';
-                                    button.disabled = false;
-                                }
-                            });
-
-                        } else {
-                            statusDiv.className = "status-message status-error";
-                            statusDiv.innerHTML = 
-                                '<i class="fas fa-exclamation-triangle me-2"></i>' +
-                                'You are too far away (' + distance.toFixed(2) + ' m)! ' +
-                                'Please come within ' + maxDistance + ' meters of the office.';
-                            button.disabled = false;
-                        }
-                    },
-                    function(error) {
-                        // If geolocation fails, use office coordinates for testing
-                        console.log("Geolocation failed, using default coordinates");
-                        const lat = 12.811393;
-                        const lon = 80.227807;
-                        
-                        updateLocationInfo(lat, lon);
-                        const distance = getDistance(lat, lon, officeLat, officeLon);
-
-                        if (distance <= maxDistance) {
-                            statusDiv.className = "status-message status-loading";
-                            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Marking attendance...';
-
-                            // Send data to server via AJAX
-                            $.ajax({
-                                url: 'mark_attendance.php',
-                                type: 'POST',
-                                data: {
-                                    latitude: lat,
-                                    longitude: lon
-                                },
-                                success: function(response) {
-                                    const result = JSON.parse(response);
-                                    if (result.success) {
-                                        document.getElementById("successTime").textContent = 
-                                            "Marked at: " + result.time + " on " + result.date + 
-                                            " (Distance: " + result.distance + " m)";
-                                        
-                                        statusDiv.style.display = 'none';
-                                        successDiv.style.display = 'flex';
-                                        
-                                        button.disabled = false;
-                                        button.classList.remove('pulse-animation');
-                                    } else {
-                                        statusDiv.className = "status-message status-error";
-                                        statusDiv.innerHTML = 
-                                            '<i class="fas fa-exclamation-triangle me-2"></i>' + result.message;
-                                        button.disabled = false;
-                                    }
-                                },
-                                error: function() {
-                                    statusDiv.className = "status-message status-error";
-                                    statusDiv.innerHTML = 
-                                        '<i class="fas fa-exclamation-triangle me-2"></i>Error connecting to server. Please try again.';
-                                    button.disabled = false;
-                                }
-                            });
-                        } else {
-                            statusDiv.className = "status-message status-error";
-                            statusDiv.innerHTML = 
-                                '<i class="fas fa-exclamation-triangle me-2"></i>' +
-                                'Location access denied. Please enable location services.';
-                            button.disabled = false;
-                        }
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 0
-                    }
-                );
+            // jQuery automatically parses JSON, so use response directly
+            if (response.success) {
+                console.log("SUCCESS: Attendance marked");
+                // Show success message
+                document.getElementById("successTitle").textContent = response.message;
+                document.getElementById("successTime").textContent = 
+                    "Marked at: " + response.time + " on " + response.date;
+                
+                statusDiv.style.display = 'none';
+                successDiv.style.display = 'flex';
+                
+                // Update button status
+                button.innerHTML = `
+                    <div class="button-icon"><i class="fas fa-check"></i></div>
+                    <div class="button-text">${typeNames[checkinType]}</div>
+                    <div class="button-time">✓ ${response.time}</div>
+                `;
+                button.disabled = true;
+                button.classList.remove('pulse-animation');
+                
+                // Reload page after 2 seconds to update status
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+                
             } else {
+                console.log("FAILED:", response.message);
                 statusDiv.className = "status-message status-error";
-                statusDiv.innerHTML = 
-                    '<i class="fas fa-exclamation-triangle me-2"></i>Geolocation is not supported by this browser.';
-                button.disabled = false;
+                statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>' + response.message;
+                
+                // Re-enable all buttons
+                document.querySelectorAll('.attendance-button').forEach(btn => {
+                    btn.disabled = false;
+                });
             }
+        },
+        error: function(xhr, status, error) {
+            console.log("=== AJAX ERROR ===");
+            console.log("Status:", status);
+            console.log("Error:", error);
+            console.log("XHR response:", xhr.responseText);
+            
+            statusDiv.className = "status-message status-error";
+            statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Network error - please try again';
+            
+            // Re-enable all buttons
+            document.querySelectorAll('.attendance-button').forEach(btn => {
+                btn.disabled = false;
+            });
         }
+    });
+}
 
         // Initialize location on page load
         document.addEventListener('DOMContentLoaded', function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-                        updateLocationInfo(lat, lon);
-                    },
-                    function(error) {
-                        // Use office coordinates if geolocation fails
-                        updateLocationInfo(officeLat, officeLon);
-                    }
-                );
-            } else {
-                // Use office coordinates if geolocation not supported
-                updateLocationInfo(officeLat, officeLon);
-            }
+            // Use hardcoded office coordinates
+            const officeLat = 12.811393;
+            const officeLon = 80.227807;
+            document.getElementById("currentLat").textContent = officeLat.toFixed(6);
+            document.getElementById("currentLon").textContent = officeLon.toFixed(6);
+            document.getElementById("distanceInfo").innerHTML = '<span class="text-success">0 meters ✓</span>';
+            
+            console.log("Page loaded successfully");
         });
     </script>
 </body>

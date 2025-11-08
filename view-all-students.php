@@ -163,6 +163,57 @@ try {
     <link href="css/style.css" rel="stylesheet">
     
     <style>
+        /* Login Dropdown Customization - FIXED */
+        #loginDropdown, #mobileLoginDropdown {
+            border: none;
+        }
+
+        /* Force dropdown to accommodate full text */
+        .dropdown-menu {
+            min-width: 320px !important;
+            width: max-content !important;
+            max-width: none !important;
+            white-space: nowrap !important;
+        }
+
+        .dropdown-menu .dropdown-item {
+            transition: all 0.3s ease;
+            white-space: nowrap !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            padding: 0.65rem 1.5rem !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+        }
+
+        .dropdown-menu .dropdown-item span {
+            white-space: nowrap !important;
+            overflow: visible !important;
+            display: inline-block !important;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #06BBCC;
+            color: white;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            color: #06BBCC;
+            width: 20px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-menu .dropdown-item:hover i {
+            color: white;
+        }
+        
+        /* Override Bootstrap dropdown constraints */
+        .dropdown-menu-end {
+            right: 0 !important;
+            left: auto !important;
+        }
+        
         .dashboard-header {
             background: linear-gradient(135deg, #06BBCC 0%, #0596a3 100%);
             color: white;
@@ -321,6 +372,17 @@ try {
             margin-left: 4px;
         }
         
+        .profile-icon {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-text {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .dashboard-header {
@@ -367,6 +429,10 @@ try {
             .welcome-text {
                 font-size: 0.9rem;
             }
+            
+            .dropdown-menu {
+                width: 100%;
+            }
         }
         
         @media (max-width: 576px) {
@@ -412,12 +478,6 @@ try {
                 padding: 10px;
                 border-radius: 0 0 10px 10px;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-            
-            .dropdown-menu {
-                border: none;
-                box-shadow: none;
-                padding-left: 15px;
             }
         }
         
@@ -497,12 +557,15 @@ try {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-3 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
-                <a href="view-all-students.php" class="nav-item nav-link active">All Students</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+               <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
+                <a href="view-all-students.php" class="nav-item nav-link">View Students</a>
+                <a href="view_staff.php" class="nav-item nav-link">View Staff</a>
+                <a href="request_leave_approval_admin.php" class="nav-item nav-link">Leave Approval</a>
+                <a href="add_careers.php" class="nav-item nav-link">Add Careers</a>
+                <a href="attendance_reports.php" class="nav-item nav-link">Attendance Report</a>
             </div>
+            
+            <!-- Mobile Dropdown -->
             <div class="d-lg-none mt-3">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -510,39 +573,45 @@ try {
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php">
-                                <i class="fas fa-users me-2"></i> View Students
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php">
-                                <i class="fas fa-user-tie me-2"></i> View Staff
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php">
-                                <i class="fas fa-key me-2"></i> Generate Staff Credentials
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php">
-                                <i class="fas fa-chart-bar me-2"></i> Attendance Reports
+                            <a class="dropdown-item" href="admin_dashboard.php">
+                                <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            <a class="dropdown-item" href="view-all-students.php">
+                                <i class="fas fa-users me-3"></i><span>View Students</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="view_staff.php">
+                                <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="generate_staff_credentials.php">
+                                <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="attendance_reports.php">
+                                <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
+            
+            <!-- Desktop Dropdown -->
             <div class="d-none d-lg-block">
                 <div class="dropdown">
                     <button class="btn btn-primary py-3 px-4 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -550,34 +619,38 @@ try {
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="admin_dashboard.php">
-                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view-all-students.php">
-                                <i class="fas fa-users me-2"></i> View Students
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="view_staff.php">
-                                <i class="fas fa-user-tie me-2"></i> View Staff
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="generate_staff_credentials.php">
-                                <i class="fas fa-key me-2"></i> Generate Staff Credentials
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="attendance_reports.php">
-                                <i class="fas fa-chart-bar me-2"></i> Attendance Reports
+                            <a class="dropdown-item" href="admin_dashboard.php">
+                                <i class="fas fa-tachometer-alt me-3"></i><span>Dashboard</span>
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="logout.php">
-                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            <a class="dropdown-item" href="view-all-students.php">
+                                <i class="fas fa-users me-3"></i><span>View Students</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="view_staff.php">
+                                <i class="fas fa-user-tie me-3"></i><span>View Staff</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="generate_staff_credentials.php">
+                                <i class="fas fa-key me-3"></i><span>Generate Staff Credentials</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="attendance_reports.php">
+                                <i class="fas fa-chart-bar me-3"></i><span>Attendance Reports</span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="logout.php">
+                                <i class="fas fa-sign-out-alt me-3"></i><span>Logout</span>
                             </a>
                         </li>
                     </ul>

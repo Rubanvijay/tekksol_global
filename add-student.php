@@ -11,7 +11,7 @@ $dbpassword = "8oQDCXxH6aqYgvkG7g8t";
 $db = "bzbnom7tqqucjcivbuxo";
 
 // Check if user is logged in as staff
-if (!isset($_SESSION['staff_username'])) {
+if (!isset($_SESSION['staff_email'])) {
     header("Location: staff-login.html");
     exit();
 }
@@ -293,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="d-none d-lg-block desktop-login-dropdown">
                 <div class="dropdown">
                     <button class="btn btn-primary py-4 px-lg-5 dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_email'] ?? 'Staff'); ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                         <li>
@@ -330,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="mobile-login-dropdown d-lg-none">
                 <div class="dropdown">
                     <button class="btn btn-primary w-100 dropdown-toggle" type="button" id="mobileLoginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_username'] ?? 'Staff'); ?>
+                        <i class="fas fa-user-tie me-2"></i><?php echo htmlspecialchars($_SESSION['staff_email'] ?? 'Staff'); ?>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="mobileLoginDropdown">
                         <li>
@@ -506,7 +506,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="number" class="form-control" name="duration" value="<?php echo htmlspecialchars($_POST['duration'] ?? ''); ?>" min="1" max="24">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Trainer Name</label>
+                                <label class="form-label">Trainer Email</label>
                                 <input type="text" class="form-control" name="trainer_name" value="<?php echo htmlspecialchars($_POST['trainer_name'] ?? ''); ?>">
                             </div>
                             <div class="col-md-6 mb-3">
