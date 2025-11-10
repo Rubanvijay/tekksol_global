@@ -121,15 +121,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
                 ];
                 
                 $response = [
-                    'success' => true, 
-                    'message' => $type_names[$checkin_type] . ' marked successfully!',
-                    'distance' => round($distance, 2),
-                    'time' => date('H:i:s'),
-                    'date' => date('F j, Y'),
-                    'type' => $checkin_type,
-                    'user_lat' => $latitude,
-                    'user_lon' => $longitude
-                ];
+    'success' => true, 
+    'message' => $type_names[$checkin_type] . ' marked successfully!',
+    'distance' => round($distance, 2),
+    'time' => date('g:i A'), // CHANGED TO 12-HOUR FORMAT
+    'date' => date('F j, Y'),
+    'type' => $checkin_type,
+    'user_lat' => $latitude,
+    'user_lon' => $longitude
+];
             } else {
                 throw new Exception("Database insert failed: " . $insert_stmt->error);
             }
@@ -147,6 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
 }
 
 // If not an AJAX request, show the HTML page
+// Get today's attendance status for display
 // Get today's attendance status for display
 function getTodayAttendanceStatus($conn, $staff_email) {
     $current_date = date('Y-m-d');
@@ -167,7 +168,8 @@ function getTodayAttendanceStatus($conn, $staff_email) {
     
     while ($row = $result->fetch_assoc()) {
         $attendance[$row['checkin_type']] = true;
-        $timestamps[$row['checkin_type']] = date('H:i', strtotime($row['timestamp']));
+        // CHANGE THIS LINE - from 24-hour to 12-hour format
+        $timestamps[$row['checkin_type']] = date('g:i A', strtotime($row['timestamp']));
     }
     
     $status_stmt->close();
@@ -1129,7 +1131,7 @@ try {
                         // Show success message
                         document.getElementById("successTitle").textContent = response.message;
                         document.getElementById("successTime").textContent = 
-                            "Marked at: " + response.time + " on " + response.date;
+    "Marked at: " + response.time + " on " + response.date;
                         
                         statusDiv.style.display = 'none';
                         successDiv.style.display = 'flex';
