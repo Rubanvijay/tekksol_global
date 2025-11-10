@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Set timezone to Indian Standard Time
+date_default_timezone_set('Asia/Kolkata');
+
 // Database configuration
 $servername = "bzbnom7tqqucjcivbuxo-mysql.services.clever-cloud.com";
 $dbusername = "uwgxq8otzk6mhome";
@@ -120,11 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
                     'evening' => 'Evening check-out'
                 ];
                 
-                $response = [
+              $response = [
     'success' => true, 
     'message' => $type_names[$checkin_type] . ' marked successfully!',
     'distance' => round($distance, 2),
-    'time' => date('g:i A'), // CHANGED TO 12-HOUR FORMAT
+    'time' => date('g:i A'), // This will now use IST
     'date' => date('F j, Y'),
     'type' => $checkin_type,
     'user_lat' => $latitude,
@@ -168,8 +171,9 @@ function getTodayAttendanceStatus($conn, $staff_email) {
     
     while ($row = $result->fetch_assoc()) {
         $attendance[$row['checkin_type']] = true;
-        // CHANGE THIS LINE - from 24-hour to 12-hour format
-        $timestamps[$row['checkin_type']] = date('g:i A', strtotime($row['timestamp']));
+        // Convert timestamp to IST and format
+        $timestamp = strtotime($row['timestamp']);
+        $timestamps[$row['checkin_type']] = date('g:i A', $timestamp);
     }
     
     $status_stmt->close();
