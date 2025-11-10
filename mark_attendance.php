@@ -45,10 +45,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
         // Office coordinates
         $officeLat = 12.811393;
         $officeLon = 80.227807;
+        $maxDistance = 50; // meters
         
-        // Hardcoded coordinates for testing - ALWAYS USE OFFICE LOCATION
-        $latitude = 12.811393;
-        $longitude = 80.227807;
+        // Get REAL coordinates from POST data
+        if (!isset($_POST['latitude']) || !isset($_POST['longitude'])) {
+            throw new Exception("Location data not provided. Please enable location services.");
+        }
+        
+        $latitude = floatval($_POST['latitude']);
+        $longitude = floatval($_POST['longitude']);
+        
+        // Validate coordinates
+        if ($latitude === 0.0 || $longitude === 0.0 || 
+            $latitude < -90 || $latitude > 90 || 
+            $longitude < -180 || $longitude > 180) {
+            throw new Exception("Invalid location data. Please try again.");
+        }
+
+        // Calculate distance from office
+        function getDistance($lat1, $lon1, $lat2, $lon2) {
+            $R = 6371e3; // Earth's radius in meters
+            $phi1 = deg2rad($lat1);
+            $phi2 = deg2rad($lat2);
+            $deltaPhi = deg2rad($lat2 - $lat1);
+            $deltaLambda = deg2rad($lon2 - $lon1);
+            
+            $a = sin($deltaPhi/2) * sin($deltaPhi/2) + 
+                 cos($phi1) * cos($phi2) * 
+                 sin($deltaLambda/2) * sin($deltaLambda/2);
+            
+            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+            return $R * $c;
+        }
+
+        $distance = getDistance($latitude, $longitude, $officeLat, $officeLon);
+
+        // Check if within allowed distance
+        if ($distance > $maxDistance) {
+            throw new Exception("You are too far away (" . round($distance, 2) . " m)! Please come within " . $maxDistance . " meters of the office.");
+        }
 
         // Check if already marked for today
         $current_date = date('Y-m-d');
@@ -75,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
             // Insert record
             $insert_sql = "INSERT INTO staff_attendance (employee_id, latitude, longitude, checkin_type, status) VALUES (?, ?, ?, ?, ?)";
             $insert_stmt = $conn->prepare($insert_sql);
-           $insert_stmt->bind_param("sddss", $staff_email, $latitude, $longitude, $checkin_type, $status);
+            $insert_stmt->bind_param("sddss", $staff_email, $latitude, $longitude, $checkin_type, $status);
             
             if ($insert_stmt->execute()) {
                 $type_names = [
@@ -88,10 +123,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
                 $response = [
                     'success' => true, 
                     'message' => $type_names[$checkin_type] . ' marked successfully!',
-                    'distance' => 0,
+                    'distance' => round($distance, 2),
                     'time' => date('H:i:s'),
                     'date' => date('F j, Y'),
-                    'type' => $checkin_type
+                    'type' => $checkin_type,
+                    'user_lat' => $latitude,
+                    'user_lon' => $longitude
                 ];
             } else {
                 throw new Exception("Database insert failed: " . $insert_stmt->error);
@@ -492,9 +529,17 @@ try {
             color: #6c757d;
         }
         
-        .testing-notice {
+        .location-permission {
             background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
             border: 2px solid #17a2b8;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .location-error {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border: 2px solid #dc3545;
             border-radius: 10px;
             padding: 15px;
             margin: 15px 0;
@@ -642,10 +687,19 @@ try {
                 <h2 class="mb-4"><i class="fas fa-clock me-2"></i>Daily Attendance</h2>
                 <p class="text-muted mb-4">Mark your attendance for different sessions throughout the day</p>
                 
-                <!-- Testing Notice -->
-                <div class="testing-notice">
-                    <h5><i class="fas fa-vial me-2"></i>Testing Mode Active</h5>
-                    <p class="mb-0">Using hardcoded office coordinates (12.811393, 80.227807) for testing. All check-ins will work regardless of actual location.</p>
+                <!-- Location Permission Notice -->
+                <div id="locationPermission" class="location-permission" style="display: none;">
+                    <h5><i class="fas fa-map-marker-alt me-2"></i>Location Access Required</h5>
+                    <p class="mb-2">Please allow location access to mark your attendance. Your location will be used to verify you're within the office premises.</p>
+                    <button class="btn btn-primary btn-sm" onclick="requestLocationPermission()">
+                        <i class="fas fa-location-arrow me-1"></i>Enable Location
+                    </button>
+                </div>
+
+                <!-- Location Error Notice -->
+                <div id="locationError" class="location-error" style="display: none;">
+                    <h5><i class="fas fa-exclamation-triangle me-2"></i>Location Error</h5>
+                    <p id="locationErrorMessage" class="mb-0">Unable to access your location. Please check your browser settings.</p>
                 </div>
                 
                 <!-- Today's Status -->
@@ -697,8 +751,16 @@ try {
                         <span class="info-value" id="currentLon">Detecting...</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label">Distance:</span>
+                        <span class="info-label">Accuracy:</span>
+                        <span class="info-value" id="accuracyInfo">--</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Distance from Office:</span>
                         <span class="info-value" id="distanceInfo">Calculating...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location Status:</span>
+                        <span class="info-value" id="locationStatus">Initializing...</span>
                     </div>
                 </div>
 
@@ -872,6 +934,8 @@ try {
         const officeLat = 12.811393;
         const officeLon = 80.227807;
         const maxDistance = 50; // meters
+        let currentLocation = null;
+        let locationWatchId = null;
 
         function getDistance(lat1, lon1, lat2, lon2) {
             const R = 6371e3;
@@ -886,134 +950,254 @@ try {
             return R * c;
         }
 
-        function updateLocationInfo(lat, lon) {
+        function updateLocationInfo(lat, lon, accuracy) {
             document.getElementById("currentLat").textContent = lat.toFixed(6);
             document.getElementById("currentLon").textContent = lon.toFixed(6);
+            document.getElementById("accuracyInfo").textContent = "±" + Math.round(accuracy) + " meters";
             
             const distance = getDistance(lat, lon, officeLat, officeLon);
-            document.getElementById("distanceInfo").textContent = distance.toFixed(2) + " meters";
             
             if (distance <= maxDistance) {
                 document.getElementById("distanceInfo").innerHTML = 
-                    '<span class="text-success">' + distance.toFixed(2) + ' meters ✓</span>';
+                    '<span class="text-success">' + distance.toFixed(2) + ' meters ✓ Within Range</span>';
+                document.getElementById("locationStatus").innerHTML = 
+                    '<span class="text-success">✓ Ready to mark attendance</span>';
             } else {
                 document.getElementById("distanceInfo").innerHTML = 
-                    '<span class="text-danger">' + distance.toFixed(2) + ' meters ✗</span>';
+                    '<span class="text-danger">' + distance.toFixed(2) + ' meters ✗ Too far</span>';
+                document.getElementById("locationStatus").innerHTML = 
+                    '<span class="text-danger">✗ Outside office range</span>';
             }
+            
+            return distance;
+        }
+
+        function showLocationError(message) {
+            document.getElementById("locationError").style.display = 'block';
+            document.getElementById("locationErrorMessage").textContent = message;
+            document.getElementById("locationPermission").style.display = 'none';
+            
+            document.getElementById("locationStatus").innerHTML = 
+                '<span class="text-danger">✗ ' + message + '</span>';
+        }
+
+        function hideLocationMessages() {
+            document.getElementById("locationPermission").style.display = 'none';
+            document.getElementById("locationError").style.display = 'none';
+        }
+
+        function requestLocationPermission() {
+            if (!navigator.geolocation) {
+                showLocationError("Geolocation is not supported by this browser.");
+                return;
+            }
+
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+
+            document.getElementById("locationStatus").innerHTML = 
+                '<span class="text-warning">⏳ Getting location...</span>';
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    hideLocationMessages();
+                    currentLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        accuracy: position.coords.accuracy
+                    };
+                    
+                    updateLocationInfo(
+                        currentLocation.latitude, 
+                        currentLocation.longitude, 
+                        currentLocation.accuracy
+                    );
+                    
+                    // Start watching position for updates
+                    startWatchingLocation();
+                },
+                (error) => {
+                    let errorMessage = "Unable to get your location. ";
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage += "Please allow location access in your browser settings.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage += "Location information is unavailable.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage += "Location request timed out.";
+                            break;
+                        default:
+                            errorMessage += "An unknown error occurred.";
+                    }
+                    showLocationError(errorMessage);
+                },
+                options
+            );
+        }
+
+        function startWatchingLocation() {
+            if (!navigator.geolocation || !currentLocation) return;
+
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+
+            locationWatchId = navigator.geolocation.watchPosition(
+                (position) => {
+                    currentLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        accuracy: position.coords.accuracy
+                    };
+                    
+                    updateLocationInfo(
+                        currentLocation.latitude, 
+                        currentLocation.longitude, 
+                        currentLocation.accuracy
+                    );
+                },
+                (error) => {
+                    console.warn("Location watch error:", error);
+                },
+                options
+            );
         }
 
         function markAttendance(checkinType) {
-    console.log("=== DEBUG START ===");
-    console.log("Marking attendance for:", checkinType);
-    
-    const statusDiv = document.getElementById("status");
-    const successDiv = document.getElementById("successMessage");
-    const button = document.getElementById(checkinType + 'Btn');
-    
-    // Hide success message if shown
-    successDiv.style.display = 'none';
-    
-    const typeNames = {
-        'morning': 'Morning check-in',
-        'lunch_out': 'Lunch break out', 
-        'lunch_in': 'Lunch break in',
-        'evening': 'Evening check-out'
-    };
-    
-    statusDiv.className = "status-message status-loading";
-    statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Marking ' + typeNames[checkinType] + '...';
-    
-    // Disable all buttons during processing
-    document.querySelectorAll('.attendance-button').forEach(btn => {
-        btn.disabled = true;
-    });
-
-    // Use hardcoded office coordinates
-    const lat = 12.811393;
-    const lon = 80.227807;
-    
-    console.log("Sending data:", {
-        checkin_type: checkinType,
-        latitude: lat,
-        longitude: lon
-    });
-
-    // Send data to server via AJAX
-    $.ajax({
-        url: 'validate_attendance.php',
-        type: 'POST',
-        data: {
-            latitude: lat,
-            longitude: lon,
-            checkin_type: checkinType
-        },
-        success: function(response) {
-            console.log("=== AJAX SUCCESS ===");
-            console.log("Response:", response);
+            console.log("=== DEBUG START ===");
+            console.log("Marking attendance for:", checkinType);
             
-            // jQuery automatically parses JSON, so use response directly
-            if (response.success) {
-                console.log("SUCCESS: Attendance marked");
-                // Show success message
-                document.getElementById("successTitle").textContent = response.message;
-                document.getElementById("successTime").textContent = 
-                    "Marked at: " + response.time + " on " + response.date;
-                
-                statusDiv.style.display = 'none';
-                successDiv.style.display = 'flex';
-                
-                // Update button status
-                button.innerHTML = `
-                    <div class="button-icon"><i class="fas fa-check"></i></div>
-                    <div class="button-text">${typeNames[checkinType]}</div>
-                    <div class="button-time">✓ ${response.time}</div>
-                `;
-                button.disabled = true;
-                button.classList.remove('pulse-animation');
-                
-                // Reload page after 2 seconds to update status
-                setTimeout(() => {
-                    location.reload();
-                }, 2000);
-                
-            } else {
-                console.log("FAILED:", response.message);
+            const statusDiv = document.getElementById("status");
+            const successDiv = document.getElementById("successMessage");
+            const button = document.getElementById(checkinType + 'Btn');
+            
+            // Hide success message if shown
+            successDiv.style.display = 'none';
+            
+            const typeNames = {
+                'morning': 'Morning check-in',
+                'lunch_out': 'Lunch break out', 
+                'lunch_in': 'Lunch break in',
+                'evening': 'Evening check-out'
+            };
+            
+            // Check if we have current location
+            if (!currentLocation) {
                 statusDiv.className = "status-message status-error";
-                statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>' + response.message;
-                
-                // Re-enable all buttons
-                document.querySelectorAll('.attendance-button').forEach(btn => {
-                    btn.disabled = false;
-                });
+                statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Location not available. Please enable location services.';
+                document.getElementById("locationPermission").style.display = 'block';
+                return;
             }
-        },
-        error: function(xhr, status, error) {
-            console.log("=== AJAX ERROR ===");
-            console.log("Status:", status);
-            console.log("Error:", error);
-            console.log("XHR response:", xhr.responseText);
+
+            statusDiv.className = "status-message status-loading";
+            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Marking ' + typeNames[checkinType] + '...';
             
-            statusDiv.className = "status-message status-error";
-            statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Network error - please try again';
-            
-            // Re-enable all buttons
+            // Disable all buttons during processing
             document.querySelectorAll('.attendance-button').forEach(btn => {
-                btn.disabled = false;
+                btn.disabled = true;
+            });
+
+            console.log("Sending REAL location data:", {
+                checkin_type: checkinType,
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
+                accuracy: currentLocation.accuracy
+            });
+
+            // Send data to server via AJAX
+            $.ajax({
+                url: 'mark_attendance.php', // Changed from validate_attendance.php to current file
+                type: 'POST',
+                data: {
+                    latitude: currentLocation.latitude,
+                    longitude: currentLocation.longitude,
+                    checkin_type: checkinType
+                },
+                success: function(response) {
+                    console.log("=== AJAX SUCCESS ===");
+                    console.log("Response:", response);
+                    
+                    if (response.success) {
+                        console.log("SUCCESS: Attendance marked");
+                        // Show success message
+                        document.getElementById("successTitle").textContent = response.message;
+                        document.getElementById("successTime").textContent = 
+                            "Marked at: " + response.time + " on " + response.date;
+                        
+                        statusDiv.style.display = 'none';
+                        successDiv.style.display = 'flex';
+                        
+                        // Update button status
+                        button.innerHTML = `
+                            <div class="button-icon"><i class="fas fa-check"></i></div>
+                            <div class="button-text">${typeNames[checkinType]}</div>
+                            <div class="button-time">✓ ${response.time}</div>
+                        `;
+                        button.disabled = true;
+                        button.classList.remove('pulse-animation');
+                        
+                        // Reload page after 2 seconds to update status
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
+                        
+                    } else {
+                        console.log("FAILED:", response.message);
+                        statusDiv.className = "status-message status-error";
+                        statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>' + response.message;
+                        
+                        // Re-enable all buttons
+                        document.querySelectorAll('.attendance-button').forEach(btn => {
+                            if (!btn.disabled) btn.disabled = false;
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("=== AJAX ERROR ===");
+                    console.log("Status:", status);
+                    console.log("Error:", error);
+                    console.log("XHR response:", xhr.responseText);
+                    
+                    statusDiv.className = "status-message status-error";
+                    statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Network error - please try again';
+                    
+                    // Re-enable all buttons
+                    document.querySelectorAll('.attendance-button').forEach(btn => {
+                        if (!btn.disabled) btn.disabled = false;
+                    });
+                }
             });
         }
-    });
-}
 
         // Initialize location on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Use hardcoded office coordinates
-            const officeLat = 12.811393;
-            const officeLon = 80.227807;
-            document.getElementById("currentLat").textContent = officeLat.toFixed(6);
-            document.getElementById("currentLon").textContent = officeLon.toFixed(6);
-            document.getElementById("distanceInfo").innerHTML = '<span class="text-success">0 meters ✓</span>';
+            console.log("Page loaded successfully - requesting location permission");
             
-            console.log("Page loaded successfully");
+            // Check if geolocation is available
+            if (!navigator.geolocation) {
+                showLocationError("Geolocation is not supported by this browser.");
+                return;
+            }
+            
+            // Show permission notice initially
+            document.getElementById("locationPermission").style.display = 'block';
+            
+            // Try to get location automatically
+            requestLocationPermission();
+        });
+
+        // Clean up when page is unloaded
+        window.addEventListener('beforeunload', function() {
+            if (locationWatchId !== null) {
+                navigator.geolocation.clearWatch(locationWatchId);
+            }
         });
     </script>
 </body>

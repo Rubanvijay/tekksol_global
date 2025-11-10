@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 
 $officeLat = 12.811393;
 $officeLon = 80.227807;
-$maxDistance = 50;
+$maxDistance = 50; // meters
 
 function getDistance($lat1, $lon1, $lat2, $lon2) {
     $R = 6371e3; // Earth's radius in meters
@@ -46,9 +46,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $employee_id = $_SESSION['staff_email'];
     $checkin_type = $_POST['checkin_type'] ?? 'morning';
     
-    // Test coordinates - always use office location for testing
-    $latitude = position.coords.latitude;
-    $longitude = position.coords.longitude;
+    // Get real coordinates from POST data
+    if (!isset($_POST['latitude']) || !isset($_POST['longitude'])) {
+        echo json_encode(['success' => false, 'message' => 'Location data not provided. Please enable location services.']);
+        exit();
+    }
+    
+    $latitude = floatval($_POST['latitude']);
+    $longitude = floatval($_POST['longitude']);
+    
+    // Validate coordinates
+    if ($latitude === 0.0 || $longitude === 0.0 || 
+        $latitude < -90 || $latitude > 90 || 
+        $longitude < -180 || $longitude > 180) {
+        echo json_encode(['success' => false, 'message' => 'Invalid location data. Please try again.']);
+        exit();
+    }
 
     $distance = getDistance($latitude, $longitude, $officeLat, $officeLon);
 
@@ -75,8 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $insert_sql = "INSERT INTO staff_attendance (employee_id, latitude, longitude, checkin_type, status) VALUES (?, ?, ?, ?, ?)";
             $insert_stmt = $conn->prepare($insert_sql);
-            
-            // FIXED: Changed "sdds" to "sddss" - 5 type specifiers for 5 variables
             $insert_stmt->bind_param("sddss", $employee_id, $latitude, $longitude, $checkin_type, $status);
             
             if ($insert_stmt->execute()) {
@@ -93,7 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'distance' => round($distance, 2),
                     'time' => date('H:i:s'),
                     'date' => date('F j, Y'),
-                    'type' => $checkin_type
+                    'type' => $checkin_type,
+                    'user_lat' => $latitude,
+                    'user_lon' => $longitude
                 ]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Database error: ' . $insert_stmt->error]);
@@ -104,7 +117,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode([
             'success' => false, 
-            'message' => 'You are too far away (' . round($distance,2) . ' m)! Please come within ' . $maxDistance . ' meters of the office.'
+            'message' => 'You are too far away (' . round($distance,2) . ' m)! Please come within ' . $maxDistance . ' meters of the office.',
+            'distance' => round($distance, 2),
+            'user_lat' => $latitude,
+            'user_lon' => $longitude
         ]);
     }
     
