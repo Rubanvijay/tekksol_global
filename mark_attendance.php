@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkin_type'])) {
         if ($conn->connect_error) {
             throw new Exception("Database connection failed: " . $conn->connect_error);
         }
-
+   $conn->query("SET time_zone = '+05:30'");
         $staff_email = $_SESSION['staff_email'];
         $checkin_type = $_POST['checkin_type'];
         
