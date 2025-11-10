@@ -656,12 +656,31 @@ try {
                             <strong>Staff Check-in</strong>
                             <small class="d-block text-muted mt-2">Mark daily attendance</small>
                         </a>
+                      
 
                         <a href="edit_walkin_report.php" class="action-btn">
                             <i class="fas fa-calendar-check"></i>
                             <strong>Edit Report</strong>
                             <small class="d-block text-muted mt-2">Edit Walkin Report</small>
                         </a>
+                        <a href="generate_student_credentials.php" class="action-btn">
+                            <i class="fas fa-user-plus"></i>
+                            <strong>Generate Credentials</strong>
+                            <small class="d-block text-muted mt-2">Generate Student username & Password</small>
+                        </a>
+
+                        <a href="add-student.php" class="action-btn">
+                            <i class="fas fa-user-plus"></i>
+                            <strong>Add New Student</strong>
+                            <small class="d-block text-muted mt-2">Register new enrollment</small>
+                        </a>
+
+                        <a href="edit-student.php" class="action-btn">
+                            <i class="fas fa-edit"></i>
+                            <strong>Edit Student</strong>
+                            <small class="d-block text-muted mt-2">Edit Student Details</small>
+                        </a>
+                        
 
                         <a href="request_leave_approval.php" class="action-btn">
                             <i class="fas fa-calendar-check"></i>

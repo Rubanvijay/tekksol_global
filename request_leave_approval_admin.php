@@ -510,7 +510,7 @@ function getStaffName($email) {
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="profile-icon">
-                        <i class="fas fa-user-shield"></i>
+                       <a href="staff_leave_request.php"><h5><i class="fas fa-clipboard-list me-2"></i>Check Staff Leave</h5></a>
                     </div>
                 </div>
             </div>

@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkin_type = $_POST['checkin_type'] ?? 'morning';
     
     // Test coordinates - always use office location for testing
-    $latitude = 12.811393;
-    $longitude = 80.227807;
+    $latitude = position.coords.latitude;
+    $longitude = position.coords.longitude;
 
     $distance = getDistance($latitude, $longitude, $officeLat, $officeLon);
 

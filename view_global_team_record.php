@@ -752,7 +752,7 @@ try {
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>HR Name</th>
+                                    <th>HR Email</th>
                                     <th>Date</th>
                                     <th>Calls</th>
                                     <th>Today</th>
